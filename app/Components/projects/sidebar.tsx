@@ -1,5 +1,5 @@
 import Button from "@/app/Resualble_Components/Button";
-
+import Link from "next/link";
 export default function SideBar({ Projects }: any) {
   let lengthOfArray = Projects.length;
   const maxDisplay = 5;
@@ -10,13 +10,21 @@ export default function SideBar({ Projects }: any) {
         className="h-[81vh] w-65 bg-black p-5 ml-5 rounded-2xl shadow shadow-gray-300 relative"
       >
         <h2 className="text-blue-700 font-bold">PROJECTS</h2>
-        <div id="lists" className="ml-6 mt-6">
+        <div id="lists" className="mt-6">
           <ul className="">
             {Projects.map((p: any, index: any) => {
+              const projectId = index;
+              const projectPath = `/projects/${projectId}`;
               return (
                 <div key={index} className="flex gap-2">
                   <span>{index + 1}. </span>
-                  <li key={index}>{p.name}</li>
+                  <Link
+                    href={projectPath}
+                    className="w-full truncate hover:text-blue-700"
+                    key={index}
+                  >
+                    {p.name}
+                  </Link>
                 </div>
               );
             })}

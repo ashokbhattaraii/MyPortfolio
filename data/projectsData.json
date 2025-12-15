@@ -1,0 +1,38 @@
+[
+  {
+    "name": "E-commerce Product Viewer",
+    "description": "A dynamic frontend interface built with React to showcase product listings, complete with filtering, sorting, and pagination features.",
+    "DateOfCompletion": "2025-11-20",
+    "Link": "https://github.com/yourusername/ecommerce-viewer-repo"
+  },
+  {
+    "name": "Real-Time Chat Application",
+    "description": "Full-stack application using Node.js, Express, and Socket.IO for real-time bidirectional communication between users in multiple chat rooms.",
+    "DateOfCompletion": "2025-10-15",
+    "Link": "https://github.com/yourusername/realtime-chat-app"
+  },
+  {
+    "name": "Personal Finance Tracker API",
+    "description": "A secure RESTful API developed with Python (Flask) and PostgreSQL to manage user transactions, budgets, and financial reporting.",
+    "DateOfCompletion": "2025-09-01",
+    "Link": "https://github.com/yourusername/finance-tracker-api"
+  },
+  {
+    "name": "Portfolio Site v2 (Current)",
+    "description": "This very site, built on Next.js 14 and styled using Tailwind CSS, demonstrating modern routing, server components, and dynamic data handling.",
+    "DateOfCompletion": "2025-12-15",
+    "Link": "https://github.com/yourusername/nextjs-portfolio"
+  },
+  {
+    "name": "Weather Dashboard (Legacy)",
+    "description": "A simple frontend project utilizing the OpenWeatherMap API to display current weather conditions and forecasts based on user input or geolocation.",
+    "DateOfCompletion": "2025-08-10",
+    "Link": "https://github.com/yourusername/weather-dashboard-js"
+  },
+  {
+    "name": "sdnkankdk",
+    "description": "kasndkjan",
+    "dateOfCompletion": "2000-01-01",
+    "link": "amsn dmnasndma"
+  }
+]

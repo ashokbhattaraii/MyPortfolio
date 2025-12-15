@@ -1,6 +1,8 @@
 interface ProjectDetail {
   name: string;
-  content: string;
+  description: string;
+  dateOfCompletion: string;
+  link: string;
 }
 
 export default function Project({ project }: any) {
@@ -9,11 +11,15 @@ export default function Project({ project }: any) {
       {project.map((p: any, index: any) => {
         return (
           <div
-            id="project1"
+            className="flex flex-wrap flex-col w-30  overflow-hidden"
             key={index}
-            className="h-30 w-30 bg-gray-500 relative rounded-2xl  flex justify-center"
           >
-            <p className="absolute -bottom-7 ">{p.name}</p>
+            <div
+              id={`project${index}`}
+              key={index}
+              className="h-30 w-30 bg-gray-500 relative rounded-2xl  flex justify-center"
+            ></div>
+            <p className="w-full truncate">{p.name}</p>
           </div>
         );
       })}

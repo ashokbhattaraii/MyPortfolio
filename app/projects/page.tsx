@@ -2,13 +2,14 @@
 import Button from "../Resualble_Components/Button";
 import SideBar from "../Components/projects/sidebar";
 import DetailedProjects from "../Components/projects/detailedProjects";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { error } from "console";
 
 interface ProjectsDetail {
   name: string;
   description: string;
-  DateOfCompletion: Date;
-  Link: string;
+  dateOfCompletion: string;
+  link: string;
 }
 
 const Projects = () => {
@@ -18,6 +19,35 @@ const Projects = () => {
       return [...prevProject, data];
     });
   };
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchInitialProjects() {
+      try {
+        const response = await fetch("/api/projects");
+        if (response.ok) {
+          const data: ProjectsDetail[] = await response.json();
+
+          console.log(data);
+          SetProjectList(data);
+        }
+      } catch (e) {
+        console.log("Failed to fetch", e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchInitialProjects();
+  }, []);
+  if (isLoading) {
+    return (
+      <>
+        <div className="text-white bg-gray-800 text-4xl">
+          Loading Projects...
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div

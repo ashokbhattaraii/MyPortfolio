@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import Project from "./project";
+import { NextResponse } from "next/server";
 import Button from "../../Resualble_Components/Button";
 import { useForm } from "react-hook-form";
 
 interface ProjectDetail {
   name: string;
   description: string;
-  DateOfCompletion: Date;
-  Link: string;
+  dateOfCompletion: string;
+  link: string;
 }
 
 interface DetailedProjectProps {
@@ -54,9 +55,25 @@ export default function DetailedProjects({
   function onClickAdd() {
     toogleForm(!isFormOpen);
   }
-  const onSubmit = (data: any) => {
-    onAddProject(data);
-    toogleForm(false);
+  const onSubmit = async (data: ProjectDetail) => {
+    try {
+      const response = await fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save project to serevr");
+      }
+
+      const result = await response.json();
+
+      onAddProject(result.project || data);
+      toogleForm(false);
+    } catch {
+      console.log("Submission failed", errors);
+      alert("Error, check the consle");
+    }
   };
   return (
     <>
@@ -108,7 +125,7 @@ export default function DetailedProjects({
             <input
               type="date"
               className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
-              {...register("date", ValidationRules.date)}
+              {...register("dateOfCompletion", ValidationRules.date)}
             />
             <span>Link</span>
             <input
