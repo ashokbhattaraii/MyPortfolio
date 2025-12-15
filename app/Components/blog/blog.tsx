@@ -1,4 +1,3 @@
-import "@/app/";
 export default function Blog() {
   return (
     <>
