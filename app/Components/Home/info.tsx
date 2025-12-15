@@ -1,16 +1,30 @@
+"use client";
 import Button from "@/app/Resualble_Components/Button";
+import { useState, useEffect } from "react";
 export default function Info() {
+  const [hasLoaded, setHasLoaded] = useState(false);
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setHasLoaded(true);
+    }, 100);
+
+    return () => clearTimeout(timeOut);
+  }, []);
+
+  const baseTransitionClass = "transition duration-300 ease-out";
+  const hasLoadedClass = (delay = "delay-0") => {
+    return `${baseTransitionClass} transform ${delay} ${hasLoaded} ?"opacity-100 translate-y-0 :"opacity-0 translate-y-5"`;
+  };
   return (
     <>
-      <div className="flex flex-col justify-center items-center pt-10 ">
+      <div className={`flex flex-col justify-center items-center pt-10 `}>
         <img
           src="./1731638746008.jpeg"
           alt="profile pic"
-          className="w-60 h-60 rounded-full  shadow-xl shadow-gray-700
-      "
+          className={`w-60 h-60 rounded-full  shadow-xl shadow-gray-700`}
         />
         <div>
-          <p className="flex items-center justify-center text-2xl text-blue-700 mt-5 transform  transition-all duration-200 hover:text-3xl font-extrabold">
+          <p className="flex items-center justify-center text-2xl text-blue-700 mt-5 transition-transform ease-out duration-200 hover:scale-110 font-extrabold">
             <span className="text-5xl">A</span>shok{" "}
             <span className="text-5xl">B</span>hattarai
           </p>

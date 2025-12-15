@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function navigation() {
@@ -11,7 +12,9 @@ export default function navigation() {
   return (
     <>
       <header className="fixed z-1000 top-0 left-0 right-0 flex justify-center items-center w-full h-20 bg-black p-3 shadow shadow-gray-800">
-        <p className="mr-auto ml-3 text-blue-600 text-3xl">Portfolio</p>
+        <p className="mr-auto ml-3 text-blue-600 text-3xl">
+          <Link href="./">Portfolio</Link>
+        </p>
         <nav className={`mr-auto hidden md:block lg:block `}>
           <ul className="flex  list-none text-white gap-x-10 text-lg">
             <li className="">
@@ -23,22 +26,22 @@ export default function navigation() {
               </a>
             </li>
             <li className="">
-              <a
+              <Link
                 href="#about-me"
                 className="hover:text-blue-700 transition-colors duration-200 "
               >
                 About
-              </a>
+              </Link>
             </li>
 
             <li className="hover:text-blue-700">
-              <a href="/projects">Projects</a>
+              <Link href="/projects">Projects</Link>
             </li>
             <li className="hover:text-blue-700">
-              <a href="/blogs">Blogs</a>
+              <Link href="/blogs">Blogs</Link>
             </li>
             <li className="hover:text-blue-700">
-              <a href="#contactArea">Contact</a>
+              <Link href="#contactArea">Contact</Link>
             </li>
           </ul>
         </nav>
@@ -63,30 +66,30 @@ export default function navigation() {
           >
             <ul className="p-6 flex flex-col justify-center items-center gap-6 font-bold  ">
               <li className="">
-                <a
+                <Link
                   href="/"
                   className="hover:text-blue-700  transition-colors duration-200 "
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li className="">
-                <a
+                <Link
                   href="#about-me"
                   className="hover:text-blue-700 transition-colors duration-200 "
                 >
                   About
-                </a>
+                </Link>
               </li>
 
               <li className="hover:text-blue-700">
-                <a href="/projects">Projects</a>
+                <Link href="/projects">Projects</Link>
               </li>
               <li className="hover:text-blue-700">
-                <a href="/blogs">Blogs</a>
+                <Link href="/blogs">Blogs</Link>
               </li>
               <li className="hover:text-blue-700">
-                <a href="#contactArea">Contact</a>
+                <Link href="#contactArea">Contact</Link>
               </li>
             </ul>
           </nav>

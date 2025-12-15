@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../Resualble_Components/Button";
 import { error } from "console";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Contact() {
   const {
@@ -125,8 +127,8 @@ export default function Contact() {
           </form>
         </div>
         <div className="bg-[url('/sumaid-pal-singh-bakshi-vq-A3vOlEr0-unsplash.jpg')] bg-cover w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
-          <div id="contactIndo">
-            <div id="details" className="mt-13">
+          <div id="contactIndo" className="">
+            <div id="details" className="md:mt-16">
               <div
                 id="email"
                 className="flex gap-5 items-center ml-6 mt-6 font-bold"
@@ -169,15 +171,35 @@ export default function Contact() {
           </div>
           <div
             id="socialLinks"
-            className="absolute flex flex-col right-5 md:absolute z-100 md:bottom-6 md:right-1/2 md:flex gap-4 mt-3 md:flex-col "
+            className="absolute flex flex-col right-10 bottom-5 md:absolute z-100 md:bottom-6 md:right-1/2 md:flex gap-4 mt-3 md:flex-col "
           >
-            <img src="./linkedin.svg" alt="linkedin" className="w-9 h-9 " />
-            <img
-              src="./instagram (1).svg"
-              alt="Instagram"
-              className="w-9 h-9 "
-            />
-            <img src="./youtube-icon.svg" alt="Youtube" className="w-9 h-9 " />
+            <Link href="https://www.linkedin.com/in/ashok-bhattarai-5a2644330/">
+              <Image
+                src="./icons8-linkedin.svg"
+                alt="linkedin"
+                className="w-9 h-9 transition-transform duration-200 ease-in-out hover:scale-125"
+                width={12}
+                height={12}
+              />
+            </Link>
+            <Link href="https://www.instagram.com/_ashokbhattarai/">
+              <Image
+                src="./icons8-instagram.svg"
+                alt="Instagram"
+                className="w-9 h-9 transition-transform duration-200 ease-in-out hover:scale-125"
+                width={12}
+                height={12}
+              />
+            </Link>
+            <Link href="https://www.linkedin.com/in/ashok-bhattarai-5a2644330/">
+              <Image
+                src="./icons8-youtube.svg"
+                alt="Youtube"
+                className="w-9 h-9 transition-transform duration-200 ease-in-out hover:scale-125"
+                height={9}
+                width={9}
+              />
+            </Link>
           </div>
         </div>
       </div>
