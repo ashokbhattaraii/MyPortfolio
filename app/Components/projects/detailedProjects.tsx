@@ -25,7 +25,7 @@ export default function DetailedProjects({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm<ProjectDetail>();
 
   const ValidationRules = {
     name: {
