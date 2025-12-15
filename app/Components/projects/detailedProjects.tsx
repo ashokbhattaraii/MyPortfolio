@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 
 interface ProjectDetail {
   name: string;
-  content: string;
+  description: string;
+  DateOfCompletion: Date;
+  Link: string;
 }
 
 interface DetailedProjectProps {
@@ -23,6 +25,29 @@ export default function DetailedProjects({
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const ValidationRules = {
+    name: {
+      required: "Name can't be empty",
+      minLength: {
+        value: 5,
+        message: "Atleast 5 character",
+      },
+    },
+    description: {
+      required: "Description can't be empty",
+      minLength: {
+        value: 5,
+        message: "Atleast 5 character",
+      },
+    },
+    date: {
+      required: "Completion date is required",
+    },
+    link: {
+      required: "Enter a valid project link",
+    },
+  };
 
   const [isFormOpen, toogleForm] = useState(false);
 
@@ -58,9 +83,9 @@ export default function DetailedProjects({
       {isFormOpen && (
         <div
           id="overlayForm"
-          className="text-white  fixed inset-0 z-100 flex justify-center items-center"
+          className="text-white  fixed inset-0 z-100 flex justify-center items-center pt-20"
         >
-          <form className="flex flex-col bg-gray-700 rounded-2xl gap-3 w-80 p-3">
+          <form className="flex flex-col bg-gray-700 rounded-2xl gap-3 w-80 p-3 overflow-auto">
             <h1 className="text-center text-blue-700 font-black text-2xl">
               Add Project
             </h1>
@@ -68,15 +93,30 @@ export default function DetailedProjects({
             <input
               type="text"
               placeholder="Project Name"
-              className="border py-3 rounded-2xl pl-2 outline-0"
-              {...register("name")}
+              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+              {...register("name", ValidationRules.name)}
             />
             <span>Content</span>
             <textarea
-              id="projectContent"
-              rows={6}
-              className="border py-3 rounded-2xl pl-2 outline-0"
+              id="description"
+              rows={3}
+              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+              placeholder="Project Description"
+              {...register("description", ValidationRules.description)}
             ></textarea>
+            <>Date Of Completetion</>
+            <input
+              type="date"
+              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+              {...register("date", ValidationRules.date)}
+            />
+            <span>Link</span>
+            <input
+              type="text"
+              placeholder="https://"
+              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+              {...register("link", ValidationRules.link)}
+            />
             <Button
               varient="primary"
               type="submit"

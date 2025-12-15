@@ -6,7 +6,9 @@ import { useState } from "react";
 
 interface ProjectsDetail {
   name: string;
-  content: string;
+  description: string;
+  DateOfCompletion: Date;
+  Link: string;
 }
 
 const Projects = () => {

@@ -3,7 +3,7 @@ export default function Blogs() {
   return (
     <>
       <div id="blogsContainer" className="relative mt-20 text-white">
-        <h1 className=" flex justify-center absolute top-7 w-full text-blue-700 mx-auto text-3xl font-extrabold">
+        <h1 className=" flex justify-center absolute top-7 w-full text-blue-700 mx-auto text-3xl font-extrabold ">
           <span className="text-red-500">B</span>logs
         </h1>
         <div
