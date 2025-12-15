@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs/promises";
 
-const dataFilePath = path.join(process.cwd(), "data", "projectsData.json");
+const dataFilePath = "./data/projectsData.json";
 
 export async function POST(request: Request) {
   try {
@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     const updatedContent = JSON.stringify(existingProjects, null, 2);
 
     await fs.writeFile(dataFilePath, updatedContent, "utf-8");
+
     return NextResponse.json(
       { message: "Project added successfully" },
       { status: 201 }

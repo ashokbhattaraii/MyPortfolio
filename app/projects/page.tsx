@@ -3,7 +3,6 @@ import Button from "../Resualble_Components/Button";
 import SideBar from "../Components/projects/sidebar";
 import DetailedProjects from "../Components/projects/detailedProjects";
 import { useState, useEffect } from "react";
-import { error } from "console";
 
 interface ProjectsDetail {
   name: string;
