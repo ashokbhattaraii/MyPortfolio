@@ -3,6 +3,7 @@ interface Blog {
   title: string;
   content: string;
   author: { name: string };
+  imageUrl: string;
 }
 
 const getBaseUrl = () => {
