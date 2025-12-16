@@ -95,7 +95,10 @@ export default function DetailedProjects({
     <>
       <div id="detailProjectDisplay" className="text-black w-full max-w-7xl ">
         <h2 className="text-blue-700 font-bold">Projects</h2>
-        <div id="detailedList" className="flex flex-wrap gap-8 text-blue-600">
+        <div
+          id="detailedList"
+          className="flex flex-wrap gap-8 text-blue-600 mt-4"
+        >
           <Project project={Projects} />
           <div
             id="AddProjects"

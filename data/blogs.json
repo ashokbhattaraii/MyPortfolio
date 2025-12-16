@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "title": "Getting Started with React",
+      "slug": "getting-started-with-react",
+      "author": {
+        "name": "Ashok",
+        "email": "ashok@example.com"
+      },
+      "imageUrl": "https://picsum.photos/id/180/1200/600",
+      "content": "React is a popular JavaScript library for building user interfaces. It allows developers to create reusable components and manage application state efficiently.",
+      "tags": ["react", "javascript", "frontend"],
+      "published": true,
+      "createdAt": "2025-01-10T10:30:00Z",
+      "updatedAt": "2025-01-12T08:15:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Introduction to Playwright for QA",
+      "slug": "introduction-to-playwright-for-qa",
+      "author": {
+        "name": "Ashok",
+        "email": "ashok@example.com"
+      },
+      "imageUrl": "https://picsum.photos/id/1011/1200/600",
+      "content": "Playwright is a modern end-to-end testing framework that supports multiple browsers and provides powerful APIs for reliable test automation.",
+      "tags": ["playwright", "qa", "automation", "testing"],
+      "published": true,
+      "createdAt": "2025-02-05T09:00:00Z",
+      "updatedAt": "2025-02-05T09:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Understanding CI/CD Pipelines",
+      "slug": "understanding-ci-cd-pipelines",
+      "author": {
+        "name": "Ashok",
+        "email": "ashok@example.com"
+      },
+      "imageUrl": "https://picsum.photos/id/1005/1200/600",
+      "content": "CI/CD pipelines automate the process of building, testing, and deploying applications, helping teams deliver software faster and more reliably.",
+      "tags": ["cicd", "devops", "automation"],
+      "published": false,
+      "createdAt": "2025-03-01T14:20:00Z",
+      "updatedAt": "2025-03-02T11:45:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Why End-to-End Testing Matters",
+      "slug": "why-end-to-end-testing-matters",
+      "author": {
+        "name": "Ashok",
+        "email": "ashok@example.com"
+      },
+      "imageUrl": "https://picsum.photos/id/1039/1200/600",
+      "content": "End-to-end testing ensures that all parts of an application work together as expected, reducing production bugs and improving overall software quality.",
+      "tags": ["testing", "e2e", "quality-assurance"],
+      "published": true,
+      "createdAt": "2025-03-10T12:00:00Z",
+      "updatedAt": "2025-03-10T12:00:00Z"
+    }
+  ]
+

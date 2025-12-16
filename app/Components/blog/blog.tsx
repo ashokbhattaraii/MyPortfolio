@@ -1,22 +1,38 @@
-export default function Blog() {
+import Button from "@/app/Resualble_Components/Button";
+import Image from "next/image";
+import Link from "next/link";
+export default function Blog({ blogs }: any) {
   return (
     <>
-      <div
-        id="blog1"
-        className="h-80 w-65 bg-black rounded shadow shadow-gray-600"
-      >
-        <div id="testNoImage" className="h-2/3 ">
-          <img
-            src="./sumaid-pal-singh-bakshi-vq-A3vOlEr0-unsplash.jpg"
-            alt="testNoImage"
-            className="h-full w-full"
-          />
-        </div>
-        <p id="blogDescription" className="p-2 ml-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit Hello. Fuga
-          deserunt ab iure? Quibusdam
-        </p>
-      </div>
+      {blogs.map((b: any, i: any) => {
+        const blogId = i;
+        const path = `/blogs/${blogId}`;
+        return (
+          <Link href={path} key={i}>
+            <div
+              className=" w-65 bg-black overflow-hidden rounded shadow shadow-gray-600 transition-transform ease-out duration-300 hover:scale-105 "
+              key={i}
+            >
+              <div id="testNoImage" className="" key={i}>
+                <img
+                  src={b.imageUrl}
+                  alt="testNoImage"
+                  className="h-full w-full"
+                />
+              </div>
+              <p id="title" className="font-bold p-2">
+                {b.title}
+              </p>
+              <p
+                id="author"
+                className="flex justify-end mr-2 hover:text-amber-500"
+              >
+                -{b.author.name}
+              </p>
+            </div>
+          </Link>
+        );
+      })}
     </>
   );
 }

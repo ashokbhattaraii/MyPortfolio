@@ -1,5 +1,22 @@
+"use client";
+import { useEffect, useState } from "react";
+
 import Blog from "../Components/blog/blog";
 export default function Blogs() {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const response = await fetch("/api/blogs");
+        const blogs = await response.json();
+        setBlogs(blogs);
+        console.log(blogs);
+      } catch (error) {
+        alert(error);
+      }
+    }
+    fetchBlogs();
+  }, []);
   return (
     <>
       <div
@@ -13,11 +30,7 @@ export default function Blogs() {
           id="blogs"
           className="flex flex-wrap gap-4 justify-center content-center relative top-25 md:mx-8 md:justify-between"
         >
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
+          <Blog blogs={blogs} />
         </div>
       </div>
     </>

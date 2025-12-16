@@ -12,7 +12,7 @@ export default function navigation() {
   return (
     <>
       <header className="fixed z-1000 top-0 left-0 right-0 flex justify-center items-center w-full h-20 bg-black p-3 shadow shadow-gray-800">
-        <p className="mr-auto ml-3 text-blue-600 text-3xl">
+        <p className="mr-auto ml-3 text-blue-600 text-3xl font-bold ">
           <Link href="./">Portfolio</Link>
         </p>
         <nav className={`mr-auto hidden md:block lg:block `}>

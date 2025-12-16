@@ -11,7 +11,7 @@ export default function Project({ project }: any) {
       {project.map((p: any, index: any) => {
         return (
           <div
-            className="flex flex-wrap flex-col w-30  overflow-hidden"
+            className="flex flex-wrap flex-col w-30   transition-transform ease-out duration-300 hover:scale-105"
             key={index}
           >
             <div

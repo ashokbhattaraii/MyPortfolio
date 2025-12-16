@@ -54,7 +54,7 @@ export default function Info() {
           </p>
         </div>
         <div className="flex gap-4 justify-center items-center mt-4 sm:gap-10">
-          <Link href="">
+          <Link href="./Ashok_Bhattarai_Resume.pdf" target="_blank">
             <Button className="border-2 rounded-2xl p-2 bg-blue-700 text-black font-semibold transition duration-300 hover:bg-blue-800">
               View CV
             </Button>

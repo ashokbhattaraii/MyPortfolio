@@ -51,7 +51,7 @@ const Projects = () => {
     <>
       <div
         id="projectContainer"
-        className="text-white relative top-6 flex gap-10 mx-auto w-full max-w-7xl"
+        className="text-white relative top-6 flex gap-6 mx-auto w-full max-w-7xl"
       >
         <SideBar Projects={ProjectList} />
         <DetailedProjects Projects={ProjectList} onAddProject={AddProject} />
