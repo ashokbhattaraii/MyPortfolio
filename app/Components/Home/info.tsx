@@ -2,8 +2,10 @@
 import Button from "@/app/Resualble_Components/Button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+
 export default function Info() {
   const [hasLoaded, setHasLoaded] = useState(false);
+
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setHasLoaded(true);
@@ -13,20 +15,21 @@ export default function Info() {
   }, []);
 
   const baseTransitionClass = "transition duration-300 ease-out";
-  const hasLoadedClass = (delay = "delay-0") => {
-    return `${baseTransitionClass} transform ${delay} ${hasLoaded} ?"opacity-100 translate-y-0 :"opacity-0 translate-y-5"`;
+  const getLoadedClass = (delay = "delay-0") => {
+    const visibility = hasLoaded
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-5";
+    return `${baseTransitionClass} transform ${delay} ${visibility}`;
   };
+
   return (
     <>
       <div
-        // 🛑 FIX 1: Removed min-w-screen. Added w-full max-w-4xl to limit size on large screens
-        // while remaining centered within the parent's container.
         className={`flex flex-col justify-center items-center pt-10 mx-auto w-full max-w-4xl`}
       >
         <img
           src="./1731638746008.jpeg"
           alt="profile pic"
-          // 🛑 FIX 3: Added responsive sizing. w-48 h-48 on mobile, w-60 h-60 on medium screens and up.
           className={`w-48 h-48 md:w-60 md:h-60 rounded-full shadow-xl shadow-gray-700`}
         />
         <div>
@@ -36,7 +39,6 @@ export default function Info() {
           </p>
         </div>
         <div className="flex flex-col justify-center items-center my-6 text-center">
-          {/* Note: whitespace-nowrap can cause overflow on tiny screens. */}
           <p className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-none">
             Frontend Developer.{" "}
           </p>
@@ -44,11 +46,7 @@ export default function Info() {
             Always Becoming.
           </p>
         </div>
-        <div
-          // 🛑 FIX 2: Removed invalid w-120. Added max-w-2xl and ensured text is centered.
-          // The padding (p-4) already handles the separation from the edges.
-          className="flex justify-center items-center my-3 max-w-2xl p-4 text-center"
-        >
+        <div className="flex justify-center items-center my-3 max-w-2xl p-4 text-center">
           <p className="text-gray-500">
             I believe mastery is a journey, not a destination, staying fiercely
             committed to growth. This approach guarantees thoughtful execution

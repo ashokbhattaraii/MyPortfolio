@@ -4,7 +4,7 @@ export default function Expertise() {
   return (
     <>
       <div
-        className="flex flex-col justify-center items-center pt-10 mx-auto min-w-screen "
+        className="flex flex-col justify-center items-center pt-10 mx-auto my-5  "
         id="expertise-section"
       >
         <h2 className="text-blue-700 font-bold">Expertise</h2>
