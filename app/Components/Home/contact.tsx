@@ -140,7 +140,7 @@ export default function Contact() {
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div
                 id="email"
-                className="flex gap-5 items-center ml-6 mt-6 font-bold"
+                className="flex gap-5 items-center ml-2 mt-6 font-bold"
               >
                 <img
                   width="30"
@@ -153,7 +153,7 @@ export default function Contact() {
 
               <div
                 id="phone"
-                className="flex gap-5 items-center ml-6 mt-6 font-bold"
+                className="flex gap-5 items-center ml-2 mt-6 font-bold"
               >
                 <img
                   width="30"
@@ -166,7 +166,7 @@ export default function Contact() {
 
               <div
                 id="phone"
-                className="flex gap-5 items-center ml-6 mt-6 font-bold"
+                className="flex gap-5 items-center ml-2 mt-6 font-bold"
               >
                 <img
                   width="30"
