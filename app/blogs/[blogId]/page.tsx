@@ -7,12 +7,12 @@ interface Blog {
 }
 
 const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_PRODUCTION_URL) {
-    return process.env.NEXT_PUBLIC_PRODUCTION_URL;
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
   }
-  return `http://localhost:${process.env.PORT}`;
-};
 
+  return `http://localhost:${process.env.PORT || 3000}`;
+};
 async function GetBlog(): Promise<Blog[]> {
   const baseUrl = getBaseUrl();
   const url = `${baseUrl}/api/blogs`;
