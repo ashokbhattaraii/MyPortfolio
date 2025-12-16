@@ -2,19 +2,37 @@ export default function AboutMe() {
   return (
     <>
       <div
-        className="flex flex-col justify-center items-center pt-10  w-1/2 gap-2 mx-auto md:flex-row"
+        // 🛑 RESPONSIVE CONTAINER (Main Wrapper)
+        // 1. px-4: Adds padding on left/right for mobile margins.
+        // 2. max-w-7xl mx-auto: Limits the overall width and centers it on all screens.
+        // 3. gap-6: Adds space between the image and text on mobile.
+        className="flex flex-col justify-center items-center pt-10 px-4 mx-auto max-w-7xl gap-6 md:gap-10 md:pt-20 md:flex-row md:items-start"
         id="about-me"
       >
         <img
           src="./about-me.jpg"
           alt="about-me-model"
-          className="h-100 max-w-60 rounded-lg shadow-2xl shadow-gray-800"
+          // 🛑 RESPONSIVE IMAGE
+          // 1. w-full max-w-xs: Image scales up to a maximum width (320px) on mobile.
+          // 2. h-auto aspect-square: Maintains proportion and avoids fixed heights.
+          // 3. md:max-w-xs: Keeps image size consistent on desktop too.
+          className="w-full max-w-xs h-auto aspect-square object-cover rounded-lg shadow-2xl shadow-gray-800 md:max-w-sm"
         />
-        <div>
-          <p className="mb-4 text-xl font-bold md:text-3xl lg:text-4xl">
+
+        {/* Text Content Wrapper */}
+        <div className="md:max-w-xl">
+          <p
+            // 🛑 RESPONSIVE HEADING
+            // Centered on mobile, left-aligned on desktop.
+            className="mb-4 text-center md:text-left text-xl font-bold md:text-3xl lg:text-4xl"
+          >
             Build. Learn. Iterate. Enduring Digital Experiences.
           </p>
-          <p className="text-gray-700 text-[0.7rem] ">
+          <p
+            // 🛑 RESPONSIVE PARAGRAPH
+            // Text size adjusted for readability; Centered on mobile, left-aligned on desktop.
+            className="text-gray-700 text-sm text-center md:text-left md:text-base"
+          >
             I'm Ashok Bhattarai, a passionate Computer Science student pursuing
             B.Sc IT (Hons) at Lord Buddha Education Foundation in collaboration
             with Asia Pacific University. Based in Lalitpur, Nepal, I specialize
