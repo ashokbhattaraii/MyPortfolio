@@ -8,10 +8,10 @@ interface Blog {
 
 const getBaseUrl = () => {
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
+    return `https://my-portfolio-rho-silk-25.vercel.app`;
   }
 
-  return `http://localhost:${process.env.PORT || 3000}`;
+  return `http://localhost:${process.env.PORT}`;
 };
 async function GetBlog(): Promise<Blog[]> {
   const baseUrl = getBaseUrl();
