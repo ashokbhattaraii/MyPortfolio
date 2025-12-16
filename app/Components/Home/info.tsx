@@ -18,7 +18,9 @@ export default function Info() {
   };
   return (
     <>
-      <div className={`flex flex-col justify-center items-center pt-10 ml-12 `}>
+      <div
+        className={`flex flex-col justify-center items-center pt-10 mx-auto min-w-screen `}
+      >
         <img
           src="./1731638746008.jpeg"
           alt="profile pic"
