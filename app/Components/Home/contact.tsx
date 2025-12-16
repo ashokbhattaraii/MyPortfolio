@@ -180,7 +180,7 @@ export default function Contact() {
           </div>
           <div
             id="socialLinks"
-            className="absolute flex flex-col right-10 bottom-5 md:absolute z-100 md:bottom-6 md:right-1/2 md:flex gap-4 mt-3 md:flex-col "
+            className="absolute flex flex-col right-10 bottom-5 md:absolute z-100 md:top-15 md:right-1/2 md:bottom-0 md: md:flex gap-4 mt-3 md:flex-col "
           >
             <Link href="https://www.linkedin.com/in/ashok-bhattarai-5a2644330/">
               <Image

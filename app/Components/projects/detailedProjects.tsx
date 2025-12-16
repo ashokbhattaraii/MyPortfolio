@@ -47,9 +47,25 @@ export default function DetailedProjects({
     },
     link: {
       required: "Enter a valid project link",
+      pattern: {
+        value:
+          /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|[a-zA-Z0-9]+\.[^\s]{2,})$/i,
+        message: "Must be a valid URL (e.g., https://example.com)",
+      },
     },
   };
 
+  const ErrorMessage = ({ error, name }: { error: any; name: string }) => {
+    const fieldError = error[name];
+    if (!fieldError) {
+      return null;
+    }
+    return (
+      <p className="text-red-400 text-sm mt-1 self-start ml-2">
+        {fieldError.message}
+      </p>
+    );
+  };
   const [isFormOpen, toogleForm] = useState(false);
 
   function onClickAdd() {
@@ -100,9 +116,9 @@ export default function DetailedProjects({
       {isFormOpen && (
         <div
           id="overlayForm"
-          className="text-white  fixed inset-0 z-100 flex justify-center items-center pt-20"
+          className="text-white  fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
         >
-          <form className="flex flex-col bg-gray-700 rounded-2xl gap-3 w-80 p-3 overflow-auto">
+          <form className="flex flex-col bg-gray-700 rounded-2xl gap-3 w-80 p-3 max-h-[90vh] overflow-y-auto ">
             <h1 className="text-center text-blue-700 font-black text-2xl">
               Add Project
             </h1>
@@ -113,20 +129,23 @@ export default function DetailedProjects({
               className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
               {...register("name", ValidationRules.name)}
             />
+            <ErrorMessage error={errors} name="name" />
             <span>Content</span>
             <textarea
               id="description"
-              rows={3}
-              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+              rows={2}
+              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700 resize-none"
               placeholder="Project Description"
               {...register("description", ValidationRules.description)}
             ></textarea>
+            <ErrorMessage error={errors} name="description" />
             <>Date Of Completetion</>
             <input
               type="date"
               className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
               {...register("dateOfCompletion", ValidationRules.date)}
             />
+            <ErrorMessage error={errors} name="date" />
             <span>Link</span>
             <input
               type="text"
@@ -134,6 +153,7 @@ export default function DetailedProjects({
               className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
               {...register("link", ValidationRules.link)}
             />
+            <ErrorMessage error={errors} name="link" />
             <Button
               varient="primary"
               type="submit"
@@ -141,15 +161,14 @@ export default function DetailedProjects({
             >
               Add Project
             </Button>
-            <Button
-              variant="danger"
-              className=""
+            <button
+              className="mb-2"
               onClick={() => {
                 toogleForm(false);
               }}
             >
               Cancel
-            </Button>
+            </button>
           </form>
         </div>
       )}
