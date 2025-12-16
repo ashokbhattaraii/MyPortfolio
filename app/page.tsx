@@ -5,7 +5,7 @@ import AboutMe from "./Components/Home/about-me";
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center items-center content-center flex-col">
+      <div className="flex justify-center  mx-auto flex-col">
         <Info />
         <AboutMe />
         <Expertise />
