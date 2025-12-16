@@ -5,10 +5,12 @@ import AboutMe from "./Components/Home/about-me";
 export default function Home() {
   return (
     <>
-      <Info />
-      <AboutMe />
-      <Expertise />
-      <Contact />
+      <div className="flex justify-center items-center flex-col">
+        <Info />
+        <AboutMe />
+        <Expertise />
+        <Contact />
+      </div>
     </>
   );
 }
