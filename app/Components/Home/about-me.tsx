@@ -5,7 +5,7 @@ export default function AboutMe() {
         className="flex flex-col justify-center items-center pt-10 mx-auto min-w-screen "
         id="about-me"
       >
-        <div className="flex flex-col justify-center items-center pt-10  max-w-8xl  mx-5 gap-6 md:gap-10 md:pt-20 md:max-w-5xl md:flex-row md:mx-autos">
+        <div className="flex flex-col justify-center items-center pt-10  max-w-full  mx-5 gap-6 md:gap-10 md:pt-20 md:max-w-5xl md:flex-row md:mx-autos">
           <img
             src="./about-me.jpg"
             alt="about-me-model"
