@@ -137,7 +137,7 @@ export default function Contact() {
         </div>
         <div className="bg-[url('/sumaid-pal-singh-bakshi-vq-A3vOlEr0-unsplash.jpg')] bg-cover w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
-            <div id="details" className="md:mt-16">
+            <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div
                 id="email"
                 className="flex gap-5 items-center ml-6 mt-6 font-bold"
