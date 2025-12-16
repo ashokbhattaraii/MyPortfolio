@@ -2,7 +2,7 @@ export default function AboutMe() {
   return (
     <>
       <div
-        className="my-10 p-10 flex gap-4 flex-col justify-center items-center mx-auto max-w-6xl md:max-w-2/3  md:flex-row"
+        className="flex flex-col justify-center items-center pt-10 mx-auto min-w-screen md:flex-row"
         id="about-me"
       >
         <img
