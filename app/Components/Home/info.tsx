@@ -19,12 +19,15 @@ export default function Info() {
   return (
     <>
       <div
-        className={`flex flex-col justify-center items-center pt-10 mx-auto min-w-screen `}
+        // 🛑 FIX 1: Removed min-w-screen. Added w-full max-w-4xl to limit size on large screens
+        // while remaining centered within the parent's container.
+        className={`flex flex-col justify-center items-center pt-10 mx-auto w-full max-w-4xl`}
       >
         <img
           src="./1731638746008.jpeg"
           alt="profile pic"
-          className={`w-60 h-60 rounded-full  shadow-xl shadow-gray-700`}
+          // 🛑 FIX 3: Added responsive sizing. w-48 h-48 on mobile, w-60 h-60 on medium screens and up.
+          className={`w-48 h-48 md:w-60 md:h-60 rounded-full shadow-xl shadow-gray-700`}
         />
         <div>
           <p className="flex items-center justify-center text-2xl text-blue-700 mt-5 transition-transform ease-out duration-200 hover:scale-110 font-extrabold">
@@ -32,29 +35,33 @@ export default function Info() {
             <span className="text-5xl">B</span>hattarai
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center my-6">
-          <p className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-none whitespace-nowrap">
+        <div className="flex flex-col justify-center items-center my-6 text-center">
+          {/* Note: whitespace-nowrap can cause overflow on tiny screens. */}
+          <p className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-none">
             Frontend Developer.{" "}
           </p>
           <p className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-none mt-2">
             Always Becoming.
           </p>
         </div>
-        <div className="flex justify-center items-center my-3 w-120 p-4 ">
+        <div
+          // 🛑 FIX 2: Removed invalid w-120. Added max-w-2xl and ensured text is centered.
+          // The padding (p-4) already handles the separation from the edges.
+          className="flex justify-center items-center my-3 max-w-2xl p-4 text-center"
+        >
           <p className="text-gray-500">
             I believe mastery is a journey, not a destination, staying fiercely
             committed to growth. This approach guarantees thoughtful execution
             and highly reliable code on every platform.
           </p>
         </div>
-        <div className="flex gap-10 justify-between items-center mt-4">
+        <div className="flex gap-4 justify-center items-center mt-4 sm:gap-10">
           <Link href="/projects">
-            <Button className=" border-2  rounded-2xl p-2 bg-blue-700 text-black font-semibold transition duration-300 hover:bg-blue-800">
+            <Button className="border-2 rounded-2xl p-2 bg-blue-700 text-black font-semibold transition duration-300 hover:bg-blue-800">
               View My Work
             </Button>
           </Link>
           <Link href="#contactArea">
-            {" "}
             <Button className="border-2 border-blue-700 p-2 rounded-2xl font-semibold transition duration-300 hover:bg-gray-950">
               Get in Touch
             </Button>
