@@ -2,7 +2,10 @@ import Blog from "../Components/blog/blog";
 export default function Blogs() {
   return (
     <>
-      <div id="blogsContainer" className="relative mt-20 text-white">
+      <div
+        id="blogsContainer"
+        className="relative mt-20 text-white w-full max-w-7xl"
+      >
         <h1 className=" flex justify-center absolute top-7 w-full text-blue-700 mx-auto text-3xl font-extrabold ">
           <span className="text-red-500">B</span>logs
         </h1>
