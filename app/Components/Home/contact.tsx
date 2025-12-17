@@ -80,7 +80,7 @@ export default function Contact() {
             <div id="name" className="relative flex  mt-4 flex-col">
               <input
                 type="text"
-                className={`border rounded-2xl border-black text-black p-2 pl-9 outline-0 w-full placeholder:text-gray-700  ${
+                className={`border rounded-2xl border-black text-black p-2 pl-9 relative outline-0 w-full placeholder:text-gray-700  ${
                   errors.name ? "border-red-500" : "border-black"
                 }`}
                 placeholder="Enter your name"
@@ -94,26 +94,25 @@ export default function Contact() {
                 alt="user-male-circle"
               />
               <ErrorMessage errors={errors} name="name" />
-              <div id="email" className="relative flex flex-col mt-4"></div>
-
-              <input
-                type="text"
-                className={`border rounded-2xl border-black text-black p-2 pl-9 outline-0 w-full placeholder:text-gray-700 ${
-                  errors.email ? "border-red-500" : "border-black"
-                }`}
-                placeholder="@gmail.com"
-                {...register("email", validationRules.email)}
-              />
-              <img
-                className="absolute top-1 left-1 "
-                width="30"
-                height="30"
-                src="https://img.icons8.com/ios-filled/50/circled-envelope.png"
-                alt="user-email-circle"
-              />
-              <ErrorMessage errors={errors} name="email" />
+              <div id="email" className="relative flex flex-col mt-4">
+                <input
+                  type="text"
+                  className={`border rounded-2xl border-black text-black p-2 pl-9 outline-0 w-full placeholder:text-gray-700 ${
+                    errors.email ? "border-red-500" : "border-black"
+                  }`}
+                  placeholder="@gmail.com"
+                  {...register("email", validationRules.email)}
+                />
+                <img
+                  className="absolute top-1 left-1 "
+                  width="30"
+                  height="30"
+                  src="https://img.icons8.com/ios-filled/50/circled-envelope.png"
+                  alt="user-email-circle"
+                />
+                <ErrorMessage errors={errors} name="email" />
+              </div>
             </div>
-
             <textarea
               id="user-message"
               placeholder="Type message here"
@@ -126,7 +125,7 @@ export default function Contact() {
             <ErrorMessage errors={errors} name="message" />
             <Button
               variant="primary"
-              className="w-full mt-3"
+              className="w-full mt-3 bg-lime-500"
               type="submit"
               onClick={handleSubmit(onSubmit)}
             >
@@ -134,7 +133,7 @@ export default function Contact() {
             </Button>
           </form>
         </div>
-        <div className=" bg-lime-800   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
+        <div className=" bg-lime-400   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div

@@ -60,7 +60,7 @@ export default function navigation() {
 
           <nav
             id="phone"
-            className={`absolute right-5 mt-2  list-none bg-gray-900 px-5 w-50 opacity-80 shadow-2xl shadow-gray-700 rounded-2xl md:hidden lg:hidden  ${
+            className={`absolute right-5 mt-2  list-none bg-white opacity-90 px-5 w-50  shadow-2xl shadow-gray-700 rounded-2xl md:hidden lg:hidden  ${
               isMenuOpen ? "block" : "hidden"
             } `}
           >

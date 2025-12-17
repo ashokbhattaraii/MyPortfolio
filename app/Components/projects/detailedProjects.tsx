@@ -67,6 +67,14 @@ export default function DetailedProjects({
     );
   };
   const [isFormOpen, toogleForm] = useState(false);
+  const [firstPage, nextPage] = useState(0);
+  const [lastIndex, setLastIndex] = useState(5);
+
+  const updatePage = () => {
+    
+    nextPage(firstPage + 5);
+    setLastIndex(lastIndex + 5);
+  };
 
   function onClickAdd() {
     toogleForm(!isFormOpen);
@@ -95,14 +103,18 @@ export default function DetailedProjects({
     <>
       <div
         id="detailProjectDisplay"
-        className="text-black w-full max-w-7xl ml-15 md:ml-0"
+        className="text-white h-full w-full max-w-7xl ml-15 md:ml-0"
       >
         <h2 className="text-blue-700 font-bold">Projects</h2>
         <div
           id="detailedList"
           className="flex flex-wrap gap-8 text-blue-600 mt-4"
         >
-          <Project project={Projects} />
+          <Project
+            project={Projects}
+            startIndex={firstPage}
+            lastIndex={lastIndex}
+          />
           <div
             id="AddProjects"
             className="h-30 w-30 border rounded-2xl relative flex justify-center"
@@ -117,6 +129,15 @@ export default function DetailedProjects({
             />
             <p className="absolute -bottom-7">Add</p>
           </div>
+        </div>
+        <div id="Next" className="flex justify-center mt-10">
+          <Button
+            variant="primary"
+            onClick={updatePage}
+            className="absolute md:bottom-2 md:right-6   "
+          >
+            Next
+          </Button>
         </div>
       </div>
       {isFormOpen && (

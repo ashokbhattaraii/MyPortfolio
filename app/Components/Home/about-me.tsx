@@ -8,7 +8,7 @@ export default function AboutMe() {
         <img
           src="./about-me.jpg"
           alt="about-me-model"
-          className="w-full max-w-xs h-auto aspect-square object-cover 
+          className="w-full max-w-sm h-auto aspect-square object-cover 
                      rounded-lg shadow-2xl shadow-gray-800 
                      md:max-w-sm"
         />
