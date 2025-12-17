@@ -13,7 +13,7 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
         id="sideProjecList"
         className="h-[81vh] w-50 hidden md:block bg-black p-5 ml-5 rounded-2xl shadow shadow-gray-300 relative  max-w-7xl"
       >
-        <h2 className="text-blue-700 font-bold">PROJECTS</h2>
+        <h2 className="text-white font-bold">PROJECTS</h2>
         <div id="lists" className="mt-6">
           <ul className="">
             {filteredProjects.map((p: any, index: any) => {

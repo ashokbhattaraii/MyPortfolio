@@ -101,7 +101,7 @@ export default function DetailedProjects({
         id="detailProjectDisplay"
         className="text-white h-full w-full max-w-7xl ml-15 md:ml-0"
       >
-        <h2 className="text-blue-700 font-bold">Projects</h2>
+        <h2 className="text-black font-bold">Projects</h2>
         <div
           id="detailedList"
           className="flex flex-wrap gap-8 text-blue-600 mt-4"
