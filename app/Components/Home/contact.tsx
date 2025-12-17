@@ -134,7 +134,7 @@ export default function Contact() {
             </Button>
           </form>
         </div>
-        <div className=" bg-lime-800   w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
+        <div className=" bg-lime-800   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div
