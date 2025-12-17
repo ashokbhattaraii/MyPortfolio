@@ -56,11 +56,11 @@ export default function Contact() {
   return (
     <>
       <div
-        className=" flex flex-wrap max-w-4/5 gray-900 items-center m-auto text-white p-4 mb-10 relative shadow shadow-gray-700"
+        className=" flex flex-wrap max-w-4/5 gray-900 items-center m-auto text-white p-4 mb-10 relative shadow shadow-gray-700 "
         id="contactArea"
       >
         <h1 className="text-blue-700 font-bold text-2xl">Get In Touch</h1>
-        <div className="flex flex-col justify-center  md:flex-row lg:flex-row">
+        <div className="flex flex-col justify-center  md:flex-row lg:flex-row text-black">
           <p className="m-6">
             I'm always open to new opportunities, collaborations, and intriguing
             challenges. Whether you have a project idea, a job offer, or just
@@ -135,7 +135,7 @@ export default function Contact() {
             </Button>
           </form>
         </div>
-        <div className="bg-[url('/sumaid-pal-singh-bakshi-vq-A3vOlEr0-unsplash.jpg')] bg-cover w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
+        <div className="bg-amber-300 w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div

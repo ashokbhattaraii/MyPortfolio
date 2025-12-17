@@ -13,7 +13,6 @@ export default function AboutMe() {
                      md:max-w-sm"
         />
 
-        {/* Text Content Wrapper */}
         <div className="md:max-w-xl px-4 md:px-0">
           <p className="mb-4 text-center md:text-left text-xl font-bold md:text-3xl lg:text-4xl">
             Build. Learn. Iterate. Enduring Digital Experiences.

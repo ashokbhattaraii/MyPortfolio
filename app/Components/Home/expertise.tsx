@@ -7,7 +7,7 @@ export default function Expertise() {
         className="flex flex-col justify-center items-center pt-10 mx-auto my-5  "
         id="expertise-section"
       >
-        <h2 className="text-blue-700 font-bold">Expertise</h2>
+        <h2 className="text-blue-700 font-bold text-2xl">Expertise</h2>
         <p className="text-3xl font-extrabold mt-3 mb-6 md:text-4xl lg:text-5xl">
           Skills and Technologies
         </p>
