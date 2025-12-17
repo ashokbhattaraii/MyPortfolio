@@ -34,7 +34,7 @@ export default function Info() {
 
   return (
     <>
-      <section className="min-h-screen bg-black flex items-center justify-center mx-auto w-full relative ">
+      <section className="md:min-h-screen min-h-[70vh] bg-black flex items-center justify-center mx-auto w-full relative ">
         <div className=" w-full  md:mx-auto   text-white flex flex-col items-center justify-center absolute top-0  max-w-7xl md:max-w-5xl">
           <div
             id="infoContainer"
@@ -57,16 +57,20 @@ export default function Info() {
               className="flex gap-4 ml-5 cursor-pointer items-center"
             >
               <div id="letsTalk" className="">
-                <Button className="bg-lime-500 flex gap-2 py-3 font-bold hover:bg-lime-400 hover:-translate-y-1 transition-transform ease-out duration-200 ">
-                  <Hand width={20} height={20} color="white"></Hand>Let's Talk
-                </Button>
+                <Link href="#contactArea">
+                  <Button className="bg-lime-500 flex gap-2 py-3 font-bold hover:bg-lime-400 hover:-translate-y-1 transition-transform ease-out duration-200 ">
+                    <Hand width={20} height={20} color="white"></Hand>Let's Talk
+                  </Button>
+                </Link>
               </div>
               <div id="cv" className="flex justify-center items-center   ">
-                <Button className="flex items-center  gap-2 font-bold py-2 z-3 hover:-translate-y-1 transition-transform ease-out duration-200">
-                  {" "}
-                  <ArrowRight className="rounded-full bg-lime-500 w-8 h-8 hover:bg-lime-400 hover:rotate-45 transition-transform ease-out duration-200"></ArrowRight>
-                  View CV
-                </Button>
+                <Link href="./Ashok_Bhattarai_Resume.pdf" target="_blank">
+                  <Button className="flex items-center  gap-2 font-bold py-2 z-3 hover:-translate-y-1 transition-transform ease-out duration-200">
+                    {" "}
+                    <ArrowRight className="rounded-full bg-lime-500 w-8 h-8 hover:bg-lime-400 hover:rotate-45 transition-transform ease-out duration-200"></ArrowRight>
+                    View CV
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
