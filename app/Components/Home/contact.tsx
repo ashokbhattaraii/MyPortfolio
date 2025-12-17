@@ -56,7 +56,7 @@ export default function Contact() {
   return (
     <>
       <div
-        className=" flex flex-wrap max-w-4/5 gray-900 items-center m-auto text-white p-4 mb-10 relative shadow shadow-gray-700 "
+        className=" flex flex-wrap max-w-4/5 gray-900 items-center m-auto text-white p-4 mb-10 relative shadow-2xl shadow-gray-700 rounded-2xl "
         id="contactArea"
       >
         <h1 className="text-blue-700 font-bold text-2xl">Get In Touch</h1>
@@ -74,7 +74,7 @@ export default function Contact() {
 
           <form
             id="message-box"
-            className="mx-auto p-5 bg-white rounded-2xl z-10 w-4/5"
+            className="mx-auto p-5 mb-3 bg-white rounded-2xl z-10 w-4/5"
           >
             <h1 className="text-blue-700 font-bold text-2xl">Message</h1>
             <div id="name" className="relative flex  mt-4 flex-col">
@@ -133,7 +133,7 @@ export default function Contact() {
             </Button>
           </form>
         </div>
-        <div className=" bg-lime-400   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
+        <div className=" bg-linear-to-r from-lime-900 to-lime-400   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div

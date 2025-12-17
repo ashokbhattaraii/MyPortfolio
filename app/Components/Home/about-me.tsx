@@ -14,10 +14,10 @@ export default function AboutMe() {
         />
 
         <div className="md:max-w-xl px-4 md:px-0">
-          <p className="mb-4 text-center md:text-left text-xl font-bold md:text-3xl lg:text-4xl">
+          <p className="mb-4 text-center md:text-left text-xl font-bold md:text-3xl lg:text-4xl text-lime-400">
             Build. Learn. Iterate. Enduring Digital Experiences.
           </p>
-          <p className="text-gray-700 text-sm text-center md:text-left md:text-base">
+          <p className="text-black text-sm text-center md:text-left md:text-base">
             I'm Ashok Bhattarai, a passionate Computer Science student pursuing
             B.Sc IT (Hons) at Lord Buddha Education Foundation in collaboration
             with Asia Pacific University. Based in Lalitpur, Nepal, I specialize
