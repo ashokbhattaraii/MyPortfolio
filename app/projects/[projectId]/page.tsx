@@ -9,7 +9,7 @@ export default async function List({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const { projectId } = await params;
+  const projectId = await params;
   async function fetchInitialProjects() {
     try {
       const response = await fetch("/api/projects");
