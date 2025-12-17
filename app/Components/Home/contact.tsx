@@ -94,9 +94,8 @@ export default function Contact() {
                 alt="user-male-circle"
               />
               <ErrorMessage errors={errors} name="name" />
-            </div>
+              <div id="email" className="relative flex flex-col mt-4"></div>
 
-            <div id="email" className="relative flex flex-col mt-4">
               <input
                 type="text"
                 className={`border rounded-2xl border-black text-black p-2 pl-9 outline-0 w-full placeholder:text-gray-700 ${
@@ -135,7 +134,7 @@ export default function Contact() {
             </Button>
           </form>
         </div>
-        <div className="bg-amber-300 w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
+        <div className=" bg-lime-800   w-full h-2/4 bottom-0 flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div

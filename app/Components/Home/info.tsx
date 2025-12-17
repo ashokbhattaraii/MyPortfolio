@@ -28,17 +28,19 @@ export default function Info() {
     return `${baseTransitionClass} transform ${delay} ${
       hasLoaded
         ? "opacity-100 translate-y-0 scale-100"
-        : "opacity-0 translate-y-10 scale-95"
+        : "opacity-0 -translate-y-10 scale-95"
     }`;
   };
 
   return (
     <>
-      <section className="md:min-h-screen min-h-[70vh] bg-black flex items-center justify-center mx-auto w-full relative ">
+      <section className="min-h-screen bg-black flex items-center justify-center mx-auto w-full relative">
         <div className=" w-full  md:mx-auto   text-white flex flex-col items-center justify-center absolute top-0  max-w-7xl md:max-w-5xl">
           <div
             id="infoContainer"
-            className=" flex flex-col m-5 gap-4 leading-snug"
+            className={`flex flex-col m-5 gap-4 leading-snug ${animate(
+              "delay-200"
+            )}`}
           >
             <p id="tag" className="text-5xl font-extrabold m-3  w-2/5 z-2">
               CODING WITH <span className="text-lime-400">PASSION</span>,
@@ -47,7 +49,7 @@ export default function Info() {
                 PURPOSE
               </span>
             </p>
-            <p id="detail" className="m-4 w-1/2 z-100">
+            <p id="detail" className="m-4 w-1/2 z-10">
               I believe mastery is a journey, not a destination, staying
               fiercely committed to growth. This approach guarantees thoughtful
               execution and highly reliable code on every platform.
@@ -76,7 +78,9 @@ export default function Info() {
           </div>
           <div
             id="photoContainer"
-            className=" flex justify-end absolute top-5 right-0"
+            className={` flex justify-end absolute top-5 right-0 ${animate(
+              "delay-200"
+            )}`}
           >
             <div className="bg-purple-600 h-120 max-w-60 w-full absolute z-1 top-10 right-20 rotate-10 rounded-2xl shadow-2xl shadow-purple-300 "></div>
             <img
