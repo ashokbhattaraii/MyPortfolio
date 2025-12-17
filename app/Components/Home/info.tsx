@@ -41,7 +41,7 @@ export default function Info() {
             className=" flex flex-col m-5 gap-4 leading-snug"
           >
             <p id="tag" className="text-5xl font-extrabold m-3  w-2/5 z-2">
-              CODING WITH <span className="text-purple-600">PASSION</span>,
+              CODING WITH <span className="text-lime-400">PASSION</span>,
               CREATING WITH{" "}
               <span className="bg-linear-to-r from-fuchsia-300 to-cyan-400 bg-clip-text text-transparent">
                 PURPOSE
