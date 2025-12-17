@@ -35,7 +35,6 @@
     "dateOfCompletion": "2000-01-01",
     "link": "asdnadnask"
   },
-  
   {
     "name": "Real-Time Chat Application",
     "description": "Full-stack application using Node.js, Express, and Socket.IO for real-time bidirectional communication between users in multiple chat rooms.",
@@ -93,6 +92,12 @@
   {
     "name": "asdja",
     "description": "asndjan",
+    "dateOfCompletion": "2000-01-01",
+    "link": "https://yout.com"
+  },
+  {
+    "name": "sadand",
+    "description": "nasjdnajkndasjnd",
     "dateOfCompletion": "2000-01-01",
     "link": "https://yout.com"
   }

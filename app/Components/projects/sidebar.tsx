@@ -21,7 +21,6 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
               const projectPath = `/projects/${projectId}`;
               return (
                 <div key={index} className="flex gap-2">
-                  <span>{index + 1}. </span>
                   <Link
                     href={projectPath}
                     className="w-full truncate hover:text-blue-700"
@@ -33,25 +32,6 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
               );
             })}
           </ul>
-
-          <button className="flex items-center gap-2 text-[12px] ml-6 text-blue-700">
-            View all
-            <span>
-              <img
-                width="13"
-                height="13"
-                src="https://img.icons8.com/ios/50/228BE6/forward--v1.png"
-                alt="forward--v1"
-              />
-            </span>
-          </button>
-
-          <Button
-            variant="primary"
-            className="w-3/4 mt-30 absolute bottom-2 right-2"
-          >
-            Hide
-          </Button>
         </div>
       </div>
     </>

@@ -13,6 +13,20 @@ interface ProjectsDetail {
 
 const Projects = () => {
   const [ProjectList, SetProjectList] = useState<ProjectsDetail[]>([]);
+  const [firstPage, nextPage] = useState(0);
+  const [lastIndex, setLastIndex] = useState(5);
+  const projectLength = ProjectList.length;
+  console.log("console from main project", projectLength);
+  const updatePage = () => {
+    if (lastIndex >= projectLength) {
+      nextPage(0);
+      setLastIndex(5);
+    } else {
+      nextPage(firstPage + 5);
+      setLastIndex(lastIndex + 5);
+    }
+  };
+
   const AddProject = (data: ProjectsDetail) => {
     SetProjectList((prevProject) => {
       return [...prevProject, data];
@@ -53,8 +67,18 @@ const Projects = () => {
         id="projectContainer"
         className="text-white relative top-6 flex gap-6 mx-auto w-full max-w-7xl"
       >
-        <SideBar Projects={ProjectList} />
-        <DetailedProjects Projects={ProjectList} onAddProject={AddProject} />
+        <SideBar
+          Projects={ProjectList}
+          firstPage={firstPage}
+          lastIndex={lastIndex}
+        />
+        <DetailedProjects
+          Projects={ProjectList}
+          onAddProject={AddProject}
+          onCLickNextPage={updatePage}
+          firstPage={firstPage}
+          lastIndex={lastIndex}
+        />
       </div>
     </>
   );

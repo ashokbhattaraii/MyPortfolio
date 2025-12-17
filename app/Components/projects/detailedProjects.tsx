@@ -15,12 +15,16 @@ interface ProjectDetail {
 interface DetailedProjectProps {
   Projects: ProjectDetail[];
   onAddProject: (newProject: ProjectDetail) => void;
+  onCLickNextPage: (nextPage: any) => void;
 }
 
 export default function DetailedProjects({
   Projects,
   onAddProject,
-}: DetailedProjectProps) {
+  onCLickNextPage,
+  firstPage,
+  lastIndex,
+}: any) {
   const {
     register,
     formState: { errors },
@@ -67,14 +71,6 @@ export default function DetailedProjects({
     );
   };
   const [isFormOpen, toogleForm] = useState(false);
-  const [firstPage, nextPage] = useState(0);
-  const [lastIndex, setLastIndex] = useState(5);
-
-  const updatePage = () => {
-    
-    nextPage(firstPage + 5);
-    setLastIndex(lastIndex + 5);
-  };
 
   function onClickAdd() {
     toogleForm(!isFormOpen);
@@ -131,13 +127,15 @@ export default function DetailedProjects({
           </div>
         </div>
         <div id="Next" className="flex justify-center mt-10">
-          <Button
-            variant="primary"
-            onClick={updatePage}
-            className="absolute md:bottom-2 md:right-6   "
-          >
-            Next
-          </Button>
+          <div id="Next">
+            <Button
+              variant="primary"
+              onClick={onCLickNextPage}
+              className="fixed bottom-6 right-6 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform"
+            >
+              Next
+            </Button>
+          </div>
         </div>
       </div>
       {isFormOpen && (

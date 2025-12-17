@@ -17,8 +17,8 @@ export default function Project({ project, startIndex, lastIndex }: any) {
 
   const pageProject = project?.slice(startIndex, lastIndex) || [];
   {
-    console.log(startIndex);
-    console.log(lastIndex);
+    console.log("StaRT", startIndex);
+    console.log("eND  ", lastIndex);
   }
   return (
     <>
