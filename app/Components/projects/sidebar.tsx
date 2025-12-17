@@ -6,7 +6,7 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
   const projectLength = Projects.length;
   console.log("Sidebar log", projectLength);
   const filteredProjects = Projects?.slice(firstPage, lastIndex) || [];
-  console.log("sidebar", firstPage, lastIndex);
+
   return (
     <>
       <div
