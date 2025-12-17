@@ -34,7 +34,7 @@ export default function Info() {
 
   return (
     <>
-      <section className="min-h-screen bg-black flex items-center justify-center mx-auto w-full relative">
+      <section className="md:min-h-screen min-h-[90vh] bg-black flex items-center justify-center mx-auto w-full relative">
         <div className=" w-full  md:mx-auto   text-white flex flex-col items-center justify-center absolute top-0  max-w-7xl md:max-w-5xl">
           <div
             id="infoContainer"
