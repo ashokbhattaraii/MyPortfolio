@@ -86,7 +86,7 @@ export default function Info() {
             <img
               src="./profile.png"
               alt="Profile Picture"
-              className="object-cover ml-25 md:ml-0 md:mr-20  drop-shadow-2xl "
+              className="object-cover ml-25 md:ml-0 md:m  drop-shadow-2xl "
             />
           </div>
         </div>
