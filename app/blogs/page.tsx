@@ -17,6 +17,9 @@ export default function Blogs() {
     }
     fetchBlogs();
   }, []);
+
+  // const [searchedBLogs, setSearch] = useState();
+
   return (
     <>
       <section className="">
