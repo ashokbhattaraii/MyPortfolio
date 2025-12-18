@@ -125,7 +125,7 @@ export default async function BlogDetail({
                   Published At: {createdAt}
                 </p>
               </div>
-              <div className="flex ml-auto mr-4 gap-2 bg-lime-400 p-2 rounded-2xl items-center">
+              <div className=" hidden md:flex ml-auto mr-4 gap-2 bg-lime-400 p-1 rounded-2xl items-center">
                 <CheckCheck className="bg-lime-500 rounded-full w-5 h-5"></CheckCheck>
                 <p>Published</p>
               </div>
