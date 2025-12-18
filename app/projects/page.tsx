@@ -2,7 +2,8 @@
 import Button from "../Resualble_Components/Button";
 import SideBar from "../Components/projects/sidebar";
 import DetailedProjects from "../Components/projects/detailedProjects";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Target } from "lucide-react";
 
 interface ProjectsDetail {
   name: string;
@@ -19,11 +20,27 @@ const Projects = () => {
   console.log("console from main project", projectLength);
   const updatePage = (action: "next" | "prev") => {
     if (action == "next") {
-      nextPage(firstPage + 5);
-      setLastIndex(lastIndex + 5);
+      if (selectedValue == 5) {
+        nextPage(firstPage + 5);
+        setLastIndex(lastIndex + 5);
+      } else if (selectedValue == 10) {
+        nextPage(firstPage + 10);
+        setLastIndex(lastIndex + 10);
+      }
+    } else if (selectedValue == 15) {
+      nextPage(firstPage - 15);
+      setLastIndex(lastIndex - 15);
     } else {
-      nextPage(firstPage - 5);
-      setLastIndex(lastIndex - 5);
+      if (selectedValue == 5) {
+        nextPage(firstPage - 5);
+        setLastIndex(lastIndex - 5);
+      } else if (selectedValue == 10) {
+        nextPage(firstPage - 10);
+        setLastIndex(lastIndex - 10);
+      } else if (selectedValue == 15) {
+        nextPage(firstPage - 15);
+        setLastIndex(lastIndex - 15);
+      }
     }
   };
 
@@ -32,6 +49,14 @@ const Projects = () => {
       return [...prevProject, data];
     });
   };
+
+  const [selectedValue, setSelectValue] = useState(5);
+  const handleChange = (selectedValue: any) => {
+    setSelectValue(selectedValue);
+  };
+  useEffect(() => {
+    console.log("selected", selectedValue);
+  }, [setSelectValue]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -80,6 +105,8 @@ const Projects = () => {
           firstPage={firstPage}
           lastIndex={lastIndex}
           projectLength={projectLength}
+          handleChange={handleChange}
+          selectedValue={selectedValue}
         />
       </div>
     </>

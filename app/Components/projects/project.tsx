@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/app/Resualble_Components/Button";
+import { useEffect } from "react";
 
 interface ProjectDetail {
   name: string;
@@ -17,16 +18,19 @@ const colors = [
   "bg-orange-500",
 ];
 
-export default function Project({ project, startIndex, lastIndex }: any) {
+export default function Project({
+  project,
+  startIndex,
+  lastIndex,
+  selectedValue,
+}: any) {
   const projectLength = project.length;
 
-  console.log("Project Length", projectLength);
-
-  const pageProject = project?.slice(startIndex, lastIndex) || [];
-  {
-    console.log("StaRT", startIndex);
-    console.log("eND  ", lastIndex);
-  }
+  console.log("Selected value", selectedValue);
+  const pageProject =
+    selectedValue == 5
+      ? project?.slice(startIndex, lastIndex)
+      : project?.slice(0, selectedValue);
   return (
     <>
       {pageProject.map((p: any, index: any) => {

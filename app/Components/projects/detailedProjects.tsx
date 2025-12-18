@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Project from "./project";
 import { NextResponse } from "next/server";
 import Button from "../../Resualble_Components/Button";
@@ -27,6 +27,8 @@ export default function DetailedProjects({
   projectLength,
   firstPage,
   lastIndex,
+  handleChange,
+  selectedValue,
 }: any) {
   const {
     register,
@@ -52,6 +54,7 @@ export default function DetailedProjects({
     date: {
       required: "Completion date is required",
     },
+
     link: {
       required: "Enter a valid project link",
       pattern: {
@@ -73,7 +76,15 @@ export default function DetailedProjects({
       </p>
     );
   };
+
   const [isFormOpen, toogleForm] = useState(false);
+
+  function changeValue(event: React.ChangeEvent<HTMLSelectElement>) {
+    const value = event.target.value;
+    const numValue = Number(value);
+    handleChange(numValue);
+    console.log("selected", numValue);
+  }
 
   function onClickAdd() {
     toogleForm(!isFormOpen);
@@ -113,6 +124,7 @@ export default function DetailedProjects({
             project={Projects}
             startIndex={firstPage}
             lastIndex={lastIndex}
+            selectedValue={selectedValue}
           />
           <div
             id="AddProjects"
@@ -129,21 +141,32 @@ export default function DetailedProjects({
             <p className="absolute -bottom-7">Add</p>
           </div>
         </div>
-        <div id="Next" className="flex justify-center mt-10">
-          <div id="Next">
+        <div id="pageControl" className="flex justify-center mt-10">
+          <div id="pageBtn" className="flex justify-around gap-10">
             <Button
               variant="primary"
               onClick={onCLickPreviousPage}
-              className={`fixed bottom-5 right-30 z-50 bg-lime-500 md:bottom-10 md:right-35 shadow-lg hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 left-8 z-50 bg-lime-500 md:bottom-10 md:right-35 shadow-lg hover:scale-105 transition-transform ${
                 firstPage > 0 ? "block" : "hidden"
               } ${firstPage < 0 ? "hidden" : "block"}`}
             >
               Previous
             </Button>
+            <select
+              onChange={changeValue}
+              name=""
+              id=""
+              className=" fixed bottom-5 py-2 px-4 bg-lime-400 text-white rounded-2xl"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+
             <Button
               variant="primary"
               onClick={onCLickNextPage}
-              className={`fixed bottom-5 right-6 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 right-4 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform ${
                 lastIndex > projectLength ? "hidden" : "block"
               }
               }`}
@@ -156,9 +179,9 @@ export default function DetailedProjects({
       {isFormOpen && (
         <div
           id="overlayForm"
-          className="text-white  fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
+          className="text-black  fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
         >
-          <form className="flex flex-col bg-gray-700 rounded-2xl gap-3 w-80 p-3 max-h-[90vh] overflow-y-auto ">
+          <form className="flex flex-col bg-white rounded-2xl gap-3 w-80 p-3 max-h-[90vh] overflow-y-auto ">
             <h1 className="text-center text-blue-700 font-black text-2xl">
               Add Project
             </h1>
