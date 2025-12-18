@@ -17,13 +17,13 @@ const Projects = () => {
   const [lastIndex, setLastIndex] = useState(5);
   const projectLength = ProjectList.length;
   console.log("console from main project", projectLength);
-  const updatePage = () => {
-    if (lastIndex >= projectLength) {
-      nextPage(0);
-      setLastIndex(5);
-    } else {
+  const updatePage = (action: "next" | "prev") => {
+    if (action == "next") {
       nextPage(firstPage + 5);
       setLastIndex(lastIndex + 5);
+    } else {
+      nextPage(firstPage - 5);
+      setLastIndex(lastIndex - 5);
     }
   };
 
@@ -75,9 +75,11 @@ const Projects = () => {
         <DetailedProjects
           Projects={ProjectList}
           onAddProject={AddProject}
-          onCLickNextPage={updatePage}
+          onCLickNextPage={() => updatePage("next")}
+          onCLickPreviousPage={() => updatePage("prev")}
           firstPage={firstPage}
           lastIndex={lastIndex}
+          projectLength={projectLength}
         />
       </div>
     </>

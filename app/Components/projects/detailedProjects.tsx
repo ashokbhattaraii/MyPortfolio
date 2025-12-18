@@ -10,6 +10,7 @@ interface ProjectDetail {
   description: string;
   dateOfCompletion: string;
   link: string;
+  projectLength: number;
 }
 
 interface DetailedProjectProps {
@@ -22,6 +23,8 @@ export default function DetailedProjects({
   Projects,
   onAddProject,
   onCLickNextPage,
+  onCLickPreviousPage,
+  projectLength,
   firstPage,
   lastIndex,
 }: any) {
@@ -130,8 +133,20 @@ export default function DetailedProjects({
           <div id="Next">
             <Button
               variant="primary"
+              onClick={onCLickPreviousPage}
+              className={`fixed bottom-5 right-30 z-50 bg-lime-500 md:bottom-10 md:right-35 shadow-lg hover:scale-105 transition-transform ${
+                firstPage > 0 ? "block" : "hidden"
+              } ${firstPage < 0 ? "hidden" : "block"}`}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="primary"
               onClick={onCLickNextPage}
-              className="fixed bottom-6 right-6 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform"
+              className={`fixed bottom-5 right-6 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform ${
+                lastIndex > projectLength ? "hidden" : "block"
+              }
+              }`}
             >
               Next
             </Button>

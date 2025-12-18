@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function navigation() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const pathName = usePathname();
 
   function toogleMenu() {
     setMenuOpen(!isMenuOpen);
@@ -12,7 +14,7 @@ export default function navigation() {
   return (
     <>
       <header className="fixed z-1000 top-0 left-0 right-0 flex justify-center items-center w-full h-20  @apply bg-linear-to-r from-gray-600 to-slate-900 p-3 shadow shadow-gray-800 opacity-90">
-        <p className="mr-auto ml-3 text-lime-400 text-3xl font-bold transition-transform ease-out duration-200 hover:scale-105 ">
+        <p className="mr-auto ml-3 text-lime-500 text-3xl font-bold transition-transform ease-out duration-200 hover:scale-105 ">
           <Link href="./">Portfolio</Link>
         </p>
         <nav className={`mr-auto hidden md:block lg:block `}>
@@ -20,28 +22,51 @@ export default function navigation() {
             <li className="">
               <a
                 href="/"
-                className="hover:text-blue-700 transition-colors duration-200 "
+                className="hover:text-lime-500 transition-colors duration-200 "
               >
                 Home
               </a>
             </li>
             <li className="">
               <Link
-                href="#about-me"
-                className="hover:text-blue-700 transition-colors duration-200 "
+                href="/#about-me"
+                className={`${
+                  pathName === "/#about-me" ? "text-lime-400" : "text-white"
+                } hover:text-lime-400`}
               >
                 About
               </Link>
             </li>
 
-            <li className="hover:text-blue-700">
-              <Link href="/projects">Projects</Link>
+            <li className="">
+              <Link
+                href="/projects"
+                className={`${
+                  pathName === "/projects" ? "text-lime-400" : "text-white"
+                } hover:text-lime-400`}
+              >
+                Projects
+              </Link>
             </li>
-            <li className="hover:text-blue-700">
-              <Link href="/blogs">Blogs</Link>
+            <li className="hover:text-lime-500">
+              <Link
+                href="/blogs"
+                className={`${
+                  pathName === "/blogs" ? "text-lime-400" : "text-white"
+                } hover:text-lime-400`}
+              >
+                Blogs
+              </Link>
             </li>
-            <li className="hover:text-blue-700">
-              <Link href="#contactArea">Contact</Link>
+            <li className="hover:text-lime-500">
+              <Link
+                href="/#contactArea"
+                className={`${
+                  pathName === "/contact" ? "text-lime-400" : "text-white"
+                } hover:text-lime-400`}
+              >
+                Contact
+              </Link>
             </li>
           </ul>
         </nav>
@@ -60,7 +85,7 @@ export default function navigation() {
 
           <nav
             id="phone"
-            className={`absolute right-5 mt-2  list-none bg-white opacity-90 px-5 w-50  shadow-2xl shadow-gray-700 rounded-2xl md:hidden lg:hidden  ${
+            className={`absolute right-5 mt-2  list-none bg-white opacity-90 px-5 w-50  shadow-2xl shadow-gray-500 rounded-2xl md:hidden lg:hidden  ${
               isMenuOpen ? "block" : "hidden"
             } `}
           >
@@ -68,27 +93,27 @@ export default function navigation() {
               <li className="">
                 <Link
                   href="/"
-                  className="hover:text-blue-700  transition-colors duration-200 "
+                  className="hover:text-lime-500  transition-colors duration-200 "
                 >
                   Home
                 </Link>
               </li>
               <li className="">
                 <Link
-                  href="#about-me"
-                  className="hover:text-blue-700 transition-colors duration-200 "
+                  href="/#about-me"
+                  className="hover:text-lime-500 transition-colors duration-200 "
                 >
                   About
                 </Link>
               </li>
 
-              <li className="hover:text-blue-700">
+              <li className="hover:text-lime-500">
                 <Link href="/projects">Projects</Link>
               </li>
-              <li className="hover:text-blue-700">
+              <li className="hover:text-lime-500">
                 <Link href="/blogs">Blogs</Link>
               </li>
-              <li className="hover:text-blue-700">
+              <li className="hover:text-lime-500">
                 <Link href="#contactArea">Contact</Link>
               </li>
             </ul>
