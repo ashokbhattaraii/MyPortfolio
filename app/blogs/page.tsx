@@ -34,10 +34,7 @@ export default function Blogs() {
               placeholder="Search by name or tags"
             />
           </div>
-          <div
-            id="blogs"
-            className="flex flex-wrap gap-6    relative top-25 md:mx-3 md:justify-between items-stretch"
-          >
+          <div id="blogs" className="flex flex-wrap flex-col gap-10 pt-20 ">
             <Blog blogs={blogs} />
           </div>
         </div>
