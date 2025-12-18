@@ -182,20 +182,37 @@ export default function DetailedProjects({
       {isFormOpen && (
         <div
           id="overlayForm"
-          className="text-black  fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
+          className="text-black fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
         >
-          <form className="flex flex-col bg-white rounded-2xl gap-3 w-80 p-3 max-h-[90vh] overflow-y-auto ">
+          <form className="flex flex-col bg-white rounded-2xl gap-3 w-187 p-4 max-h-[85vh] overflow-y-auto">
             <h1 className="text-center text-blue-700 font-black text-2xl">
               Add Project
             </h1>
-            <span>Name</span>
-            <input
-              type="text"
-              placeholder="Project Name"
-              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
-              {...register("name", ValidationRules.name)}
-            />
-            <ErrorMessage error={errors} name="name" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1">
+                <span>Name</span>
+                <input
+                  type="text"
+                  placeholder="Project Name"
+                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  {...register("name", ValidationRules.name)}
+                />
+                <ErrorMessage error={errors} name="name" />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <span>Link</span>
+                <input
+                  type="text"
+                  placeholder="https://"
+                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  {...register("link", ValidationRules.link)}
+                />
+                <ErrorMessage error={errors} name="link" />
+              </div>
+            </div>
+
             <span>Content</span>
             <textarea
               id="description"
@@ -205,36 +222,48 @@ export default function DetailedProjects({
               {...register("description", ValidationRules.description)}
             ></textarea>
             <ErrorMessage error={errors} name="description" />
-            <>Date Of Completetion</>
-            <input
-              type="date"
-              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
-              {...register("dateOfCompletion", ValidationRules.date)}
-            />
-            <ErrorMessage error={errors} name="date" />
-            <span>Link</span>
-            <input
-              type="text"
-              placeholder="https://"
-              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
-              {...register("link", ValidationRules.link)}
-            />
-            <ErrorMessage error={errors} name="link" />
-            <Button
-              varient="primary"
-              type="submit"
-              onClick={handleSubmit(onSubmit)}
-            >
-              Add Project
-            </Button>
-            <button
-              className="mb-2"
-              onClick={() => {
-                toogleForm(false);
-              }}
-            >
-              Cancel
-            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1">
+                <span>Date Of Completion</span>
+                <input
+                  type="date"
+                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  {...register("dateOfCompletion", ValidationRules.date)}
+                />
+                <ErrorMessage error={errors} name="date" />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <span>Tags</span>
+                <input
+                  type="text"
+                  placeholder="React, Next.js, Tailwind"
+                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-2 justify-center items-center">
+              <Button
+                varient="primary"
+                type="submit"
+                onClick={handleSubmit(onSubmit)}
+                className="bg-lime-400"
+              >
+                Add Project
+              </Button>
+
+              <Button
+                variant="danger"
+                className="bg-lime-400"
+                onClick={() => {
+                  toogleForm(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
           </form>
         </div>
       )}
