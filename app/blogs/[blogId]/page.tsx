@@ -15,6 +15,9 @@ interface Blog {
   content: string;
   author: { name: string };
   imageUrl: string;
+  updatedAt: string;
+  createdAt: string;
+  tags: [string];
 }
 
 const getBaseUrl = () => {
@@ -107,7 +110,7 @@ export default async function BlogDetail({
                   <p>{targetBlog.author.name}</p>
                 </div>
               </div>
-              <hr className="w-[1px] h-20 bg-lime-400 border-none mx-6" />
+              <hr className="w-px h-20 bg-lime-400 border-none mx-6" />
               <div id="published" className="flex flex-col gap-2">
                 <p className="text-[12px] flex items-center gap-1">
                   <span>

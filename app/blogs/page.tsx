@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { useForm } from "react-hook-form";
 import Blog from "../Components/blog/blog";
+
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
@@ -18,7 +19,15 @@ export default function Blogs() {
     fetchBlogs();
   }, []);
 
-  // const [searchedBLogs, setSearch] = useState();
+  const [query, setQuery] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const currentquery = e.target.value;
+    setQuery(currentquery);
+  };
+  useEffect(() => {
+    console.log("useeffect", query);
+  }, [query]);
 
   return (
     <>
@@ -35,10 +44,11 @@ export default function Blogs() {
               type="text"
               className="border fixed right-15 top-25 px-2 py-2 z-100 rounded-xl max-w-70 outline-0 w-full"
               placeholder="Search by name or tags"
+              onChange={handleSearch}
             />
           </div>
           <div id="blogs" className="flex flex-wrap flex-col gap-10 pt-20 ">
-            <Blog blogs={blogs} />
+            <Blog blogs={blogs} query={query} />
           </div>
         </div>
       </section>

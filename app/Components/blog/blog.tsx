@@ -2,7 +2,7 @@ import Button from "@/app/Resualble_Components/Button";
 import { User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-export default function Blog({ blogs }: any) {
+export default function Blog({ blogs, query }: any) {
   return (
     <>
       {blogs.map((b: any, i: any) => {
