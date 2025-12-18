@@ -31,7 +31,7 @@ export default function Blogs() {
 
   return (
     <>
-      <section className="">
+      <section className="max-w-4xl w-full md:max-w-7xl">
         <div
           id="blogsContainer"
           className="relative mt-20 text-white w-full max-w-7xl"
