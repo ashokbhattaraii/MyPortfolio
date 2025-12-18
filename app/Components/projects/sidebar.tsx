@@ -21,6 +21,9 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
               const projectPath = `/projects/${projectId}`;
               return (
                 <div key={index} className="flex gap-2">
+                  <div>
+                    {index + 1}. {""}
+                  </div>
                   <Link
                     href={projectPath}
                     className="w-full truncate hover:text-blue-700"
