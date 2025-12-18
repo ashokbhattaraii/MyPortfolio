@@ -52,14 +52,14 @@ export default async function BlogDetail({
       >
         <p
           id="title"
-          className="text-center  text-2xl font-bold text-blue-700  transition-transform ease-out duration-200 hover:scale-105 hover:text-blue-200"
+          className="text-center  text-2xl font-bold text-lime-400  transition-transform ease-out duration-200 hover:scale-105 hover:text-blue-200"
         >
           {targetBlog.title}
         </p>
         <img
           src={targetBlog.imageUrl}
           alt=""
-          className="w-1/2 h-full mt-5 rounded transition-transform ease-out duration-200 hover:scale-105"
+          className="w-[60%] h-full mt-5 rounded transition-transform ease-out duration-200 hover:scale-105"
         />
         <p id="content" className="mt-10 w-1/2">
           {targetBlog?.content}

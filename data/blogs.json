@@ -1,63 +1,152 @@
 [
-    {
-      "id": 1,
-      "title": "Getting Started with React",
-      "slug": "getting-started-with-react",
-      "author": {
-        "name": "Ashok",
-        "email": "ashok@example.com"
-      },
-      "imageUrl": "https://picsum.photos/id/180/1200/600",
-      "content": "React is a popular JavaScript library for building user interfaces. It allows developers to create reusable components and manage application state efficiently.",
-      "tags": ["react", "javascript", "frontend"],
-      "published": true,
-      "createdAt": "2025-01-10T10:30:00Z",
-      "updatedAt": "2025-01-12T08:15:00Z"
+  {
+    "id": 1,
+    "title": "Getting Started with React",
+    "slug": "getting-started-with-react",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
     },
-    {
-      "id": 2,
-      "title": "Introduction to Playwright for QA",
-      "slug": "introduction-to-playwright-for-qa",
-      "author": {
-        "name": "Ashok",
-        "email": "ashok@example.com"
-      },
-      "imageUrl": "https://picsum.photos/id/1011/1200/600",
-      "content": "Playwright is a modern end-to-end testing framework that supports multiple browsers and provides powerful APIs for reliable test automation.",
-      "tags": ["playwright", "qa", "automation", "testing"],
-      "published": true,
-      "createdAt": "2025-02-05T09:00:00Z",
-      "updatedAt": "2025-02-05T09:00:00Z"
+    "imageUrl": "https://picsum.photos/id/180/1200/600",
+    "content": "React has revolutionized the way we build modern web applications. Created by Facebook in 2013, it has grown to become one of the most popular JavaScript libraries for building user interfaces. The component-based architecture that React provides allows developers to break down complex UIs into smaller, manageable, and reusable pieces.\n\nOne of the key concepts in React is the Virtual DOM. Instead of manipulating the browser's DOM directly, React creates a virtual representation of the UI in memory. When state changes occur, React efficiently calculates the minimal set of changes needed and updates only those specific parts of the actual DOM. This approach leads to significant performance improvements, especially in applications with frequent updates.\n\nGetting started with React is easier than ever thanks to Create React App, a tool that sets up a modern React development environment with zero configuration. You can have a working React application up and running in minutes. The library uses JSX, a syntax extension that allows you to write HTML-like code directly in your JavaScript files, making your components more readable and intuitive.\n\nReact's ecosystem is vast and vibrant. Popular tools like React Router for navigation, Redux or Context API for state management, and countless UI libraries make it possible to build anything from simple landing pages to complex enterprise applications. The strong community support means you'll always find solutions to common problems and best practices to follow.",
+    "tags": ["react", "javascript", "frontend"],
+    "published": true,
+    "createdAt": "2025-01-10T10:30:00Z",
+    "updatedAt": "2025-01-12T08:15:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Introduction to Playwright for QA",
+    "slug": "introduction-to-playwright-for-qa",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
     },
-    {
-      "id": 3,
-      "title": "Understanding CI/CD Pipelines",
-      "slug": "understanding-ci-cd-pipelines",
-      "author": {
-        "name": "Ashok",
-        "email": "ashok@example.com"
-      },
-      "imageUrl": "https://picsum.photos/id/1005/1200/600",
-      "content": "CI/CD pipelines automate the process of building, testing, and deploying applications, helping teams deliver software faster and more reliably.",
-      "tags": ["cicd", "devops", "automation"],
-      "published": false,
-      "createdAt": "2025-03-01T14:20:00Z",
-      "updatedAt": "2025-03-02T11:45:00Z"
+    "imageUrl": "https://picsum.photos/id/1011/1200/600",
+    "content": "Playwright has emerged as a game-changer in the world of end-to-end testing. Developed by Microsoft, this powerful framework provides a unified API for automating Chromium, Firefox, and WebKit browsers. Unlike older testing tools, Playwright is built from the ground up with modern web applications in mind, offering features that address the pain points QA engineers face daily.\n\nOne of Playwright's standout features is its auto-waiting mechanism. The framework automatically waits for elements to be ready before performing actions, eliminating the need for arbitrary timeouts and sleep statements that plague traditional test frameworks. This intelligent waiting makes tests more reliable and less flaky, which is crucial for maintaining a healthy CI/CD pipeline.\n\nPlaywright excels at handling modern web application scenarios. It provides built-in support for handling multiple pages and frames, intercepting network requests, emulating mobile devices, and even testing across different browser contexts. The ability to run tests in parallel out of the box significantly reduces test execution time, making it practical to run comprehensive test suites on every commit.\n\nThe framework also includes powerful debugging tools. The Playwright Inspector allows you to step through your tests, view element selectors, and see exactly what's happening at each step. The trace viewer provides a complete recording of your test execution, including screenshots, network activity, and DOM snapshots, making it easy to diagnose failures even in CI environments. For teams looking to improve their testing infrastructure, Playwright represents a modern, robust solution.",
+    "tags": ["playwright", "qa", "automation", "testing"],
+    "published": true,
+    "createdAt": "2025-02-05T09:00:00Z",
+    "updatedAt": "2025-02-05T09:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Understanding CI/CD Pipelines",
+    "slug": "understanding-ci-cd-pipelines",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
     },
-    {
-      "id": 4,
-      "title": "Why End-to-End Testing Matters",
-      "slug": "why-end-to-end-testing-matters",
-      "author": {
-        "name": "Ashok",
-        "email": "ashok@example.com"
-      },
-      "imageUrl": "https://picsum.photos/id/1039/1200/600",
-      "content": "End-to-end testing ensures that all parts of an application work together as expected, reducing production bugs and improving overall software quality.",
-      "tags": ["testing", "e2e", "quality-assurance"],
-      "published": true,
-      "createdAt": "2025-03-10T12:00:00Z",
-      "updatedAt": "2025-03-10T12:00:00Z"
-    }
-  ]
-
+    "imageUrl": "https://picsum.photos/id/1005/1200/600",
+    "content": "Continuous Integration and Continuous Deployment (CI/CD) have become fundamental practices in modern software development. These methodologies automate the process of integrating code changes, running tests, and deploying applications, fundamentally changing how teams deliver software. The goal is to make software releases boring, predictable, and stress-free events rather than high-stakes, all-hands-on-deck emergencies.\n\nContinuous Integration focuses on automatically building and testing code every time a developer commits changes to the version control system. This practice catches integration issues early when they're easier and cheaper to fix. A typical CI pipeline will check out the latest code, install dependencies, run unit tests, integration tests, and linting tools, then report the results back to the development team. If any step fails, the team is immediately notified and can fix the issue before it affects others.\n\nContinuous Deployment takes this a step further by automatically deploying code that passes all tests to production. This might sound risky, but with proper automated testing, monitoring, and rollback mechanisms in place, it's actually safer than manual deployments. Many successful companies deploy to production dozens or even hundreds of times per day. The key is having confidence in your automated tests and the ability to quickly revert changes if issues arise.\n\nModern CI/CD tools like GitHub Actions, GitLab CI, Jenkins, and CircleCI make it easier than ever to set up these pipelines. They provide pre-built actions for common tasks, integration with cloud platforms, and sophisticated workflows that can handle complex deployment scenarios. Implementing CI/CD requires initial investment in infrastructure and test automation, but the payoff in terms of faster delivery, fewer bugs, and reduced stress is well worth it.",
+    "tags": ["cicd", "devops", "automation"],
+    "published": false,
+    "createdAt": "2025-03-01T14:20:00Z",
+    "updatedAt": "2025-03-02T11:45:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Why End-to-End Testing Matters",
+    "slug": "why-end-to-end-testing-matters",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1039/1200/600",
+    "content": "End-to-end testing validates that your application works correctly from the user's perspective, testing complete workflows from start to finish. While unit tests verify individual components and integration tests check how different modules work together, end-to-end tests ensure that the entire system functions as intended. This comprehensive approach catches issues that other testing levels might miss, particularly problems related to user workflows, data flow, and system integration.\n\nThe value of end-to-end testing becomes clear when you consider how modern applications are built. Today's web applications often consist of a frontend, backend API, database, third-party services, and various microservices all working together. A bug in any of these components or in how they interact can break critical user functionality. End-to-end tests simulate real user scenarios, clicking buttons, filling forms, and verifying that the expected outcomes occur across the entire stack.\n\nHowever, end-to-end testing comes with challenges. These tests are typically slower to run than unit tests, more expensive to maintain, and can be prone to flakiness if not written carefully. The key is finding the right balance in your testing strategy. Martin Fowler's test pyramid suggests having many unit tests, fewer integration tests, and even fewer end-to-end tests. Focus your end-to-end tests on critical user journeys and happy paths, while using other testing levels for edge cases and error handling.\n\nWhen implemented correctly, end-to-end tests provide invaluable confidence in your releases. They serve as living documentation of how your application should behave and act as a safety net against regressions. Many teams run these tests in their CI/CD pipeline before deploying to production, ensuring that only fully functional code reaches users. The investment in maintaining a solid suite of end-to-end tests pays dividends in reduced production incidents and improved software quality.",
+    "tags": ["testing", "e2e", "quality-assurance"],
+    "published": true,
+    "createdAt": "2025-03-10T12:00:00Z",
+    "updatedAt": "2025-03-10T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "title": "Mastering JavaScript Async/Await",
+    "slug": "mastering-javascript-async-await",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1018/1200/600",
+    "content": "Asynchronous programming is at the heart of JavaScript, and async/await has revolutionized how we write asynchronous code. Before async/await, developers relied on callbacks and promises, which often led to nested code structures that were hard to read and maintain. Async/await provides a cleaner, more intuitive syntax that makes asynchronous code look and behave more like synchronous code, dramatically improving code readability.\n\nUnder the hood, async/await is built on top of promises. When you mark a function as async, it automatically returns a promise. The await keyword can only be used inside async functions and pauses the execution until the promise resolves, but importantly, it doesn't block the entire JavaScript thread. This means other code can continue executing while your async function waits for operations like API calls or database queries to complete.\n\nError handling with async/await is straightforward using traditional try-catch blocks. This is a significant improvement over promise chains where error handling with .catch() could become cumbersome. You can wrap your await statements in try blocks and catch any errors that occur during the asynchronous operations, making your error handling logic clear and consistent with synchronous code patterns.\n\nOne common pitfall is forgetting to use await when calling async functions, which can lead to subtle bugs. Another is not understanding that await pauses execution sequentially, so if you have multiple independent async operations, you should use Promise.all() to run them in parallel. Mastering these patterns and understanding when to use sequential versus parallel execution is key to writing efficient asynchronous JavaScript code. Modern JavaScript development is impossible without a solid grasp of async/await patterns.",
+    "tags": ["javascript", "async", "programming", "tutorial"],
+    "published": true,
+    "createdAt": "2025-03-15T11:30:00Z",
+    "updatedAt": "2025-03-15T11:30:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Docker Containers: A Comprehensive Guide",
+    "slug": "docker-containers-comprehensive-guide",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1074/1200/600",
+    "content": "Docker has transformed how we develop, ship, and run applications. At its core, Docker uses containerization technology to package applications and their dependencies into standardized units that can run consistently across different computing environments. This solves the infamous 'it works on my machine' problem that has plagued development teams for decades. With Docker, if it works in your container, it will work the same way in testing, staging, and production.\n\nContainers are fundamentally different from virtual machines. While VMs virtualize entire operating systems, containers share the host system's kernel and isolate the application processes. This makes containers incredibly lightweight and fast to start. You can run dozens of containers on a laptop that might struggle with just a few VMs. Containers also use layered file systems, which means common layers can be shared between containers, saving significant disk space.\n\nDocker's ecosystem extends beyond just running containers. Docker Compose allows you to define multi-container applications using a simple YAML file, making it easy to spin up complex development environments with databases, caching layers, and multiple services with a single command. Docker Hub provides a vast library of pre-built images, so you often don't need to start from scratch. You can pull official images for databases, web servers, programming language runtimes, and more.\n\nIn production environments, container orchestration platforms like Kubernetes take Docker containers to the next level, managing deployment, scaling, and operation of containerized applications across clusters of machines. Learning Docker is essential for modern developers and DevOps engineers. It's not just a deployment tool but has become a fundamental part of the development workflow, enabling consistent environments from development through production.",
+    "tags": ["docker", "containers", "devops", "infrastructure"],
+    "published": true,
+    "createdAt": "2025-03-20T09:45:00Z",
+    "updatedAt": "2025-03-20T09:45:00Z"
+  },
+  {
+    "id": 7,
+    "title": "Building RESTful APIs with Node.js",
+    "slug": "building-restful-apis-nodejs",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1060/1200/600",
+    "content": "Node.js has become the go-to platform for building RESTful APIs, thanks to its non-blocking I/O model and vibrant ecosystem. REST (Representational State Transfer) is an architectural style that uses HTTP methods to create, read, update, and delete resources. A well-designed REST API is intuitive, consistent, and follows established conventions that make it easy for developers to understand and use.\n\nExpress.js is the most popular framework for building APIs in Node.js. It provides a minimal and flexible set of features for web applications, allowing you to handle routing, middleware, and HTTP requests with clean, readable code. Setting up basic CRUD endpoints is straightforward, but building production-ready APIs requires careful consideration of aspects like authentication, input validation, error handling, and documentation.\n\nAuthentication and authorization are critical concerns for any API. JSON Web Tokens (JWT) have become the standard for stateless authentication in REST APIs. When a user logs in, the server generates a JWT containing user information and permissions, which the client includes in subsequent requests. Middleware functions can verify these tokens and ensure users only access resources they're authorized to use. Implementing proper security measures including rate limiting, CORS configuration, and input sanitization is essential.\n\nAPI versioning is another important consideration that's often overlooked in early development but becomes critical as your API evolves. Common approaches include versioning through URL paths (/api/v1/users), headers, or query parameters. Good documentation using tools like Swagger or API Blueprint helps consumers understand your API endpoints, request formats, and expected responses. Testing your API thoroughly with tools like Jest or Mocha ensures reliability. Building robust APIs requires thinking beyond just making endpoints work to considering scalability, maintainability, and developer experience.",
+    "tags": ["nodejs", "api", "rest", "backend"],
+    "published": true,
+    "createdAt": "2025-03-25T13:20:00Z",
+    "updatedAt": "2025-03-25T13:20:00Z"
+  },
+  {
+    "id": 8,
+    "title": "CSS Grid vs Flexbox: When to Use Each",
+    "slug": "css-grid-vs-flexbox",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1015/1200/600",
+    "content": "CSS Grid and Flexbox are both powerful layout systems, but they're designed for different purposes and shine in different scenarios. Understanding when to use each is crucial for creating efficient, maintainable layouts. Many developers wonder if they need to choose between them, but the reality is that they complement each other perfectly, and modern websites often use both in combination.\n\nFlexbox is a one-dimensional layout system, perfect for arranging items in a row or column. It excels at distributing space and aligning items within a container, even when their sizes are unknown or dynamic. Common use cases include navigation bars, button groups, centering elements, and card layouts where items should wrap to the next line. Flexbox's strength lies in content-first design where the size of items determines the layout.\n\nCSS Grid, on the other hand, is a two-dimensional system that handles both rows and columns simultaneously. It's ideal for creating complex page layouts where you need precise control over both dimensions. Grid works best for layout-first design where you define the structure and then place content into it. Use Grid for overall page layout, image galleries with specific arrangements, forms with aligned labels and inputs, and any scenario where you need explicit control over both horizontal and vertical positioning.\n\nA good rule of thumb is to use Flexbox for components and Grid for layouts. For example, you might use Grid to create the main page structure with header, sidebar, main content, and footer areas, then use Flexbox within those areas to arrange navigation items, buttons, or cards. Both systems are well-supported in modern browsers, and learning to use them together gives you the tools to create any layout you can imagine without resorting to hacky workarounds or JavaScript.",
+    "tags": ["css", "flexbox", "grid", "frontend", "layout"],
+    "published": true,
+    "createdAt": "2025-03-28T10:15:00Z",
+    "updatedAt": "2025-03-28T10:15:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Introduction to TypeScript for JavaScript Developers",
+    "slug": "introduction-to-typescript",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1036/1200/600",
+    "content": "TypeScript has rapidly gained adoption in the JavaScript community, and for good reason. It's a superset of JavaScript that adds optional static typing, enabling developers to catch errors during development rather than at runtime. For JavaScript developers, the transition to TypeScript is smooth because any valid JavaScript is also valid TypeScript. You can gradually adopt TypeScript in existing projects without rewriting everything at once.\n\nThe primary benefit of TypeScript is improved developer experience and code quality. Type annotations serve as inline documentation, making it clear what kind of data functions expect and return. Modern editors like VS Code provide incredible autocomplete and refactoring capabilities when working with TypeScript, dramatically reducing the time spent looking up API documentation or tracking down typos. When you rename a function or change its signature, TypeScript will highlight every place that needs updating.\n\nTypeScript's type system is remarkably powerful and flexible. Beyond basic types like string, number, and boolean, you can define complex object shapes with interfaces, create union and intersection types, use generics for reusable type-safe functions, and even perform conditional type transformations. The type system catches many common bugs like null reference errors, property access mistakes, and incorrect function arguments before you run your code.\n\nSome developers worry that TypeScript adds complexity or slows development, but the opposite is often true once you're past the initial learning curve. The time saved debugging runtime errors and the confidence that comes from the compiler checking your code typically outweighs the overhead of writing type annotations. Major frameworks like Angular, Vue 3, and increasingly React projects are embracing TypeScript. Whether you're building a small project or a large-scale application, TypeScript's benefits make it worth considering for your next JavaScript project.",
+    "tags": ["typescript", "javascript", "programming", "types"],
+    "published": true,
+    "createdAt": "2025-04-02T14:30:00Z",
+    "updatedAt": "2025-04-02T14:30:00Z"
+  },
+  {
+    "id": 10,
+    "title": "Web Performance Optimization Techniques",
+    "slug": "web-performance-optimization",
+    "author": {
+      "name": "Ashok",
+      "email": "ashok@example.com"
+    },
+    "imageUrl": "https://picsum.photos/id/1001/1200/600",
+    "content": "Web performance is not just about making your site fast; it's about providing a better user experience, improving conversion rates, and boosting SEO rankings. Studies show that even a one-second delay in page load time can significantly impact bounce rates and user satisfaction. Google has made page speed a ranking factor, and with Core Web Vitals, performance metrics are more important than ever for search visibility.\n\nThe first step in optimization is measuring current performance. Tools like Lighthouse, WebPageTest, and Chrome DevTools provide detailed insights into where your site is slow. Key metrics to track include First Contentful Paint (FCP), Largest Contentful Paint (LCP), Time to Interactive (TTI), and Cumulative Layout Shift (CLS). These metrics help you understand both perceived and actual performance from the user's perspective.\n\nCommon optimization techniques include image optimization, which often yields the biggest gains since images typically account for the majority of page weight. Use modern formats like WebP, implement responsive images with srcset, and lazy load images below the fold. Minify and compress your CSS and JavaScript, eliminate render-blocking resources, and consider code splitting to load only what's needed for each page. Implementing a Content Delivery Network (CDN) reduces latency by serving assets from servers geographically closer to users.\n\nCaching strategies are crucial for performance. Browser caching stores static assets locally so they don't need to be downloaded on repeat visits. Service workers enable even more sophisticated caching strategies and can make your site work offline. On the server side, implement HTTP caching headers, use database query caching, and consider Redis or Memcached for frequently accessed data. Performance optimization is an ongoing process, not a one-time task. Regular monitoring and optimization ensure your site stays fast as it grows and evolves.",
+    "tags": ["performance", "optimization", "web", "frontend", "seo"],
+    "published": true,
+    "createdAt": "2025-04-05T16:00:00Z",
+    "updatedAt": "2025-04-05T16:00:00Z"
+  }
+]
