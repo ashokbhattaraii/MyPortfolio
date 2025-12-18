@@ -7,6 +7,8 @@ import {
   ArrowRight,
   MoveUpRight,
   Hand,
+  PhoneCall,
+  File,
   Github,
   Linkedin,
   MousePointerClick,
@@ -60,8 +62,14 @@ export default function Info() {
             >
               <div id="letsTalk" className="">
                 <Link href="#contactArea">
-                  <Button className="bg-lime-500 flex gap-2 py-3 font-bold hover:bg-lime-400 hover:-translate-y-1 transition-transform ease-out duration-200 ">
-                    <Hand width={20} height={20} color="white"></Hand>Let's Talk
+                  <Button className="bg-lime-500 flex gap-2 py-3 font-bold  hover:bg-lime-400 hover:-translate-y-1 transition-transform ease-out duration-200 ">
+                    <PhoneCall
+                      width={20}
+                      height={20}
+                      color="white"
+                      className="hover:rotate-45"
+                    ></PhoneCall>
+                    Let's Talk
                   </Button>
                 </Link>
               </div>
@@ -69,7 +77,7 @@ export default function Info() {
                 <Link href="./Ashok_Bhattarai_Resume.pdf" target="_blank">
                   <Button className="flex items-center  gap-2 font-bold py-2 z-3 hover:-translate-y-1 transition-transform ease-out duration-200">
                     {" "}
-                    <ArrowRight className="rounded-full bg-lime-500 w-8 h-8 hover:bg-lime-400 hover:rotate-45 transition-transform ease-out duration-200"></ArrowRight>
+                    <File className="rounded-full  w-8 h-8  hover:rotate-45 transition-transform ease-out duration-200"></File>
                     View CV
                   </Button>
                 </Link>

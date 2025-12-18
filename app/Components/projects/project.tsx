@@ -27,10 +27,8 @@ export default function Project({
   const projectLength = project.length;
 
   console.log("Selected value", selectedValue);
-  const pageProject =
-    selectedValue == 5
-      ? project?.slice(startIndex, lastIndex)
-      : project?.slice(0, selectedValue);
+  const pageProject = project?.slice(startIndex, lastIndex);
+
   return (
     <>
       {pageProject.map((p: any, index: any) => {

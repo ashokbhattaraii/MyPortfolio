@@ -19,28 +19,14 @@ const Projects = () => {
   const projectLength = ProjectList.length;
   console.log("console from main project", projectLength);
   const updatePage = (action: "next" | "prev") => {
-    if (action == "next") {
-      if (selectedValue == 5) {
-        nextPage(firstPage + 5);
-        setLastIndex(lastIndex + 5);
-      } else if (selectedValue == 10) {
-        nextPage(firstPage + 10);
-        setLastIndex(lastIndex + 10);
-      }
-    } else if (selectedValue == 15) {
-      nextPage(firstPage - 15);
-      setLastIndex(lastIndex - 15);
+    const step = selectedValue;
+
+    if (action === "next") {
+      nextPage(firstPage + step);
+      setLastIndex(lastIndex + step);
     } else {
-      if (selectedValue == 5) {
-        nextPage(firstPage - 5);
-        setLastIndex(lastIndex - 5);
-      } else if (selectedValue == 10) {
-        nextPage(firstPage - 10);
-        setLastIndex(lastIndex - 10);
-      } else if (selectedValue == 15) {
-        nextPage(firstPage - 15);
-        setLastIndex(lastIndex - 15);
-      }
+      nextPage(firstPage - step);
+      setLastIndex(lastIndex - step);
     }
   };
 
@@ -53,6 +39,8 @@ const Projects = () => {
   const [selectedValue, setSelectValue] = useState(5);
   const handleChange = (selectedValue: any) => {
     setSelectValue(selectedValue);
+    nextPage(0);
+    setLastIndex(selectedValue);
   };
   useEffect(() => {
     console.log("selected", selectedValue);

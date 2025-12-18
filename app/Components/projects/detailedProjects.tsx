@@ -141,12 +141,15 @@ export default function DetailedProjects({
             <p className="absolute -bottom-7">Add</p>
           </div>
         </div>
-        <div id="pageControl" className="flex justify-center mt-10">
+        <div
+          id="pageControl"
+          className="flex justify-center items-center mt-10"
+        >
           <div id="pageBtn" className="flex justify-around gap-10">
             <Button
               variant="primary"
               onClick={onCLickPreviousPage}
-              className={` fixed bottom-5 left-8 z-50 bg-lime-500 md:bottom-10 md:right-35 shadow-lg hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 left-8 z-50 bg-lime-500 md:bottom-4  shadow-lg md:left-110  hover:scale-105 transition-transform ${
                 firstPage > 0 ? "block" : "hidden"
               } ${firstPage < 0 ? "hidden" : "block"}`}
             >
@@ -166,7 +169,7 @@ export default function DetailedProjects({
             <Button
               variant="primary"
               onClick={onCLickNextPage}
-              className={` fixed bottom-5 right-4 z-50 bg-lime-500 md:bottom-10 md:right-10 shadow-lg hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 right-4 z-50 bg-lime-500 md:bottom-4 md:right-55 shadow-lg hover:scale-105 transition-transform ${
                 lastIndex > projectLength ? "hidden" : "block"
               }
               }`}
