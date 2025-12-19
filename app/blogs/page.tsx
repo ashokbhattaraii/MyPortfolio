@@ -12,7 +12,17 @@ export default function Blogs() {
       try {
         const response = await fetch("/api/blogs");
         const blogs = await response.json();
-        const filteredBLogs = blogs.filter((f: any) => f.title.includes(query));
+
+        const filteredBLogs = blogs.filter((f: any) => {
+          const titleMatch = f.title
+            .toLowerCase()
+            .includes(query.toLowerCase());
+          const tagsMatch = f.tags.some((t: any) => {
+            t.toLowerCase().includes(query);
+          });
+          return titleMatch || tagsMatch;
+        });
+
         console.log("filtered blogs", filteredBLogs);
         setBlogs(filteredBLogs);
         console.log(blogs);
@@ -24,7 +34,7 @@ export default function Blogs() {
   }, [query, setQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentquery = e.target.value;
+    const currentquery = e.target.value.trim();
     setQuery(currentquery);
   };
   useEffect(() => {
