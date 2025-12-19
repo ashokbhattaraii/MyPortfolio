@@ -5,6 +5,7 @@ import Button from "../../Resualble_Components/Button";
 import { error } from "console";
 import Image from "next/image";
 import Link from "next/link";
+import { Check } from "lucide-react";
 
 export default function Contact() {
   const {
@@ -43,16 +44,21 @@ export default function Contact() {
 
     return <p className="text-red-500 mt-2">{errors[name].message}</p>;
   };
+  const [isSending, setSending] = useState(false);
+  const [successDialog, setDialog] = useState(false);
 
   const onSubmit = async (data: any) => {
     try {
+      setSending(true);
       const req = await fetch("/api/contact", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "content-type": "application/json" },
       });
       if (req.ok) {
-        alert("Message send successfully");
+        setDialog(true);
+
+        setSending(false);
       }
     } catch (error) {
       alert("Error send failed");
@@ -66,7 +72,7 @@ export default function Contact() {
         id="contactArea"
       >
         <h1 className="text-blue-700 font-bold text-2xl">Get In Touch</h1>
-        <div className="flex flex-col justify-center  md:flex-row lg:flex-row text-black">
+        <div className="flex flex-col justify-center  md:flex-row lg:flex-row text-white">
           <p className="m-6">
             I'm always open to new opportunities, collaborations, and intriguing
             challenges. Whether you have a project idea, a job offer, or just
@@ -135,8 +141,48 @@ export default function Contact() {
               type="submit"
               onClick={handleSubmit(onSubmit)}
             >
-              Send Message
+              {isSending ? (
+                <>
+                  <div className="flex justify-center items-center font-bold">
+                    <p className="flex">
+                      Sending
+                      <span className="flex ml-1">
+                        <span className="animate-bounce [animation-delay:-0.3s]">
+                          .
+                        </span>
+                        <span className="animate-bounce [animation-delay:-0.15s]">
+                          .
+                        </span>
+                        <span className="animate-bounce">.</span>
+                      </span>
+                    </p>
+                  </div>
+                </>
+              ) : (
+                "Send Message"
+              )}
             </Button>
+            {successDialog && (
+              <div className=" fixed inset-0  z-100 text-black bg-black/50  flex justify-center items-center w-full max-w-4xl   backdrop-blur-sm px-4 overflow-hidden">
+                <div className="bg-white p-4 rounded-2xl ">
+                  <div className="flex flex-col gap-1">
+                    <Check className="m-auto bg-lime-400 rounded-full w-10 h-10"></Check>
+                    <p className="pb-4 px-6">Message Sent Successfully</p>
+                    <span className="flex ">
+                      <Button
+                        variant="danger"
+                        className="flex-1 mt-4"
+                        onClick={() => {
+                          setDialog(false);
+                        }}
+                      >
+                        Close
+                      </Button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </form>
         </div>
         <div className=" bg-linear-to-r from-lime-900 to-lime-400   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">

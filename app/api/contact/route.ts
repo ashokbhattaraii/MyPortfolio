@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
+      replyTo: email,
       secure: true,
       auth: {
         user: process.env.EMAIL_USER,
@@ -16,11 +17,10 @@ export async function POST(req: Request) {
     });
     await transporter.verify();
     await transporter.sendMail({
-      from: `"${name} <${email}>"`,
+      from: email,
       to: process.env.EMAIL_USER,
       subject: "New Portfolio Message",
       text: message,
-      html: `<b>From:</b> ${name} (${email})<br/><b>Message:</b> ${message}`,
     });
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {

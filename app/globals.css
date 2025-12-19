@@ -23,7 +23,7 @@ html{
 }
 
 body {
- @apply bg-linear-to-r from-blue-300 to-lime-900;
+ @apply bg-linear-to-r from-black to-gray-900;
   color: black;
   font-family: Arial, Helvetica, sans-serif;
 }

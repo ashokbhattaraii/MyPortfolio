@@ -90,7 +90,7 @@ export default function Info() {
               "delay-200"
             )}`}
           >
-            <div className="hidden md:block bg-purple-600 h-120 max-w-60 w-full absolute  top-10 md:right-20 rotate-10 rounded-2xl shadow-2xl shadow-purple-300 "></div>
+            <div className="hidden md:block bg-lime-400 h-120 max-w-60 w-full absolute  top-10 md:right-20 rotate-10 rounded-2xl shadow shadow-purple-300 "></div>
             <img
               src="./profile.png"
               alt="Profile Picture"
