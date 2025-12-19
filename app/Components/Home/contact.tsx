@@ -11,7 +11,7 @@ export default function Contact() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const validationRules = {
     name: {
@@ -44,13 +44,19 @@ export default function Contact() {
     return <p className="text-red-500 mt-2">{errors[name].message}</p>;
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    console.log(data.name);
-
-    console.log(data.email);
-    console.log(data.message);
-    alert("Messsage sent successfully");
+  const onSubmit = async (data: any) => {
+    try {
+      const req = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "content-type": "application/json" },
+      });
+      if (req.ok) {
+        alert("Message send successfully");
+      }
+    } catch (error) {
+      alert("Error send failed");
+    }
   };
 
   return (
@@ -74,7 +80,7 @@ export default function Contact() {
 
           <form
             id="message-box"
-            className="mx-auto p-5 mb-3 bg-white rounded-2xl z-10 w-4/5"
+            className="mx-auto max-w-4xl w-full p-5 mb-3 bg-white rounded-2xl z-10"
           >
             <h1 className="text-blue-700 font-bold text-2xl">Message</h1>
             <div id="name" className="relative flex  mt-4 flex-col">
