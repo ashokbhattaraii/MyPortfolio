@@ -8,6 +8,6 @@ export async function GET() {
     const existingBlogs = await JSON.parse(response);
     return NextResponse.json(existingBlogs, { status: 200 });
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 }
