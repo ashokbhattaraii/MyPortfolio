@@ -11,6 +11,7 @@ export default function Contact() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
@@ -57,7 +58,7 @@ export default function Contact() {
       });
       if (req.ok) {
         setDialog(true);
-
+        reset();
         setSending(false);
       }
     } catch (error) {
@@ -163,7 +164,7 @@ export default function Contact() {
               )}
             </Button>
             {successDialog && (
-              <div className=" fixed inset-0  z-100 text-black bg-black/50  flex justify-center items-center w-full max-w-4xl   backdrop-blur-sm px-4 overflow-hidden">
+              <div className=" fixed inset-0  z-100 text-black bg-black/50  flex justify-center items-center w-full    backdrop-blur-sm px-4 overflow-hidden">
                 <div className="bg-white p-4 rounded-2xl ">
                   <div className="flex flex-col gap-1">
                     <Check className="m-auto bg-lime-400 rounded-full w-10 h-10"></Check>
@@ -185,7 +186,7 @@ export default function Contact() {
             )}
           </form>
         </div>
-        <div className=" bg-linear-to-r from-lime-900 to-lime-400   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
+        <div className=" bg-linear-to-r from-lime-900 to-lime-400 rounded-2xl max-w-7xl   w-full h-2/4 bottom-0  flex gap-50  md:absolute right-0">
           <div id="contactIndo" className="">
             <div id="details" className="md:mt-16 text-[12px] text-bold">
               <div
