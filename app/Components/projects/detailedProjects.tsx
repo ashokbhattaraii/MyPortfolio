@@ -102,7 +102,7 @@ export default function DetailedProjects({
 
       const result = await response.json();
 
-      onAddProject(result.project || data);
+      onAddProject(result || data);
       toogleForm(false);
     } catch {
       console.log("Submission failed", errors);
