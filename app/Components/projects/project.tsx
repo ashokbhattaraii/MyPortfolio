@@ -32,7 +32,7 @@ export default function Project({
   return (
     <>
       {pageProject.map((p: any, index: any) => {
-        const firstLetter = p.name.split("")[0].toUpperCase();
+        const firstLetter = p.name?.trim().charAt(0).toUpperCase() || "";
         const bgColor = colors[index % colors.length];
         console.log("First word", firstLetter);
         return (
