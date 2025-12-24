@@ -37,7 +37,7 @@ export default function Project({
         console.log("First word", firstLetter);
         return (
           <div
-            className="flex flex-wrap flex-col w-30  text-black  transition-transform ease-out duration-300 hover:scale-105"
+            className="flex flex-wrap flex-col w-30  text-white text-center  transition-transform ease-out duration-300 hover:scale-105"
             key={index}
           >
             <div
@@ -45,7 +45,7 @@ export default function Project({
               key={index}
               className={`h-30 w-30 ${bgColor} relative rounded-2xl  flex justify-center items-center`}
             >
-              <p className="text-8xl text-white font-bold">{firstLetter}</p>
+              <p className="text-8xl text-black font-bold">{firstLetter}</p>
             </div>
 
             <p className="w-full truncate">{p.name}</p>
