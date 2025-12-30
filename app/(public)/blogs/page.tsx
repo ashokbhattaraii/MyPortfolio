@@ -3,35 +3,36 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Blog from "../Components/blog/blog";
 import { Search } from "lucide-react";
+import { fetchPosts } from "@/app/actions/blogActions";
 
+interface PostType {
+  id: number;
+  title: string;
+  content: string;
+  slug: string;
+  author: string | null;
+  status: string;
+  tags: string[];
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export default function Blogs() {
   const [query, setQuery] = useState("");
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<PostType[]>([]);
   useEffect(() => {
-    async function fetchBlogs() {
+    async function fetchBlog() {
       try {
-        const response = await fetch("/api/blogs");
-        const blogs = await response.json();
+        const blogs = await fetchPosts();
 
-        const filteredBLogs = blogs.filter((f: any) => {
-          const titleMatch = f.title
-            .toLowerCase()
-            .includes(query.toLowerCase());
-          const tagsMatch = f.tags.some((t: any) => {
-            t.toLowerCase().includes(query);
-          });
-          return titleMatch || tagsMatch;
-        });
-
-        console.log("filtered blogs", filteredBLogs);
-        setBlogs(filteredBLogs);
-        console.log(blogs);
+        setBlogs(blogs);
+        console.log("Fetched from supabase", blogs);
       } catch (error) {
-        alert(error);
+        console.log("Error fetching blogs", error);
       }
     }
-    fetchBlogs();
-  }, [query, setQuery]);
+    fetchBlog();
+  }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentquery = e.target.value.trim();

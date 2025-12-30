@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/app/Resualble_Components/Button";
+import Button from "../../Resualble_Components/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";

@@ -1,4 +1,4 @@
-import Button from "@/app/Resualble_Components/Button";
+import Button from "../../Resualble_Components/Button";
 import {
   ArrowLeft,
   Calendar,
@@ -17,7 +17,7 @@ interface Blog {
   imageUrl: string;
   updatedAt: string;
   createdAt: string;
-  tags: [string];
+  tags: string[];
 }
 
 const getBaseUrl = () => {

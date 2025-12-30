@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
+import Home from "./page";
 
 import { Inter, Geist_Mono } from "next/font/google";
 

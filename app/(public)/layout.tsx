@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
+import "../globals.css";
+import Navigation from "./Navbar";
+
+import Home from "./page";
+import expertise from "./Components/Home/expertise";
 
 import { Inter, Geist_Mono } from "next/font/google";
 
@@ -23,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth Geist.className">
       <body>
-        <div className="">{children}</div>
+        <Navigation />
+
+        <div className="mt-20">{children}</div>
       </body>
     </html>
   );
