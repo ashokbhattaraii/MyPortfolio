@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/db";
+
 import BlogEditor from "../../Components/blogEditor";
 
 export default async function Edit({
