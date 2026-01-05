@@ -1,5 +1,7 @@
 import { Trash2, Edit } from "lucide-react";
+import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface BlogsDataProps {
   post: {
@@ -9,13 +11,19 @@ interface BlogsDataProps {
     status: string;
     createdAt: Date;
   };
+  index: number;
+
   onDelete: (id: number) => void;
 }
-export default function BlogData({ post, onDelete }: BlogsDataProps) {
+export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
+  const router = useRouter();
   return (
-    <tbody className="divide-y divide-white/5">
+    <tbody
+      className="divide-y divide-white/5 cursor-pointer "
+      onClick={() => router.push(`/blogs/${post.id}`)}
+    >
       <tr className="hover:bg-white/5 transition-colors">
-        <td className="px-8 py-4 text-gray-500 italic">{post.id}</td>
+        <td className="px-8 py-4 text-gray-500 italic">{index}</td>
         <td className="px-8 py-4 font-medium text-white">{post.title}</td>
         <td className="px-8 py-4 text-gray-400 text-sm">20/08/2025</td>
         <td className="px-8 py-4">

@@ -68,7 +68,7 @@ const Projects = () => {
   if (isLoading) {
     return (
       <>
-        <div className="text-white bg-gray-800 text-4xl">
+        <div className="text-white animate-pulse text-4xl min-h-screen flex justify-center items-center">
           Loading Projects...
         </div>
       </>

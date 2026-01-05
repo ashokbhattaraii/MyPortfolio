@@ -5,6 +5,7 @@ import Card from "../ResuableComponents/card/card";
 import BlogData from "../dataTable";
 import { deletePost } from "@/app/actions/blogActions";
 import { useTransition } from "react";
+import { useGlobalActions } from "../../Context/ActionContext";
 interface card {
   title: string;
   count: number;
@@ -26,28 +27,15 @@ interface DashboardProps {
 export default function Dashboard({ postsList }: DashboardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
-
-  const handleDelete = async (id: number) => {
-    setIsDeleting(true);
-    setConfirmDeleteId(id);
-  };
-
-  const handleConfirmDelete = async () => {
-    if (confirmDeleteId === null) return;
-    startTransition(async () => {
-      try {
-        await deletePost(confirmDeleteId);
-        console.log("deleted successsfully", confirmDeleteId);
-      } catch (error) {
-        console.log("Error deleting", error);
-      } finally {
-        setIsDeleting(false);
-        setConfirmDeleteId(null);
-      }
-    });
-  };
+  const { openDeleteModel } = useGlobalActions();
 
   const blogCount = postsList.length;
+  const latestBlogs = postsList
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    .slice(0, 3);
   return (
     <>
       <main className="max-w-7xl w-full">
@@ -71,46 +59,19 @@ export default function Dashboard({ postsList }: DashboardProps) {
                   <th className="px-8 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              {postsList.map((post: PostType, index: number) => {
+              {latestBlogs.map((post: PostType, index: number) => {
                 return (
-                  <>
-                    {
-                      <BlogData
-                        post={post}
-                        key={post.id}
-                        onDelete={() => handleDelete(post.id)}
-                      ></BlogData>
-                    }
-                  </>
+                  <BlogData
+                    post={post}
+                    key={index++}
+                    index={index + 1}
+                    onDelete={() => openDeleteModel(post.id)}
+                  ></BlogData>
                 );
               })}
             </table>
           </div>
         </div>
-        {isDeleting && (
-          <div
-            id="deleteDialog"
-            className="fixed inset-0 flex justify-center items-center bg-slate-400/40  backdrop-blur-2xl "
-          >
-            <div className="bg-slate-400 flex-col flex justify-center items-center p-4 max-w-sm w-full shadow-2xl rounded-2xl gap-4">
-              <h1 className="text-xl text-black">Are you sure?</h1>
-              <div className="flex gap-4">
-                <button
-                  className=" bg-slate-800 px-4 py-2 rounded-2xl text-xl font-bold hover:-translate-y-2 transition-transform ease-out duration-300"
-                  onClick={() => handleConfirmDelete()}
-                >
-                  Confirm!
-                </button>
-                <button
-                  className=" px-4 py-2 rounded-2xl text-xl font-bold hover:-translate-y-2 transition-transform ease-out duration-300 text-black"
-                  onClick={() => setIsDeleting(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </main>
     </>
   );

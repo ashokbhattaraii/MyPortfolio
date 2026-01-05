@@ -1,4 +1,5 @@
 import Button from "../../Resualble_Components/Button";
+import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   Calendar,
@@ -19,27 +20,13 @@ interface Blog {
   createdAt: string;
   tags: string[];
 }
+import { fetchPosts } from "@/app/actions/blogActions";
+import { getBlogByID } from "@/app/actions/blogActions";
 
-const getBaseUrl = () => {
-  if (process.env.VERCEL_URL) {
-    return `https://my-portfolio-rho-silk-25.vercel.app`;
-  }
-
-  return `http://localhost:${process.env.PORT}`;
-};
-async function GetBlog(): Promise<Blog[]> {
-  const baseUrl = getBaseUrl();
-  const url = `${baseUrl}/api/blogs`;
-
+let blogs;
+async function GetBlog() {
   try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      console.error(`Fetch failed from ${url}. Status: ${response.status}`);
-      return [];
-    }
-
-    return await response.json();
+    const blogs = await fetchPosts();
   } catch (error) {
     console.error("Network error during fetch:", error);
     return [];
@@ -52,12 +39,11 @@ export default async function BlogDetail({
   params: Promise<{ blogId: string }>;
 }) {
   const { blogId } = await params;
-  const BlogDetail = await GetBlog();
-  console.log(BlogDetail);
-  const requestedIndex = Number(blogId);
 
-  const targetBlog = BlogDetail[requestedIndex];
-
+  const targetBlog = await getBlogByID(Number(blogId));
+  if (!targetBlog) {
+    notFound();
+  }
   const createdAt = new Date(targetBlog.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
@@ -68,6 +54,10 @@ export default async function BlogDetail({
     month: "long",
     year: "numeric",
   });
+  const stripHTML = (html: string) => {
+    return html.replace(/<[^>]*>?/gm, "");
+  };
+
   return (
     <>
       <div id="blogDetailContainer" className=" ">
@@ -103,11 +93,11 @@ export default async function BlogDetail({
                   id="author"
                   className="h-12 w-12 rounded-full bg-lime-400 flex justify-center items-center text-3xl font-extrabold"
                 >
-                  <p>{targetBlog.author.name.charAt(0)}</p>
+                  <p>{targetBlog.author.charAt(0)}</p>
                 </div>
                 <div id="authorName">
                   <p className="text-[12px]">Written By</p>
-                  <p>{targetBlog.author.name}</p>
+                  <p>{targetBlog.author}</p>
                 </div>
               </div>
               <hr className="w-px h-20 bg-lime-400 border-none mx-6" />
@@ -133,24 +123,18 @@ export default async function BlogDetail({
           </header>
           <div className="overflow-hidden">
             <img
-              src={targetBlog.imageUrl}
+              src={targetBlog.image}
               alt={targetBlog.title}
               className="hover:scale-105 object-cover transition-transform ease-out duration-300 rounded"
             ></img>
           </div>
           <div id="contnet">
-            {targetBlog.content
-              .split("\n\n")
-              .map((paragraph: any, index: any) => {
-                return (
-                  <p
-                    key={index}
-                    className="p-4 my-1 first-letter:text-4xl first-letter:text-lime-400 first-letter:flex first-letter:float-left first-letter:mr-2 first-letter:font-bold"
-                  >
-                    {paragraph}
-                  </p>
-                );
-              })}
+            <div
+              className="prose prose-invert prose-lime max-w-none px-2 mb-10
+                     first-letter:text-5xl first-letter:font-bold first-letter:text-lime-400 
+                     first-letter:float-left first-letter:mr-3"
+              dangerouslySetInnerHTML={{ __html: targetBlog.content }}
+            />
           </div>
           <div id="footer" className="ml-4 flex gap-2">
             <Button className="flex  gap-2 bg-red-600 transition-transform ease-out duration-300  hover:-translate-y-2 ">

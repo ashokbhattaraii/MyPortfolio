@@ -107,7 +107,7 @@ export async function deletePost(id: number) {
 
 export async function UpdatePost(
   id: number,
-  data: { title: string; content: string; status: string }
+  data: { title: string; content: string; author: string; status: string }
 ) {
   try {
     const updated = await prisma.post.update({
@@ -115,14 +115,22 @@ export async function UpdatePost(
       data: {
         title: data.title,
         content: data.content,
+        author: data.author,
         status: data.status,
         slug: data.title.toLowerCase().replace(/ /g, "-"),
       },
     });
 
-    revalidatePath("/admin");
     return { success: true, post: updated };
   } catch (error) {
     return { success: false, error: "Falied to update" };
+  } finally {
+    revalidatePath("/admin");
+    redirect("/admin");
   }
+}
+
+export async function getBlogByID(id: number) {
+  const blog = await prisma.post.findUnique({ where: { id } });
+  return blog;
 }

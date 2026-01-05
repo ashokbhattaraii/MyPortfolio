@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.89.0",
     "@tiptap/react": "^3.14.0",
     "@tiptap/starter-kit": "^3.14.0",
+    "cookies-next": "^6.1.1",
     "dotenv": "^17.2.3",
     "lucide-react": "^0.561.0",
     "next": "^15.1.0",

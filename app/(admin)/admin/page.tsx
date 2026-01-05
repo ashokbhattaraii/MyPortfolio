@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import Post from "./Components/post/post";
 import {
   LayoutDashboard,
   FileText,
@@ -123,11 +124,8 @@ export default function AdminDashboard() {
         </header>
 
         <main className="p-10">
-          {selected === "Dashboard" ? (
-            <Dashboard postsList={postsList} />
-          ) : (
-            `${selected}`
-          )}
+          {selected === "Dashboard" ? <Dashboard postsList={postsList} /> : ``}
+          {selected === "Posts" ? <Post postsList={postsList} /> : ``}
         </main>
       </div>
     </div>

@@ -3,11 +3,14 @@ import { User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Blog({ blogs, query }: any) {
+export default function Blog({ filteredBlogs, query }: any) {
+  const stripHTML = (html: string) => {
+    return html.replace(/<[^>]*>?/gm, "");
+  };
   return (
     <>
-      {blogs.map((b: any, i: any) => {
-        const blogId = i;
+      {filteredBlogs.map((b: any, i: any) => {
+        const blogId = b.id;
         const path = `/blogs/${blogId}`;
         const dateStr = b.createdAt;
         const formattedDate = new Date(dateStr).toLocaleDateString("en-US", {
@@ -41,7 +44,7 @@ export default function Blog({ blogs, query }: any) {
                   {b.title}
                 </p>
                 <p id="contents" className=" line-clamp-3 px-2 text-[12px]">
-                  {b.content}
+                  {stripHTML(b.content)}
                 </p>
                 <hr className="h-0.5 w-[90%] mx-auto shadow shadow-lime-400 my-2" />
                 <div
@@ -54,7 +57,7 @@ export default function Blog({ blogs, query }: any) {
                   >
                     <User />
                   </div>
-                  {b.author.name}
+                  {b.author}
                   <p className="ml-auto">{formattedDate}</p>
                 </div>
               </div>

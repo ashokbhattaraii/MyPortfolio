@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Home from "./page";
 
 import { Inter, Geist_Mono } from "next/font/google";
+import { ActionProvider } from "./Context/ActionContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -22,9 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth Geist.className">
-      <body>
-        <div className="">{children}</div>
-      </body>
+      <ActionProvider>
+        <body>
+          <div className="">{children}</div>
+        </body>
+      </ActionProvider>
     </html>
   );
 }

@@ -4,6 +4,10 @@ import Project from "./project";
 import { NextResponse } from "next/server";
 import Button from "../../Resualble_Components/Button";
 import { useForm } from "react-hook-form";
+import { getCookie } from "cookies-next";
+import { useSession } from "next-auth/react";
+import { Session } from "inspector/promises";
+import ToastMessage from "@/app/(admin)/admin/Components/Toast/toast";
 
 interface ProjectDetail {
   name: string;
@@ -78,6 +82,7 @@ export default function DetailedProjects({
   };
 
   const [isFormOpen, toogleForm] = useState(false);
+  const [toast, setToast] = useState(false);
 
   function changeValue(event: React.ChangeEvent<HTMLSelectElement>) {
     const value = event.target.value;
@@ -85,8 +90,27 @@ export default function DetailedProjects({
     handleChange(numValue);
     console.log("selected", numValue);
   }
+  const { data, status } = useSession();
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    if (status === "loading") {
+      console.log("Loged In");
+    }
+    if (data) {
+      console.log("The logged in data", data.user?.email);
+      setIsAdmin(true);
+    }
+  }, [status]);
 
   function onClickAdd() {
+    if (!isAdmin) {
+      console.log("onclick check admin", data?.user?.email);
+      setToast(true);
+
+      console.log("toast message shown");
+      return;
+    }
+    console.log("admin status", isAdmin);
     toogleForm(!isFormOpen);
   }
   const onSubmit = async (data: ProjectDetail) => {
@@ -109,8 +133,18 @@ export default function DetailedProjects({
       alert("Error, check the consle");
     }
   };
+
   return (
     <>
+      {toast && (
+        <div className="fixed">
+          <ToastMessage
+            type="error"
+            message="Access denied"
+            onClose={() => setToast(false)}
+          ></ToastMessage>
+        </div>
+      )}
       <div
         id="detailProjectDisplay"
         className="text-white h-full w-full max-w-7xl ml-15 md:ml-0"

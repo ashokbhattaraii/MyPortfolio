@@ -20,6 +20,7 @@ interface PostType {
 export default function Blogs() {
   const [query, setQuery] = useState("");
   const [blogs, setBlogs] = useState<PostType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function fetchBlog() {
       try {
@@ -27,8 +28,11 @@ export default function Blogs() {
 
         setBlogs(blogs);
         console.log("Fetched from supabase", blogs);
+        setIsLoading(false);
       } catch (error) {
         console.log("Error fetching blogs", error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchBlog();
@@ -36,11 +40,22 @@ export default function Blogs() {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentquery = e.target.value.trim();
+    console.log(currentquery);
     setQuery(currentquery);
   };
-  useEffect(() => {
-    console.log("useeffect", query);
-  }, [query]);
+  let filteredBlogs;
+
+  filteredBlogs = blogs.filter((blog) =>
+    blog.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black text-white">
+        <h1 className="text-2xl animate-pulse">Loading Blogs...</h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -61,7 +76,7 @@ export default function Blogs() {
             />
           </div>
           <div id="blogs" className="flex flex-wrap flex-col gap-10 pt-30 ">
-            <Blog blogs={blogs} query={query} />
+            <Blog filteredBlogs={filteredBlogs} query={query} />
           </div>
         </div>
       </section>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import Providers from "./Components/providers";
 import "../globals.css";
 import Navigation from "./Navbar";
 
@@ -26,11 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth Geist.className">
-      <body>
-        <Navigation />
+      <Providers>
+        <body>
+          <Navigation />
 
-        <div className="mt-20">{children}</div>
-      </body>
+          <div className="mt-20">{children}</div>
+        </body>
+      </Providers>
     </html>
   );
 }

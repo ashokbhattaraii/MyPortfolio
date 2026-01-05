@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth Geist.className">
-      <body>
+      <body className="">
         <div className="">{children}</div>
       </body>
     </html>
