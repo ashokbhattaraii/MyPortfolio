@@ -26,6 +26,7 @@
     "react-hook-form": "^7.68.0"
   },
   "devDependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
     "@prisma/client": "^5.22.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
