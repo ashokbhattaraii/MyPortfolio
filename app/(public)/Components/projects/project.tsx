@@ -1,6 +1,7 @@
 "use client";
-import Button from "@/app/Resualble_Components/Button";
+import Button from "../../Resualble_Components/Button";
 import { useEffect } from "react";
+import Link from "next/link";
 
 interface ProjectDetail {
   name: string;
@@ -28,7 +29,7 @@ export default function Project({
 
   console.log("Selected value", selectedValue);
   const pageProject = project?.slice(startIndex, lastIndex);
-
+  let key = 1;
   return (
     <>
       {pageProject.map((p: any, index: any) => {
@@ -36,20 +37,22 @@ export default function Project({
         const bgColor = colors[index % colors.length];
         console.log("First word", firstLetter);
         return (
-          <div
-            className="flex flex-wrap flex-col w-30  text-white text-center  transition-transform ease-out duration-300 hover:scale-105"
-            key={index}
-          >
+          <Link href={p.link} key={index++}>
             <div
-              id={`project${index}`}
+              className="flex flex-wrap flex-col w-30  text-white text-center  transition-transform ease-out duration-300 hover:scale-105"
               key={index}
-              className={`h-30 w-30 ${bgColor} relative rounded-2xl  flex justify-center items-center`}
             >
-              <p className="text-8xl text-black font-bold">{firstLetter}</p>
-            </div>
+              <div
+                id={`project${index}`}
+                key={index}
+                className={`h-30 w-30 ${bgColor} relative rounded-2xl  flex justify-center items-center`}
+              >
+                <p className="text-8xl text-black font-bold">{firstLetter}</p>
+              </div>
 
-            <p className="w-full truncate">{p.name}</p>
-          </div>
+              <p className="w-full truncate">{p.name}</p>
+            </div>
+          </Link>
         );
       })}
     </>

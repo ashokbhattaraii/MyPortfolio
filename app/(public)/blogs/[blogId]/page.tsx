@@ -60,7 +60,7 @@ export default async function BlogDetail({
 
   return (
     <>
-      <div id="blogDetailContainer" className=" ">
+      <div id="blogDetailContainer" className="">
         <div className="max-w-4xl h-auto w-full mx-auto bg-linear-to-r from-black to-gray-900 p-4 text-white">
           <header>
             <div id="backBtn" className="flex gap-2 hover:text-gray-600 ">
@@ -93,7 +93,7 @@ export default async function BlogDetail({
                   id="author"
                   className="h-12 w-12 rounded-full bg-lime-400 flex justify-center items-center text-3xl font-extrabold"
                 >
-                  <p>{targetBlog.author.charAt(0)}</p>
+                  <p>{targetBlog.author?.charAt(0)}</p>
                 </div>
                 <div id="authorName">
                   <p className="text-[12px]">Written By</p>
@@ -112,7 +112,7 @@ export default async function BlogDetail({
                   <span>
                     <Repeat></Repeat>
                   </span>{" "}
-                  Published At: {createdAt}
+                  Updated At: {updatedAt}
                 </p>
               </div>
               <div className=" hidden md:flex ml-auto mr-4 gap-2 bg-lime-400 p-1 rounded-2xl items-center">
@@ -123,12 +123,12 @@ export default async function BlogDetail({
           </header>
           <div className="overflow-hidden">
             <img
-              src={targetBlog.image}
+              src={targetBlog.image || "placeholder-image.jpg"}
               alt={targetBlog.title}
               className="hover:scale-105 object-cover transition-transform ease-out duration-300 rounded"
             ></img>
           </div>
-          <div id="contnet">
+          <div id="contnet" className="mt-4">
             <div
               className="prose prose-invert prose-lime max-w-none px-2 mb-10
                      first-letter:text-5xl first-letter:font-bold first-letter:text-lime-400 

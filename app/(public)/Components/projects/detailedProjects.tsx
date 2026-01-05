@@ -216,7 +216,7 @@ export default function DetailedProjects({
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md px-4">
           <form className="w-full max-w-3xl rounded bg-gradient-to-br from-zinc-900 to-black p-6 shadow-2xl shadow-blue-900/40 overflow-y-auto max-h-[90vh]">
-            <h1 className="mb-6 text-center text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className="mb-6 text-center text-2xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Add New Project
             </h1>
 
