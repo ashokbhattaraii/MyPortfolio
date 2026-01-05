@@ -1,4 +1,4 @@
-import Button from "@/app/Resualble_Components/Button";
+import Button from "../../Resualble_Components/Button";
 import Link from "next/link";
 export default function SideBar({ Projects, firstPage, lastIndex }: any) {
   let lengthOfArray = Projects.length;
