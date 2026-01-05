@@ -214,88 +214,80 @@ export default function DetailedProjects({
         </div>
       </div>
       {isFormOpen && (
-        <div
-          id="overlayForm"
-          className="text-black fixed inset-0 z-100 flex justify-center items-center pt-20 backdrop-blur-sm"
-        >
-          <form className="flex flex-col bg-white rounded-2xl gap-3 w-187 p-4 max-h-[85vh] overflow-y-auto">
-            <h1 className="text-center text-blue-700 font-black text-2xl">
-              Add Project
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md px-4">
+          <form className="w-full max-w-3xl rounded bg-gradient-to-br from-zinc-900 to-black p-6 shadow-2xl shadow-blue-900/40 overflow-y-auto max-h-[90vh]">
+            <h1 className="mb-6 text-center text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Add New Project
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1">
-                <span>Name</span>
+                <label className="text-sm text-gray-300">Project Name</label>
                 <input
                   type="text"
-                  placeholder="Project Name"
-                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  placeholder="My Awesome Project"
+                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
                   {...register("name", ValidationRules.name)}
                 />
                 <ErrorMessage error={errors} name="name" />
               </div>
 
               <div className="flex flex-col gap-1">
-                <span>Link</span>
+                <label className="text-sm text-gray-300">Project Link</label>
                 <input
                   type="text"
-                  placeholder="https://"
-                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  placeholder="https://example.com"
+                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
                   {...register("link", ValidationRules.link)}
                 />
                 <ErrorMessage error={errors} name="link" />
               </div>
             </div>
 
-            <span>Content</span>
-            <textarea
-              id="description"
-              rows={2}
-              className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700 resize-none"
-              placeholder="Project Description"
-              {...register("description", ValidationRules.description)}
-            ></textarea>
-            <ErrorMessage error={errors} name="description" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1">
-                <span>Date Of Completion</span>
+                <label className="text-sm text-gray-300">Completion Date</label>
                 <input
                   type="date"
-                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
                   {...register("dateOfCompletion", ValidationRules.date)}
                 />
                 <ErrorMessage error={errors} name="date" />
               </div>
 
               <div className="flex flex-col gap-1">
-                <span>Tags</span>
+                <label className="text-sm text-gray-300">Tags</label>
                 <input
                   type="text"
                   placeholder="React, Next.js, Tailwind"
-                  className="border py-2 rounded-2xl pl-2 outline-0 focus:border-blue-700"
+                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
                 />
               </div>
             </div>
+            <div className="mt-4 flex flex-col gap-1">
+              <label className="text-sm text-gray-300">Description</label>
+              <textarea
+                rows={3}
+                placeholder="Describe your project..."
+                className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition resize-none"
+                {...register("description", ValidationRules.description)}
+              />
+              <ErrorMessage error={errors} name="description" />
+            </div>
 
-            <div className="flex gap-3 mt-2 justify-center items-center">
+            <div className="mt-8 flex justify-center gap-4">
               <Button
-                varient="primary"
-                type="submit"
-                onClick={handleSubmit(onSubmit)}
-                className="bg-lime-400"
-              >
-                Add Project
-              </Button>
-
-              <Button
-                variant="danger"
-                className="bg-lime-400"
-                onClick={() => {
-                  toogleForm(false);
-                }}
+                onClick={() => toogleForm(false)}
+                className="rounded bg-zinc-700 px-6 py-2 font-bold text-white hover:bg-red-600 transition"
               >
                 Cancel
+              </Button>
+              <Button
+                type="submit"
+                onClick={handleSubmit(onSubmit)}
+                className="rounded bg-lime-400 py-2 font-bold text-black hover:scale-105 transition"
+              >
+                Add Project
               </Button>
             </div>
           </form>
