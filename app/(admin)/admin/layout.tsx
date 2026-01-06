@@ -4,6 +4,7 @@ import Home from "./page";
 
 import { Inter, Geist_Mono } from "next/font/google";
 import { ActionProvider } from "./Context/ActionContext";
+import { ToastProvider } from "./Context/ToastContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -23,11 +24,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth Geist.className">
-      <ActionProvider>
-        <body>
-          <div className="">{children}</div>
-        </body>
-      </ActionProvider>
+      <body>
+        <ActionProvider>
+          <ToastProvider>
+            <div className="">{children}</div>
+          </ToastProvider>
+        </ActionProvider>
+      </body>
     </html>
   );
 }

@@ -105,6 +105,7 @@ export default function DetailedProjects({
     if (!isAdmin) {
       console.log("onclick check admin", data?.user?.email);
       setToast(true);
+      console.log("Toast stte", toast);
 
       console.log("toast message shown");
       return;
@@ -135,8 +136,8 @@ export default function DetailedProjects({
 
   return (
     <>
-      {isAdmin && toast && (
-        <div className="fixed">
+      {toast && (
+        <div className="fixed bottom-4 right-2">
           <ToastMessage
             type="error"
             message="Access denied"

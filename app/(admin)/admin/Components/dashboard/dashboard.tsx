@@ -23,12 +23,13 @@ interface PostType {
 interface DashboardProps {
   postsList: PostType[];
 }
-
+import { useToast } from "../../Context/ToastContext";
 export default function Dashboard({ postsList }: DashboardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
   const { openDeleteModel } = useGlobalActions();
-
+  const { isPostCreated } = useToast();
+  console.log("Is post created", isPostCreated);
   const blogCount = postsList.length;
   const latestBlogs = postsList
     .sort(

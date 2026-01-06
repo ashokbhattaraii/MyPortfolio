@@ -7,12 +7,15 @@ import ToastMessage from "../Components/Toast/toast";
 interface ActionContextType {
   openDeleteModel: (id: number) => void;
   isDeleting: boolean;
+  postCreated: boolean;
 }
 const ActionContent = createContext<ActionContextType | undefined>(undefined);
 export function ActionProvider({ children }: { children: React.ReactNode }) {
   const [targetId, setTargetId] = useState<number | null>(null);
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [isTostOpen, setIsTostOpen] = useState(false);
+  const [postCreated, setPostCreated] = useState(false);
+
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error" | "info";
@@ -39,14 +42,22 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ActionContent.Provider value={{ openDeleteModel, isDeleting: isPending }}>
+    <ActionContent.Provider
+      value={{
+        openDeleteModel,
+        isDeleting: isPending,
+        postCreated,
+      }}
+    >
       <>
         {isTostOpen && toast && (
-          <ToastMessage
-            message={toast.message}
-            type={toast.type}
-            onClose={() => setIsTostOpen(false)}
-          />
+          <div className="fixed bottom-4 right-2 z-50">
+            <ToastMessage
+              message={toast.message}
+              type={toast.type}
+              onClose={() => setIsTostOpen(false)}
+            />
+          </div>
         )}
         {isModelOpen && (
           <div

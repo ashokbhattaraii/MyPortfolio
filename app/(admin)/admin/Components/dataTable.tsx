@@ -18,13 +18,15 @@ interface BlogsDataProps {
 export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
   const router = useRouter();
   return (
-    <tbody
-      className="divide-y divide-white/5 cursor-pointer "
-      onClick={() => router.push(`/blogs/${post.id}`)}
-    >
+    <tbody className="divide-y divide-white/5  ">
       <tr className="hover:bg-white/5 transition-colors">
         <td className="px-8 py-4 text-gray-500 italic">{index}</td>
-        <td className="px-8 py-4 font-medium text-white">{post.title}</td>
+        <td
+          className="px-8 py-4 font-medium text-white cursor-pointer"
+          onClick={() => router.push(`/blogs/${post.id}`)}
+        >
+          {post.title}
+        </td>
         <td className="px-8 py-4 text-gray-400 text-sm">20/08/2025</td>
         <td className="px-8 py-4">
           <span className="bg-lime-400/10 text-lime-400 px-3 py-1 rounded-full text-[10px] font-bold">

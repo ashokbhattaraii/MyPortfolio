@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { createBlogPost } from "@/app/actions/blogActions";
 import { error } from "console";
 
+import { useToast } from "../Context/ToastContext";
 export default function CreateBlog() {
   const [title, setTitle] = useState("");
   const [isPublishing, setIsPublishing] = useState(false);
@@ -14,7 +15,7 @@ export default function CreateBlog() {
   const [tags, setTags] = useState<string[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
+  const { setIsPostCreated, setToast } = useToast();
   const editor = useEditor({
     extensions: [StarterKit],
     content: "Create your story here...",
@@ -52,6 +53,8 @@ export default function CreateBlog() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const [isTostOpen, setIsTostOpen] = useState(false);
+
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("title", title);
@@ -63,9 +66,15 @@ export default function CreateBlog() {
     }
     try {
       await createBlogPost(formData);
+      setIsPostCreated(true);
     } catch (error) {
       console.log("Error crating post", error);
+      setToast("Failed to create Post", "error");
+      setIsTostOpen(true);
     }
+    setToast("Post created successfully!", "success");
+    setIsPostCreated(true);
+    setIsTostOpen(true);
   };
   return (
     <>
