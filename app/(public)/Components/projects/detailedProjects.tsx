@@ -101,7 +101,6 @@ export default function DetailedProjects({
       setIsAdmin(true);
     }
   }, [data, status]);
-
   function onClickAdd() {
     if (!isAdmin) {
       console.log("onclick check admin", data?.user?.email);
@@ -136,7 +135,7 @@ export default function DetailedProjects({
 
   return (
     <>
-      {toast && (
+      {isAdmin && toast && (
         <div className="fixed">
           <ToastMessage
             type="error"
