@@ -75,7 +75,7 @@ export default function Blogs() {
               onChange={handleSearch}
             />
           </div>
-          <div id="blogs" className="flex flex-wrap flex-col gap-10 pt-30 ">
+          <div id="blogs" className="flex flex-wrap flex-col gap-9 pt-30 ">
             <Blog filteredBlogs={filteredBlogs} query={query} />
           </div>
         </div>
