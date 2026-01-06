@@ -84,8 +84,12 @@ export default function CreateBlog() {
             Create New <span className="text-lime-40  0 italic">Blog</span>
           </h1>
           <button
-            className={`bg-lime-400 px-4 py-2 text-2xl rounded-2xl font-bold max-w-50}`}
+            disabled={isPublishing}
+            className={`bg-lime-400 px-4 py-2 text-2xl rounded-2xl font-bold max-w-50 ${
+              isPublishing ? "opacity-50 cursor-not-allowed" : ""
+            }}`}
             onClick={async () => {
+              if (isPublishing) return;
               const isValid = validate();
               if (isValid) {
                 setIsPublishing(true);
