@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useState, createContext, useTransition } from "react";
-export const dynamic = "force-dynamic";
+
 import { deletePost } from "@/app/actions/blogActions";
 import ToastMessage from "../Components/Toast/toast";
 import { useRouter } from "next/navigation";
