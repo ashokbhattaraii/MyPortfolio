@@ -6,7 +6,7 @@ export default function SignIn() {
   return (
     <>
       <div className="overflow-hidden flex justify-center items-center min-h-120">
-        <div className="text-white flex  flex-col gap-5 items-center min-h-screenjustify-center bg-slate-800/40 p-4 rounded-2xl">
+        <div className="text-white flex  flex-col gap-4 items-center min-h-screenjustify-center bg-slate-800/40 p-4 rounded-2xl">
           <h1 className="animate-pulse py-4 text-white text-2xl font-bold">
             Login Here
           </h1>
