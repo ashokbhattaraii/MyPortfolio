@@ -100,7 +100,7 @@ export default function DetailedProjects({
       console.log("The logged in data", data.user?.email);
       setIsAdmin(true);
     }
-  }, [status]);
+  }, [data, status]);
 
   function onClickAdd() {
     if (!isAdmin) {
