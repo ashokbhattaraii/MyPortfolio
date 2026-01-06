@@ -63,7 +63,7 @@ export default function AdminDashboard() {
     "flex items-center  gap-2 py-3 hover:bg-slate-800 transition-transform ease-out duration-300 border-r-4 border-lime-400 bg-gray-600/40 pl-4 text-lime-400";
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a] text-white">
+    <div className="flex  min-h-screen bg-[#0a0a0a] text-white">
       <aside
         className={`transition-all duration-300 border-r border-white/10 flex flex-col ${
           menuOpen ? "w-60" : "w-20"

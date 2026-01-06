@@ -55,10 +55,10 @@ export default function CreateBlog() {
 
   const [isTostOpen, setIsTostOpen] = useState(false);
 
+  formData.append("content", editor?.getHTML() || "");
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("content", editor?.getHTML() || "");
     formData.append("author", author);
     tags.forEach((tag) => formData.append("tags", tag));
     if (file) {
