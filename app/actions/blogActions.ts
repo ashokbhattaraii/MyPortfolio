@@ -99,10 +99,15 @@ export async function fetchPosts() {
 }
 
 export async function deletePost(id: number) {
-  await prisma.post.delete({
-    where: { id: id },
-  });
+  try {
+    const deletePost = await prisma.post.delete({
+      where: { id: id },
+    });
+  } catch (error) {
+    return { success: false, error: "Falied to delete" };
+  }
   revalidatePath("/admin");
+  redirect("/admin");
 }
 
 export async function UpdatePost(

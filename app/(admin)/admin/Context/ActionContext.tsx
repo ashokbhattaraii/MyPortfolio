@@ -1,8 +1,9 @@
 "use client";
 import { useContext, useState, createContext, useTransition } from "react";
-
+export const dynamic = "force-dynamic";
 import { deletePost } from "@/app/actions/blogActions";
 import ToastMessage from "../Components/Toast/toast";
+import { useRouter } from "next/navigation";
 
 interface ActionContextType {
   openDeleteModel: (id: number) => void;
@@ -15,6 +16,7 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [isTostOpen, setIsTostOpen] = useState(false);
   const [postCreated, setPostCreated] = useState(false);
+  const router = useRouter();
 
   const [toast, setToast] = useState<{
     message: string;
@@ -26,17 +28,31 @@ export function ActionProvider({ children }: { children: React.ReactNode }) {
     setTargetId(id);
     setIsModelOpen(true);
   };
+
   const handleConfirmDelete = async () => {
     if (targetId === null) return;
 
     startTransition(async () => {
+      setIsModelOpen(false);
+
       try {
-        await deletePost(Number(targetId));
-        setIsModelOpen(false);
-        setToast({ message: "Post Deleted Successfully", type: "success" });
-        setIsTostOpen(true);
-      } catch (error) {
+        const result = await deletePost(Number(targetId));
+
+        if (result && result.success === false) {
+          setToast({ message: result.error, type: "error" });
+          setIsTostOpen(true);
+        }
+        router.refresh();
+      } catch (error: any) {
+        if (error.message === "NEXT_REDIRECT") {
+          setToast({ message: "Post Deleted Successfully", type: "success" });
+          setIsTostOpen(true);
+          router.refresh();
+          return;
+        }
+
         setToast({ message: "Error deleting Post", type: "error" });
+        setIsTostOpen(true);
       }
     });
   };

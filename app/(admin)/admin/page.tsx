@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Dashboard from "./Components/dashboard/dashboard";
 import { prisma } from "@/lib/db";
-
+export const dynamic = "force-dynamic";
 import { fetchData } from "next-auth/client/_utils";
 import { fetchPosts } from "@/app/actions/blogActions";
 interface PostType {
