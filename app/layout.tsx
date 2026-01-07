@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   },
 };
 
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "400", "700"], // 100 is the "Thin" weight
+  variable: "--font-poppins",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth Geist.className">
-      <body className="">
+      <body className={`${poppins.variable}`}>
         <div className="">{children}</div>
       </body>
     </html>
