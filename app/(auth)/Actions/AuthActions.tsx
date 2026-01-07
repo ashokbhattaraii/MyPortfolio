@@ -1,0 +1,44 @@
+"use server";
+import { prisma } from "@/lib/db";
+
+import { PrismaClient } from "@prisma/client";
+import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
+import { CloudCog } from "lucide-react";
+interface registerType {
+  fname: string;
+  lname: string;
+  phone: string;
+  email: string;
+  password: string;
+}
+export async function registerUser(formData: registerType) {
+  const { data, error } = await supabase.auth.signUp({
+    email: formData.email,
+    password: formData.password,
+  });
+  if (error) {
+    return { success: false, error: error.message };
+  }
+  console.log("data", data);
+  if (data.user) {
+    try {
+      await prisma.user.create({
+        data: {
+          email: formData.email,
+          fname: formData.fname,
+          lname: formData.lname,
+          phone: formData.phone,
+          password: formData.password,
+        },
+      });
+      return { success: true };
+    } catch (dbError) {
+      console.error("Prisma Error:", dbError);
+      return {
+        success: false,
+        error: "Account created, but profile could not be saved.",
+      };
+    }
+  }
+}
