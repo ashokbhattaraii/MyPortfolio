@@ -15,7 +15,7 @@ const images = [
 interface registerType {
   fname: string;
   lname: string;
-  phone: number;
+  phone: string;
   email: string;
   password: string;
   confirmPassword: string;
