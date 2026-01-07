@@ -6,7 +6,7 @@ import { error } from "console";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
-
+import { useToast } from "@/app/(admin)/admin/Context/ToastContext";
 export default function Contact() {
   const {
     register,
@@ -48,6 +48,8 @@ export default function Contact() {
   const [isSending, setSending] = useState(false);
   const [successDialog, setDialog] = useState(false);
 
+  const { setIsMessageSent, setToast } = useToast();
+
   const onSubmit = async (data: any) => {
     try {
       setSending(true);
@@ -59,6 +61,8 @@ export default function Contact() {
       if (req.ok) {
         setDialog(true);
         reset();
+        setToast("Message Sent Successfully", "success");
+        setIsMessageSent(true);
         setSending(false);
       }
     } catch (error) {

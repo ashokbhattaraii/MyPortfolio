@@ -5,7 +5,7 @@ import Navigation from "./Navbar";
 
 import Home from "./page";
 import expertise from "./Components/Home/expertise";
-
+import { ToastProvider } from "../(admin)/admin/Context/ToastContext";
 import { Inter, Geist_Mono } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -30,7 +30,9 @@ export default function RootLayout({
         <body>
           <Navigation />
 
-          <div className="mt-20">{children}</div>
+          <ToastProvider>
+            <div className="mt-20">{children}</div>
+          </ToastProvider>
         </body>
       </Providers>
     </html>
