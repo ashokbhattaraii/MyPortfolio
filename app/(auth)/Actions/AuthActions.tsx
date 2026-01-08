@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/db";
-
+import { NextRequest } from "next/server";
+import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
@@ -40,5 +41,20 @@ export async function registerUser(formData: registerType) {
         error: "Account created, but profile could not be saved.",
       };
     }
+  }
+}
+
+export async function loginWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${process.env.NEXTAUTH_URL}/api/auth/callback`,
+    },
+  });
+  if (error) {
+    console.log("Google Auth Error", error);
+  }
+  if (data.url) {
+    redirect(data.url);
   }
 }

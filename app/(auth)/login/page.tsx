@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { callbackify } from "util";
 import { registerUser } from "../Actions/AuthActions";
+import { loginWithGoogle } from "../Actions/AuthActions";
 
 const images = [
   "/auth/images/image1.jpg",
@@ -154,7 +155,10 @@ export default function SignIn() {
             </div>
           </div>
         </div>
-        <form className="w-full" onSubmit={handleSubmit(onValidSubmit)}>
+        <form
+          className="w-full flex flex-col justify-center items-center"
+          onSubmit={handleSubmit(onValidSubmit)}
+        >
           <div
             id="registerForm"
             className="text-white flex items-center justify-center w-full flex-col px-3"
@@ -281,6 +285,7 @@ export default function SignIn() {
             <div id="directRegister" className="max-w-xl w-full">
               <div
                 id="google"
+                onClick={async () => await loginWithGoogle()}
                 className="flex gap-2 bg-white max-w-100 mx-auto w-full justify-center items-center py-3 rounded cursor-pointer"
               >
                 <Image
