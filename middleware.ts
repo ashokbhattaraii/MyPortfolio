@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
   console.log("Session found", session);
   console.log("pathname", req.nextUrl.pathname);
   if (req.nextUrl.pathname.startsWith("/admin") && !session) {
-    url.pathname = "/login";
+    url.pathname = "/signup";
     return NextResponse.redirect(url);
   }
 
