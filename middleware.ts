@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -25,19 +26,23 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (req.nextUrl.pathname.startsWith("/admin")) {
-    if (!session) {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
+  const url = req.nextUrl.clone();
+
+  // Protect /admin routes
+  if (req.nextUrl.pathname.startsWith("/admin") && !session) {
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
   }
 
+  // Prevent logged-in users from going back to /login
   if (req.nextUrl.pathname === "/login" && session) {
-    return NextResponse.redirect(new URL("/admin", req.url));
+    url.pathname = "/admin";
+    return NextResponse.redirect(url);
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/login"],
 };

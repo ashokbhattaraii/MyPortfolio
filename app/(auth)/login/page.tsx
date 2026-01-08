@@ -109,6 +109,7 @@ export default function SignIn() {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+      console.log(session);
       if (session) router.push("/admin");
     };
     checkSession();
