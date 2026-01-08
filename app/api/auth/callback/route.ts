@@ -9,13 +9,12 @@ export async function GET(req: Request) {
 
   if (!code) return NextResponse.redirect(`${origin}/login`);
 
-  const cookieStore = await cookies(); // get Next.js cookies
+  const cookieStore = await cookies();
 
-  // Correct usage: 3 arguments
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY!,
-    { cookies: cookieStore } // just pass cookie store directly
+    { cookies: cookieStore }
   );
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -27,7 +26,6 @@ export async function GET(req: Request) {
 
   const user = data.user;
 
-  // Check if user exists in Prisma DB
   const existingUser = await prisma.user.findUnique({
     where: { email: user.email! },
   });
