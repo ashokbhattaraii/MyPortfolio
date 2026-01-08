@@ -1,16 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export async function GET(req: Request) {
-  const { searchParams, origin } = new URL(req.url);
-  const code = searchParams.get("code");
-
-  if (!code) {
-    return NextResponse.redirect(`${origin}/login`);
-  }
-
-  const cookieStore = await cookies();
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -18,18 +11,37 @@ export async function GET(req: Request) {
     {
       cookies: {
         getAll() {
-          return cookieStore.getAll();
+          return req.cookies.getAll();
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
+            res.cookies.set(name, value, options)
           );
         },
       },
     }
   );
 
-  await supabase.auth.exchangeCodeForSession(code);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  return NextResponse.redirect(`${origin}/admin`);
+  const url = req.nextUrl.clone();
+  console.log("Session found", session);
+  console.log("pathname", req.nextUrl.pathname);
+  if (req.nextUrl.pathname.startsWith("/admin") && !session) {
+    url.pathname = "/signup";
+    return NextResponse.redirect(url);
+  }
+
+  if (req.nextUrl.pathname === "/login" && session) {
+    url.pathname = "/admin";
+    return NextResponse.redirect(url);
+  }
+
+  return res;
 }
+
+export const config = {
+  matcher: ["/admin/:path*", "/login"],
+};
