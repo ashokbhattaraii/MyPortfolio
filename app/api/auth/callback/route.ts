@@ -7,19 +7,31 @@ export async function GET(req: Request) {
   const { searchParams, origin } = new URL(req.url);
   const code = searchParams.get("code");
 
-  if (!code) return NextResponse.redirect(`${origin}/login`);
+  if (!code) {
+    return NextResponse.redirect(`${origin}/login`);
+  }
 
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: cookieStore }
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options);
+          });
+        },
+      },
+    }
   );
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-  console.log("Code", code);
   if (error || !data?.user) {
     console.error("Supabase auth error:", error);
     return NextResponse.redirect(`${origin}/login`);
@@ -30,7 +42,6 @@ export async function GET(req: Request) {
   const existingUser = await prisma.user.findUnique({
     where: { email: user.email! },
   });
-  console.log("Existing user", existingUser);
 
   if (!existingUser) {
     const fullName = user.user_metadata?.full_name ?? "";
@@ -42,6 +53,6 @@ export async function GET(req: Request) {
       },
     });
   }
-  console.log("Existing user", existingUser);
+
   return NextResponse.redirect(`${origin}/admin`);
 }
