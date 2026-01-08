@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { callbackify } from "util";
 import { registerUser } from "../Actions/AuthActions";
 import { loginWithGoogle } from "../Actions/AuthActions";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 const images = [
   "/auth/images/image1.jpg",
@@ -101,6 +103,16 @@ export default function SignIn() {
         </>
       );
   };
+  const router = useRouter();
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session) router.push("/admin");
+    };
+    checkSession();
+  }, []);
 
   const onValidSubmit = async (data: registerType) => {
     const req = await registerUser(data);
