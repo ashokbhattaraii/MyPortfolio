@@ -27,7 +27,8 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   const url = req.nextUrl.clone();
-
+  console.log("Session found", session);
+  console.log("pathname", req.nextUrl.pathname);
   if (req.nextUrl.pathname.startsWith("/admin") && !session) {
     url.pathname = "/login";
     return NextResponse.redirect(url);
