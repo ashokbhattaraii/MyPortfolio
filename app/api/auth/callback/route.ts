@@ -29,6 +29,7 @@ export async function GET(req: Request) {
   const existingUser = await prisma.user.findUnique({
     where: { email: user.email! },
   });
+  console.log("Existing user", existingUser);
 
   if (!existingUser) {
     const fullName = user.user_metadata?.full_name ?? "";
@@ -40,6 +41,6 @@ export async function GET(req: Request) {
       },
     });
   }
-
+  console.log("Existing user", existingUser);
   return NextResponse.redirect(`${origin}/admin`);
 }
