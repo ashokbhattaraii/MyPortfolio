@@ -49,7 +49,6 @@ export async function loginWithGoogle() {
     provider: "google",
     options: {
       redirectTo: `https://my-portfolio-rho-silk-25.vercel.app/api/auth/callback`,
-      skipBrowserRedirect: false,
     },
   });
   if (error) {
