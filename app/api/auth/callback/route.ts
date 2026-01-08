@@ -19,6 +19,7 @@ export async function GET(req: Request) {
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
+  console.log("Code", code);
   if (error || !data?.user) {
     console.error("Supabase auth error:", error);
     return NextResponse.redirect(`${origin}/login`);
