@@ -1,10 +1,12 @@
-import { defineConfig } from "drizzle-kit";
 import "dotenv/config";
+import type { Config } from "drizzle-kit";
 
-export default defineConfig({
-  schema: "./prisma/schema.prisma",
+const config: Config = {
+  schema: "./src/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
-});
+};
+
+export default config;
