@@ -47,6 +47,7 @@ export async function registerUser(formData: registerType) {
 export async function loginWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
+
     options: {
       redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
     },
@@ -54,7 +55,7 @@ export async function loginWithGoogle() {
   if (error) {
     console.log("Google Auth Error", error);
   }
-  if (data.url) {
+  if (data?.url) {
     redirect(data.url);
   }
 }
