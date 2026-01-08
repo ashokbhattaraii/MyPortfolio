@@ -7,11 +7,9 @@ export async function GET(req: Request) {
   const { searchParams, origin } = new URL(req.url);
   const code = searchParams.get("code");
 
-  if (!code) {
-    return NextResponse.redirect(`${origin}/login`);
-  }
+  if (!code) return NextResponse.redirect(`${origin}/login`);
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
