@@ -1,9 +1,9 @@
 import "dotenv/config";
 import type { Config } from "drizzle-kit";
 
-const config: Config = {
+const config = {
   schema: "./src/schema.ts",
-  dialect: "postgresql",
+  driver: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
