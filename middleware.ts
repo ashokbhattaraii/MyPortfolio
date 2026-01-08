@@ -21,19 +21,16 @@ export async function middleware(req: NextRequest) {
     }
   );
 
-  // This refreshes the session if it's expired - essential for server-side auth
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // If there is no session and the user is trying to access /admin
   if (req.nextUrl.pathname.startsWith("/admin")) {
     if (!session) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
   }
 
-  // If the user is logged in, don't let them go back to the login page
   if (req.nextUrl.pathname === "/login" && session) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
@@ -42,5 +39,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/login"],
+  matcher: ["/admin/:path*"],
 };
