@@ -28,13 +28,11 @@ export async function middleware(req: NextRequest) {
 
   const url = req.nextUrl.clone();
 
-  // Protect /admin routes
   if (req.nextUrl.pathname.startsWith("/admin") && !session) {
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  // Prevent logged-in users from going back to /login
   if (req.nextUrl.pathname === "/login" && session) {
     url.pathname = "/admin";
     return NextResponse.redirect(url);

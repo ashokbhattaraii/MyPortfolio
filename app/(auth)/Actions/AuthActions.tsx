@@ -48,7 +48,8 @@ export async function loginWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback?server=true`,
+      redirectTo: `https://my-portfolio-rho-silk-25.vercel.app/api/auth/callback`,
+      skipBrowserRedirect: false,
     },
   });
   if (error) {
