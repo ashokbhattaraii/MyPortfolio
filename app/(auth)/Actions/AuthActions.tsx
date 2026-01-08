@@ -55,6 +55,6 @@ export async function loginWithGoogle() {
     console.log("Google Auth Error", error);
   }
   if (data.url) {
-    redirect(data.url);
+    redirect("/admin");
   }
 }
