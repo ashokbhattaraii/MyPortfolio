@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (req.nextUrl.pathname === "/admin" && session) {
+  if (req.nextUrl.pathname === "/login" && session) {
     url.pathname = "/admin";
     return NextResponse.redirect(url);
   }
