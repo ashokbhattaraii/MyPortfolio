@@ -1,34 +1,42 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
 
 export async function middleware(req: NextRequest) {
-  const cookieStore = await cookies();
+  // Create an immutable response placeholder so Supabase can write cookies
+  let res = NextResponse.next();
 
-  // Create Supabase server client
+  // Create Supabase client from middleware context
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY!,
-    { cookies: cookieStore }
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            res.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
   );
 
-  // Get user session
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // If user is not logged in, redirect to login
+  // If not logged in, redirect to /login
   if (!session) {
     const loginUrl = new URL("/login", req.url);
     return NextResponse.redirect(loginUrl);
   }
 
-  // User is logged in, allow the request
-  return NextResponse.next();
+  return res;
 }
 
-// Apply middleware only to /admin routes
 export const config = {
-  matcher: ["/admin/:path*"], // protect all /admin pages
+  matcher: ["/admin/:path*"],
 };
