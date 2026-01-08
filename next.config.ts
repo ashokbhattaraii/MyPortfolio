@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import { hostname } from "os";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",
@@ -17,9 +18,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
 };
 
 export default nextConfig;
