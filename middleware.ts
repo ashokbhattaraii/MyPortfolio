@@ -1,9 +1,10 @@
 import { createServerClient } from "@supabase/ssr";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const res = NextResponse.next();
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
+  });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -11,11 +12,17 @@ export async function middleware(req: NextRequest) {
     {
       cookies: {
         getAll() {
-          return req.cookies.getAll();
+          return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          supabaseResponse = NextResponse.next({
+            request,
+          });
           cookiesToSet.forEach(({ name, value, options }) =>
-            res.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, options)
           );
         },
       },
@@ -23,25 +30,26 @@ export async function middleware(req: NextRequest) {
   );
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const url = req.nextUrl.clone();
-  console.log("Session found", session);
-  console.log("pathname", req.nextUrl.pathname);
-  if (req.nextUrl.pathname.startsWith("/admin") && !session) {
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+  console.log("User", user);
+  const isAuthPage =
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname === "/register";
+  const isProtectedPage = request.nextUrl.pathname === "/admin";
+
+  if (isAuthPage && user) {
+    return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  if (req.nextUrl.pathname === "/login" && session) {
-    url.pathname = "/admin";
-    return NextResponse.redirect(url);
+  if (isProtectedPage && !user) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  return res;
+  return supabaseResponse;
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/login"],
+  matcher: ["/admin/:path*", "/login", "/register"],
 };

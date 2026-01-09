@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { logOut } from "@/app/(auth)/Actions/AuthActions";
 import Link from "next/link";
 import Post from "./Components/post/post";
 import {
@@ -112,7 +112,10 @@ export default function AdminDashboard() {
                 + Add New Blog
               </button>
             </Link>
-            <button className="text-gray-400 hover:text-white underline text-sm">
+            <button
+              className="text-gray-400 hover:text-white underline text-sm"
+              onClick={logOut}
+            >
               Logout
             </button>
           </div>

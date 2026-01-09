@@ -1,11 +1,10 @@
 "use server";
-import { prisma } from "@/lib/db";
-import { NextRequest } from "next/server";
+
 import { redirect } from "next/navigation";
-import { PrismaClient } from "@prisma/client";
-import { createClient } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
+import { createClient } from "@/lib/supabase/server"; // ✅ Use server client
 import { supabase } from "@/lib/supabase";
-import { CloudCog } from "lucide-react";
+
 interface registerType {
   fname: string;
   lname: string;
@@ -13,38 +12,56 @@ interface registerType {
   email: string;
   password: string;
 }
+
 export async function registerUser(formData: registerType) {
+  const supabase = await createClient(); // ✅ Call it fresh
+
   const { data, error } = await supabase.auth.signUp({
     email: formData.email,
     password: formData.password,
+    options: {
+      data: {
+        fname: formData.fname,
+        lname: formData.lname,
+        phone: formData.phone,
+      },
+    },
   });
+
   if (error) {
     return { success: false, error: error.message };
   }
-  console.log("data", data);
-  if (data.user) {
-    try {
-      await prisma.user.create({
-        data: {
-          email: formData.email,
-          fname: formData.fname,
-          lname: formData.lname,
-          phone: formData.phone,
-          password: formData.password,
-        },
-      });
-      return { success: true };
-    } catch (dbError) {
-      console.error("Prisma Error:", dbError);
-      return {
-        success: false,
-        error: "Account created, but profile could not be saved.",
-      };
-    }
+
+  redirect("/login");
+}
+
+export async function handleLogin(formData: registerType) {
+  const supabase = await createClient(); // ✅ Call it fresh
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData.email,
+    password: formData.password,
+  });
+
+  console.log("Login response:", { data, error });
+
+  if (error) {
+    console.log("Login error:", error);
+    return { error: error.message };
   }
+
+  if (data.session) {
+    console.log("Session created successfully");
+    revalidatePath("/", "layout");
+    redirect("/admin");
+  }
+
+  return { success: true };
 }
 
 export async function loginWithGoogle() {
+  const supabase = await createClient();
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -53,10 +70,20 @@ export async function loginWithGoogle() {
       }/api/auth/callback`,
     },
   });
+
   if (error) {
     console.log("Google Auth Error", error);
   }
+
   if (data?.url) {
     redirect(data.url);
+  }
+}
+
+export async function logOut() {
+  const supabase = await createClient();
+  const logOutUser = await supabase.auth.signOut();
+  if (logOutUser) {
+    redirect("/login");
   }
 }
