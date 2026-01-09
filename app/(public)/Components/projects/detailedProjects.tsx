@@ -162,17 +162,26 @@ export default function DetailedProjects({
           />
           <div
             id="AddProjects"
-            className="h-30 w-30 border rounded-2xl relative flex justify-center"
+            className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-6 
+              cursor-pointer transition-all duration-300 hover:border-gray-400 hover:shadow-xl 
+              hover:-translate-y-1 group flex flex-col items-center justify-center gap-4 min-h-[200px]"
             onClick={onClickAdd}
           >
-            <img
-              width="30"
-              height="30"
-              src="https://img.icons8.com/android/24/1A1A1A/plus.png"
-              alt="add"
-              className="absolute top-[40%] "
-            />
-            <p className="absolute -bottom-7">Add</p>
+            <div
+              className="w-16 h-16 rounded-xl bg-gray-100 flex items-center justify-center
+              transition-all duration-300 group-hover:bg-gray-200 group-hover:scale-110"
+            >
+              <span className="text-5xl font-light text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+                +
+              </span>
+            </div>
+
+            <div className="text-center space-y-1">
+              <p className="font-semibold text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
+                Add Project
+              </p>
+              <p className="text-xs text-gray-500">Click to create new</p>
+            </div>
           </div>
         </div>
         <div
