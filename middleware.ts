@@ -10,12 +10,13 @@ export async function middleware(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          const cookie = req.cookies.get(name);
-          return cookie?.value;
+        getAll() {
+          return req.cookies.getAll();
         },
-        set(name: string, value: string, options?: any) {
-          res.cookies.set(name, value, options);
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            res.cookies.set(name, value, options)
+          );
         },
       },
     }
@@ -26,17 +27,13 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   const url = req.nextUrl.clone();
-
-  console.log("Session found:", session);
-  console.log("Current pathname:", req.nextUrl.pathname);
-
-  // Redirect to login if not authenticated
+  console.log("Session found", session);
+  console.log("pathname", req.nextUrl.pathname);
   if (req.nextUrl.pathname.startsWith("/admin") && !session) {
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  // Redirect logged-in users away from login page
   if (req.nextUrl.pathname === "/login" && session) {
     url.pathname = "/admin";
     return NextResponse.redirect(url);
