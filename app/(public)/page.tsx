@@ -6,7 +6,7 @@ import AboutMe from "./Components/Home/about-me";
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center  flex-col w-full max-w-8xl ">
+      <div className="flex justify-center flex-col w-full max-w-full overflow-x-hidden">
         <Info />
         <AboutMe />
         <Expertise />

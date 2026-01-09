@@ -13,7 +13,7 @@ interface ProjectDetail {
 }
 const colors = [
   "bg-pink-400",
-  "bg-lime-400",
+  "bg-blue-600",
   "bg-purple-500",
   "bg-cyan-400",
   "bg-orange-500",
@@ -39,7 +39,7 @@ export default function Project({
         return (
           <Link href={p.link} key={index++}>
             <div
-              className="flex flex-wrap flex-col w-30  text-white text-center  transition-transform ease-out duration-300 hover:scale-105"
+              className="flex flex-wrap flex-col w-30  text-center  transition-transform ease-out duration-300 hover:scale-105"
               key={index}
             >
               <div
@@ -47,10 +47,16 @@ export default function Project({
                 key={index}
                 className={`h-30 w-30 ${bgColor} relative rounded-2xl  flex justify-center items-center`}
               >
-                <p className="text-8xl text-black font-bold">{firstLetter}</p>
+                <p
+                  className={`text-8xl font-bold ${
+                    bgColor === "bg-blue-600" ? "text-white" : "text-black"
+                  }`}
+                >
+                  {firstLetter}
+                </p>
               </div>
 
-              <p className="w-full truncate">{p.name}</p>
+              <p className="w-full truncate text-[#2B2A2A]">{p.name}</p>
             </div>
           </Link>
         );

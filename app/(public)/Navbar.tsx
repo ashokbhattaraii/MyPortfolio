@@ -13,8 +13,8 @@ export default function navigation() {
   }
   return (
     <>
-      <header className="fixed z-1000 top-0 left-0 right-0 flex justify-center items-center w-full h-20  @apply bg-linear-to-r from-gray-600 to-slate-900 p-3 shadow shadow-gray-800">
-        <p className="mr-auto ml-3 text-lime-500 text-3xl font-bold transition-transform ease-out duration-200 hover:scale-105 ">
+      <header className="fixed z-1000 top-0 left-0 right-0 flex justify-center items-center w-full h-20 bg-[#2B2A2A] p-3 shadow shadow-gray-800">
+        <p className="mr-auto ml-3 text-blue-600 text-3xl font-bold transition-transform ease-out duration-200 hover:scale-105 ">
           <Link href="./">Portfolio</Link>
         </p>
         <nav className={`mr-auto hidden md:block lg:block `}>
@@ -22,7 +22,7 @@ export default function navigation() {
             <li className="">
               <a
                 href="/"
-                className="hover:text-lime-500 transition-colors duration-200 "
+                className="hover:text-blue-600 transition-colors duration-200 "
               >
                 Home
               </a>
@@ -31,8 +31,8 @@ export default function navigation() {
               <Link
                 href="/#about-me"
                 className={`${
-                  pathName === "/#about-me" ? "text-lime-400" : "text-white"
-                } hover:text-lime-400`}
+                  pathName === "/#about-me" ? "text-blue-600" : "text-white"
+                } hover:text-blue-600`}
               >
                 About
               </Link>
@@ -42,28 +42,28 @@ export default function navigation() {
               <Link
                 href="/projects"
                 className={`${
-                  pathName === "/projects" ? "text-lime-400" : "text-white"
-                } hover:text-lime-400`}
+                  pathName === "/projects" ? "text-blue-600" : "text-white"
+                } hover:text-blue-600`}
               >
                 Projects
               </Link>
             </li>
-            <li className="hover:text-lime-500">
+            <li className="hover:text-blue-600">
               <Link
                 href="/blogs"
                 className={`${
-                  pathName === "/blogs" ? "text-lime-400" : "text-white"
-                } hover:text-lime-400`}
+                  pathName === "/blogs" ? "text-blue-600" : "text-white"
+                } hover:text-blue-600`}
               >
                 Blogs
               </Link>
             </li>
-            <li className="hover:text-lime-500">
+            <li className="hover:text-blue-600">
               <Link
                 href="/#contactArea"
                 className={`${
-                  pathName === "/contact" ? "text-lime-400" : "text-white"
-                } hover:text-lime-400`}
+                  pathName === "/contact" ? "text-blue-600" : "text-white"
+                } hover:text-blue-600`}
               >
                 Contact
               </Link>
@@ -89,11 +89,11 @@ export default function navigation() {
               isMenuOpen ? "block" : "hidden"
             } `}
           >
-            <ul className="p-6 flex flex-col justify-center items-center gap-6 font-bold  ">
+            <ul className="p-6 flex flex-col justify-center items-center gap-6 font-bold text-[#2B2A2A] ">
               <li className="">
                 <Link
                   href="/"
-                  className="hover:text-lime-500  transition-colors duration-200 "
+                  className="hover:text-blue-600  transition-colors duration-200 "
                 >
                   Home
                 </Link>
@@ -101,19 +101,19 @@ export default function navigation() {
               <li className="">
                 <Link
                   href="/#about-me"
-                  className="hover:text-lime-500 transition-colors duration-200 "
+                  className="hover:text-blue-600 transition-colors duration-200 "
                 >
                   About
                 </Link>
               </li>
 
-              <li className="hover:text-lime-500">
+              <li className="hover:text-blue-600">
                 <Link href="/projects">Projects</Link>
               </li>
-              <li className="hover:text-lime-500">
+              <li className="hover:text-blue-600">
                 <Link href="/blogs">Blogs</Link>
               </li>
-              <li className="hover:text-lime-500">
+              <li className="hover:text-blue-600">
                 <Link href="#contactArea">Contact</Link>
               </li>
             </ul>

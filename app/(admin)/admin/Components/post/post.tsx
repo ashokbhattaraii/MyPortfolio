@@ -6,10 +6,12 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  status: string;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
+  tags: string[];
+  image: string | null;
+  author: string | null;
 }
 interface PostProps {
   postsList: PostType[];

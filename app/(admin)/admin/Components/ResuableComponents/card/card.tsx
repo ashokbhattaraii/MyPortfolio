@@ -18,7 +18,7 @@ export default function Card({ title, count }: card) {
         </div>
         <div
           id="circularReperesenation"
-          className="w-20 h-20 rounded-full flex items-center justify-center bg-lime-400"
+          className="w-20 h-20 rounded-full flex items-center justify-center bg-blue-600 text-white"
         >
           <Plus size={40}></Plus>
         </div>

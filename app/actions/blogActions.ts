@@ -8,23 +8,25 @@ import { createClient } from "@supabase/supabase-js";
 interface createPostInput {
   title: string;
   content: string;
-  author: string;
-  image: File;
+  slug: string;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
   tags: string[];
-  status?: string;
+  image: string | null;
+  author: string | null;
 }
 interface PostType {
   id: number;
   title: string;
   content: string;
   slug: string;
-  author: string;
-  status: string;
-  image: string | null;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
   tags: string[];
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  image: string | null;
+  author: string | null;
 }
 
 const supabase = createClient(
@@ -80,7 +82,7 @@ export async function createBlogPost(formData: FormData) {
         tags: tags,
         image: imageUrl,
         slug: slug,
-        status: "Published",
+        status: "published",
       },
     });
   } catch (error) {
@@ -93,9 +95,22 @@ export async function createBlogPost(formData: FormData) {
 }
 
 export async function fetchPosts() {
-  return await prisma.post.findMany({
-    orderBy: { createdAt: "asc" },
+  const posts = await prisma.post.findMany({
+    orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
   });
+
+  return posts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    content: post.content,
+    slug: post.slug,
+    status: post.status as "published" | "draft",
+    tags: post.tags,
+    image: post.image,
+    author: post.author,
+    publishedAt: post.publishedAt ? post.publishedAt.toISOString() : null,
+    updatedAt: post.updatedAt.toISOString(),
+  }));
 }
 
 export async function deletePost(id: number) {

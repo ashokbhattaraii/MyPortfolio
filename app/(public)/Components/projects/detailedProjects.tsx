@@ -4,9 +4,7 @@ import Project from "./project";
 import { NextResponse } from "next/server";
 import Button from "../../Resualble_Components/Button";
 import { useForm } from "react-hook-form";
-import { getCookie } from "cookies-next";
-import { useSession } from "next-auth/react";
-import { Session } from "inspector/promises";
+import { createClient } from "@/lib/supabase/client";
 import ToastMessage from "@/app/(admin)/admin/Components/Toast/toast";
 
 interface ProjectDetail {
@@ -90,20 +88,22 @@ export default function DetailedProjects({
     handleChange(numValue);
     console.log("selected", numValue);
   }
-  const { data, status } = useSession();
+
   const [isAdmin, setIsAdmin] = useState(false);
+  const supabase = createClient();
+
   useEffect(() => {
-    if (status === "loading") {
-      console.log("Loged In");
+    async function checkAdmin() {
+      const checkUser = await supabase.auth.getUser();
+      if (checkUser) {
+        setIsAdmin(true);
+      }
+      return setIsAdmin(false);
     }
-    if (data) {
-      console.log("The logged in data", data.user?.email);
-      setIsAdmin(true);
-    }
-  }, [data, status]);
+    checkAdmin();
+  }, []);
   function onClickAdd() {
     if (!isAdmin) {
-      console.log("onclick check admin", data?.user?.email);
       setToast(true);
       console.log("Toast stte", toast);
 
@@ -149,7 +149,7 @@ export default function DetailedProjects({
         id="detailProjectDisplay"
         className="text-white h-full w-full max-w-7xl ml-15 md:ml-0"
       >
-        <h2 className="text-black font-bold">Projects</h2>
+        <h2 className="text-[#2B2A2A] font-bold">Projects</h2>
         <div
           id="detailedList"
           className="flex flex-wrap gap-8 text-blue-600 mt-4"
@@ -183,7 +183,7 @@ export default function DetailedProjects({
             <Button
               variant="primary"
               onClick={onCLickPreviousPage}
-              className={` fixed bottom-5 left-8 z-50 bg-lime-500 md:bottom-4  shadow-lg md:left-110  hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 left-8 z-50 bg-blue-600 text-white md:bottom-4  shadow-lg md:left-110  hover:scale-105 transition-transform ${
                 firstPage > 0 ? "block" : "hidden"
               } ${firstPage < 0 ? "hidden" : "block"}`}
             >
@@ -193,7 +193,7 @@ export default function DetailedProjects({
               onChange={changeValue}
               name=""
               id=""
-              className=" fixed bottom-5 py-2 px-4 bg-lime-400 text-white rounded-2xl"
+              className=" fixed bottom-5 py-2 px-4 bg-blue-600 text-white rounded-2xl"
             >
               <option value="5">5</option>
               <option value="10">10</option>
@@ -203,7 +203,7 @@ export default function DetailedProjects({
             <Button
               variant="primary"
               onClick={onCLickNextPage}
-              className={` fixed bottom-5 right-4 z-50 bg-lime-500 md:bottom-4 md:right-55 shadow-lg hover:scale-105 transition-transform ${
+              className={` fixed bottom-5 right-4 z-50 bg-blue-600 text-white md:bottom-4 md:right-55 shadow-lg hover:scale-105 transition-transform ${
                 lastIndex > projectLength ? "hidden" : "block"
               }
               }`}
@@ -285,7 +285,7 @@ export default function DetailedProjects({
               <Button
                 type="submit"
                 onClick={handleSubmit(onSubmit)}
-                className="rounded bg-lime-400 py-2 font-bold text-black hover:scale-105 transition"
+                className="rounded bg-blue-600 py-2 font-bold text-white hover:scale-105 transition"
               >
                 Add Project
               </Button>

@@ -12,7 +12,7 @@ import {
   X,
 } from "lucide-react";
 import Dashboard from "./Components/dashboard/dashboard";
-import { prisma } from "@/lib/db";
+
 export const dynamic = "force-dynamic";
 
 import { fetchPosts } from "@/app/actions/blogActions";
@@ -21,10 +21,12 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  status: string;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
+  tags: string[];
+  image: string | null;
+  author: string | null;
 }
 interface PostTypePros {
   postsList: PostType[];
@@ -38,7 +40,6 @@ export default function AdminDashboard() {
     async function getPosts() {
       try {
         const posts = await fetchPosts();
-
         setpostsList(posts);
       } catch (error) {
         console.log("Error fetching lists", error);
@@ -60,7 +61,7 @@ export default function AdminDashboard() {
   const defaultClass =
     " flex items-center  gap-2 py-3 hover:bg-slate-800 transition-transform ease-out duration-300 pl-4 ";
   const selectedClass =
-    "flex items-center  gap-2 py-3 hover:bg-slate-800 transition-transform ease-out duration-300 border-r-4 border-lime-400 bg-gray-600/40 pl-4 text-lime-400";
+    "flex items-center  gap-2 py-3 hover:bg-slate-800 transition-transform ease-out duration-300 border-r-4 border-[#5A7ACD] bg-gray-600/40 pl-4 text-blue-600";
 
   return (
     <div className="flex  min-h-screen bg-[#0a0a0a] text-white">
@@ -103,12 +104,12 @@ export default function AdminDashboard() {
 
       <div className="flex-1 flex flex-col">
         <header className="h-20 border-b border-white/10 flex justify-between items-center px-10 bg-[#0f0f0f]">
-          <h1 className="text-xl font-bold italic text-lime-400">
+          <h1 className="text-xl font-bold italic text-blue-600">
             BLOG MANAGER
           </h1>
           <div className="flex gap-4">
             <Link href="/admin/create">
-              <button className="bg-lime-400 text-black px-4 py-2 rounded-md font-bold hover:bg-lime-500 transition-colors cursor-pointer">
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-md font-bold hover:bg-blue-600/80 transition-colors cursor-pointer">
                 + Add New Blog
               </button>
             </Link>

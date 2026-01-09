@@ -61,7 +61,7 @@ export default function BlogEditor({ initialData, isEditing }: any) {
           </label>
           <input
             placeholder="Enter title..."
-            className="bg-transparent text-4xl font-bold text-white outline-none border-b border-slate-800 focus:border-lime-400 transition-colors pb-2"
+            className="bg-transparent text-4xl font-bold text-white outline-none border-b border-slate-800 focus:border-[#5A7ACD] transition-colors pb-2"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -73,7 +73,7 @@ export default function BlogEditor({ initialData, isEditing }: any) {
           </label>
           <input
             placeholder="Author name..."
-            className="bg-slate-900 text-lg text-white outline-none p-3 rounded-lg border border-slate-800 focus:border-lime-400"
+            className="bg-slate-900 text-lg text-white outline-none p-3 rounded-lg border border-slate-800 focus:border-[#5A7ACD]"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
@@ -87,7 +87,7 @@ export default function BlogEditor({ initialData, isEditing }: any) {
                 onClick={() => editor?.chain().focus().toggleBold().run()}
                 className={`px-3 py-1 rounded ${
                   editor?.isActive("bold")
-                    ? "bg-lime-400 text-black"
+                    ? "bg-blue-600 text-white"
                     : "bg-slate-700"
                 }`}
               >
@@ -97,7 +97,7 @@ export default function BlogEditor({ initialData, isEditing }: any) {
                 onClick={() => editor?.chain().focus().toggleItalic().run()}
                 className={`px-3 py-1 rounded ${
                   editor?.isActive("italic")
-                    ? "bg-lime-400 text-black"
+                    ? "bg-blue-600 text-white"
                     : "bg-slate-700"
                 }`}
               >
@@ -110,7 +110,7 @@ export default function BlogEditor({ initialData, isEditing }: any) {
 
         <button
           onClick={handleSave}
-          className="bg-lime-400 text-black font-extrabold py-3 px-8 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-lime-400/20 w-fit ml-auto"
+          className="bg-blue-600 text-white font-extrabold py-3 px-8 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#5A7ACD]/20 w-fit ml-auto"
         >
           {isEditing ? "Save Changes" : "Publish Post"}
         </button>

@@ -291,7 +291,7 @@ export default function SignIn() {
               </div>
             </div>
             <div className="max-w-60 w-full my-4 flex flex-col  items-center gap-4 ">
-              <button className="  w-full flex justify-center bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-lime-500 hover:-translate-y-1  transition-transform ease-out duration-200 cursor-pointer">
+              <button className="  w-full flex justify-center bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1  transition-transform ease-out duration-200 cursor-pointer">
                 <span>Register</span>
               </button>
               <span

@@ -91,7 +91,7 @@ export default async function BlogDetail({
               <div id="authContainer" className="flex gap-2 ml-4">
                 <div
                   id="author"
-                  className="h-12 w-12 rounded-full bg-lime-400 flex justify-center items-center text-3xl font-extrabold"
+                  className="h-12 w-12 rounded-full bg-blue-600 flex justify-center items-center text-3xl font-extrabold text-white"
                 >
                   <p>{targetBlog.author?.charAt(0)}</p>
                 </div>
@@ -100,7 +100,7 @@ export default async function BlogDetail({
                   <p>{targetBlog.author}</p>
                 </div>
               </div>
-              <hr className="w-px h-20 bg-lime-400 border-none mx-6" />
+              <hr className="w-px h-20 bg-blue-600 border-none mx-6" />
               <div id="published" className="flex flex-col gap-2">
                 <p className="text-[12px] flex items-center gap-1">
                   <span>
@@ -115,8 +115,8 @@ export default async function BlogDetail({
                   Updated At: {updatedAt}
                 </p>
               </div>
-              <div className=" hidden md:flex ml-auto mr-4 gap-2 bg-lime-400 p-1 rounded-2xl items-center">
-                <CheckCheck className="bg-lime-500 rounded-full w-5 h-5"></CheckCheck>
+              <div className=" hidden md:flex ml-auto mr-4 gap-2 bg-blue-600 p-1 rounded-2xl items-center text-white">
+                <CheckCheck className="bg-[#2B2A2A] text-white rounded-full w-5 h-5"></CheckCheck>
                 <p>Published</p>
               </div>
             </div>
@@ -130,8 +130,8 @@ export default async function BlogDetail({
           </div>
           <div id="contnet" className="mt-4">
             <div
-              className="prose prose-invert prose-lime max-w-none px-2 mb-10
-                     first-letter:text-5xl first-letter:font-bold first-letter:text-lime-400 
+              className="prose prose-invert max-w-none px-2 mb-10
+                     first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 
                      first-letter:float-left first-letter:mr-3"
               dangerouslySetInnerHTML={{ __html: targetBlog.content }}
             />
@@ -144,14 +144,14 @@ export default async function BlogDetail({
               </span>{" "}
               Like
             </Button>
-            <Button className="flex gap-2 bg-lime-400 transition-transform ease-out duration-300  hover:-translate-y-2">
+            <Button className="flex gap-2 bg-blue-600 text-white transition-transform ease-out duration-300  hover:-translate-y-2">
               {" "}
               <span>
                 <Share color="white"></Share>
               </span>{" "}
               Share
             </Button>
-            <p className="ml-auto mr-3 mt-2 text-gray-400 hover:text-blue-400 transition-colors">
+            <p className="ml-auto mr-3 mt-2 text-gray-400 hover:text-blue-600 transition-colors">
               Contact by Mail
             </p>
           </div>

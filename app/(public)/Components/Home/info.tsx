@@ -34,6 +34,8 @@ export default function Info() {
     }`;
   };
 
+  const nameWords = ["ASHOK", "BHATTARAI"];
+
   return (
     <>
       <section className="md:min-h-screen min-h-[90vh] bg-black flex items-center justify-center mx-auto w-full relative">
@@ -45,24 +47,38 @@ export default function Info() {
             )}`}
           >
             <p id="tag" className="text-5xl font-extrabold m-3  w-2/5 z-2">
-              CODING WITH <span className="text-lime-400">PASSION</span>,
-              CREATING WITH{" "}
-              <span className="bg-linear-to-r from-fuchsia-300 to-cyan-400 bg-clip-text text-transparent">
-                PURPOSE
-              </span>
+              CODING WITH <span className="text-blue-600">PASSION</span>,
+              CREATING WITH <span className="text-blue-600">PURPOSE</span>
             </p>
-            <p id="detail" className="m-4 w-1/2 z-10">
-              I believe mastery is a journey, not a destination, staying
-              fiercely committed to growth. This approach guarantees thoughtful
-              execution and highly reliable code on every platform.
-            </p>
+            <div id="name" className="m-4 w-1/2 z-10 relative">
+              <div className="flex gap-3 items-center">
+                {nameWords.map((word, index) => (
+                  <span
+                    key={index}
+                    className={`inline-block text-6xl font-serif italic relative ${animate(
+                      `delay-[${400 + index * 200}ms]`
+                    )}`}
+                    style={{
+                      transitionDelay: hasLoaded
+                        ? `${400 + index * 200}ms`
+                        : "0ms",
+                    }}
+                  >
+                    <span className="relative z-10">{word}</span>
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm tracking-widest mt-2 ml-1 text-gray-300">
+                Full Stack Developer
+              </p>
+            </div>
             <div
               id="buttonContainer"
               className="flex gap-4 ml-5 cursor-pointer items-center"
             >
               <div id="letsTalk" className="">
                 <Link href="#contactArea">
-                  <Button className="bg-lime-500 flex gap-2 py-3 font-bold  hover:bg-lime-400 hover:-translate-y-1 transition-transform ease-out duration-200 ">
+                  <Button className="bg-blue-600 text-white flex gap-2 py-3 font-bold  hover:bg-blue-600/80 hover:-translate-y-1 transition-transform ease-out duration-200 ">
                     <PhoneCall
                       width={20}
                       height={20}
@@ -90,7 +106,7 @@ export default function Info() {
               "delay-200"
             )}`}
           >
-            <div className="hidden md:block bg-lime-400 h-120 max-w-60 w-full absolute  top-10 md:right-20 rotate-10 rounded-2xl shadow shadow-purple-300 "></div>
+            <div className="hidden md:block bg-blue-600 h-120 max-w-60 w-full absolute  top-10 md:right-20 rotate-10 rounded-2xl shadow shadow-purple-300 "></div>
             <img
               src="./profile.png"
               alt="Profile Picture"

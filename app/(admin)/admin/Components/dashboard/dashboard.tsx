@@ -15,10 +15,12 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  status: string;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
+  tags: string[];
+  image: string | null;
+  author: string | null;
 }
 interface DashboardProps {
   postsList: PostType[];
@@ -34,9 +36,11 @@ export default function Dashboard({ postsList }: DashboardProps) {
   const latestBlogs = postsList
     .sort(
       (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        new Date(b.publishedAt ?? 0).getTime() -
+        new Date(a.publishedAt ?? 0).getTime()
     )
     .slice(0, 5);
+
   return (
     <>
       <main className="max-w-7xl w-full">

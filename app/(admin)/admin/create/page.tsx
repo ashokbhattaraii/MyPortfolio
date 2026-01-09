@@ -1,213 +1,175 @@
 "use client";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+interface PostType {
+  title: string;
+  content: string;
+  slug: string;
+  status: "published" | "draft";
+  publishedAt?: string | null;
+  updatedAt: string;
+  tags: string[];
+  image: string | null;
+  author: string | null;
+}
 
-import { useState, useEffect, useContext } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { createBlogPost } from "@/app/actions/blogActions";
-import { error } from "console";
+export default function CreateBlogForm() {
+  const router = useRouter();
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<PostType>();
 
-import { useToast } from "../Context/ToastContext";
-export default function CreateBlog() {
-  const [title, setTitle] = useState("");
-  const [isPublishing, setIsPublishing] = useState(false);
-  const [author, setAuthor] = useState("");
-  const [tagInput, setTagInput] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
-  const [file, setFile] = useState<File | null>(null);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const { setIsPostCreated, setToast } = useToast();
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: "Create your story here...",
-    immediatelyRender: false,
-    editorProps: {
-      attributes: {
-        class:
-          "prose prose-invert focus:outline-none min-h-[400px] max-w-none text-lg p-6 bg-slate-800 focus:bg-slate-900 rounded transition-transform ease-out duration-300",
-      },
-    },
-  });
-  const addTag = () => {
-    const trimmedValue = tagInput.trim();
-    if (!trimmedValue) return;
-    if (tags.includes(trimmedValue)) {
-      setTagInput("");
-      return;
-    }
-    setTags([...tags, tagInput]);
-  };
+  const onSubmit: SubmitHandler<PostType> = (data) => {};
 
-  const validate = () => {
-    const newErrors: { [key: string]: string } = {};
-    if (!title.trim()) newErrors.title = "Title is required";
-    if (title.trim().length < 5) newErrors.title = "Atleast 5 character";
-
-    if (!author.trim()) newErrors.author = "Author is required";
-
-    if (!editor || editor.getText().trim().length < 20)
-      newErrors.content = "Atleast 20 characters";
-    if (tags.length === 0) newErrors.tags = "Atleast one tag is required";
-    if (!file) newErrors.image = "Cover Image is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const [isTostOpen, setIsTostOpen] = useState(false);
-
-  const handleSubmit = async () => {
-    const formData = new FormData();
-    formData.append("content", editor?.getHTML() || "");
-    formData.append("title", title);
-    formData.append("author", author);
-    tags.forEach((tag) => formData.append("tags", tag));
-    if (file) {
-      formData.append("image", file);
-    }
-    try {
-      await createBlogPost(formData);
-      setIsPostCreated(true);
-    } catch (error) {
-      console.log("Error crating post", error);
-      setToast("Failed to create Post", "error");
-      setIsTostOpen(true);
-    }
-    setToast("Post created successfully!", "success");
-    setIsPostCreated(true);
-    setIsTostOpen(true);
-  };
   return (
-    <>
-      <div className="text-white mx-6">
-        <div id="heading" className="flex justify-around items-center py-4">
-          <h1 className="text-[2.4rem] font-bold">
-            Create New <span className="text-lime-40  0 italic">Blog</span>
-          </h1>
-          <button
-            disabled={isPublishing}
-            className={`bg-lime-400 px-4 py-2 text-2xl rounded-2xl font-bold max-w-50 ${
-              isPublishing ? "opacity-50 cursor-not-allowed" : ""
-            }}`}
-            onClick={async () => {
-              if (isPublishing) return;
-              const isValid = validate();
-              if (isValid) {
-                setIsPublishing(true);
-
-                await handleSubmit();
-                setIsPublishing(false);
-              }
-            }}
-          >
-            {isPublishing ? "Publishing..." : "Publish"}
-          </button>
-        </div>
-        <div
-          id="blogArea"
-          className="max-w-4xl w-full mx-auto flex flex-col gap-4"
-        >
-          <div className="w-full flex- flex-col">
-            <input
-              type="text"
-              placeholder="Enter your title here"
-              className={`text-3xl w-full outline-0 mt-20  ${
-                errors.title ? "" : ""
-              }`}
-              onChange={(e) => {
-                setTitle(e.target.value);
-                console.log(title);
-              }}
-            />
-            <p className="my-2 text-red-800">{errors.title}</p>
-          </div>
-          <div className="w-full flex- flex-col">
-            <input
-              type="text"
-              id="author"
-              placeholder="Author"
-              className={`border border-slate-800 rounded-2xl w-full py-3 pl-4 outline-0 focus:border-slate-600 text-gray-300 ${
-                errors.author ? "border border-red-700" : "border-slate-400"
-              }`}
-              onChange={(e) => setAuthor(e.target.value)}
-            />
-            <p className="my-2 text-red-800">{errors.author}</p>
-          </div>
-          <div className="w-full flex- flex-cols">
-            <input
-              type="file"
-              className="border border-slate-800 rounded-2xl py-3 w-full pl-4 outline-0 focus:border-slate-600 text-gray-300"
-              onChange={(e) => {
-                setFile(e.target.files?.[0] || null);
-              }}
-            />
-            <p className="my-2 text-red-800">{errors.image}</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <button
+        className="fixed flex  gap-2  shadow-xl cursor-pointer shadow-gray-400 py-2 px-4 bg-indigo-600 m-2 text-white rounded-xl"
+        onClick={() => router.push("/admin")}
+      >
+        <ArrowLeft></ArrowLeft> <p>Back</p>
+      </button>
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-gradient-to-r from-indigo-600 text-blue-600 px-8 py-10">
+            <h1 className="text-4xl font-bold text-white mb-2">
+              Create New Blog
+            </h1>
+            <p className="text-indigo-100">Share your story with the world</p>
           </div>
 
-          <div id="tags" className="flex gap-2">
-            <input
-              type="text"
-              className="border border-slate-800 rounded-2xl py-3 pl-4 outline-0 focus:border-slate-600 text-gray-300 w-full"
-              placeholder="Tag"
-              id="tag"
-              onChange={(e) => setTagInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  addTag();
-                }
-              }}
-            />
+          <div className="p-8 space-y-8">
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Blog Title
+              </label>
+              <input
+                {...register("title", { required: "Title is required" })}
+                type="text"
+                placeholder="Enter an engaging title for your blog"
+                className="w-full px-4 py-3 text-lg border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+              />
+              {errors.title && (
+                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                  <span className="text-lg">⚠</span> {errors.title.message}
+                </p>
+              )}
+            </div>
 
-            <button
-              className="border px-4 rounded-2xl bg-lime-400 text-2xl"
-              onClick={() => {
-                if (!tagInput) return;
-                setTags([...tags, tagInput]);
-                setTagInput("");
-              }}
-            >
-              Add
-            </button>
-          </div>
-          {!errors.tags ? (
-            <span className="h-10 flex gap-4 ">
-              {tags.map((tag, index) => {
-                return <h1 key={index}>#{tag}</h1>;
-              })}
-            </span>
-          ) : (
-            <span className="my-2 text-red-800">{errors.tags}</span>
-          )}
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Author Name
+              </label>
+              <input
+                {...register("author", { required: "Author name is required" })}
+                type="text"
+                placeholder="Your name"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+              />
+              {errors.author && (
+                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                  <span className="text-lg">⚠</span> {errors.author.message}
+                </p>
+              )}
+            </div>
 
-          <div className="bg-slate-900 rounded-2xl">
-            <div
-              id="btn"
-              className="mt-2 flex  pl-4 pt-3 gap-4 pb-4 w-full  rounded"
-            >
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Featured Image
+              </label>
+              <div className="relative">
+                <input
+                  {...register("image", { required: "Image is required" })}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  id="image-upload"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      const url = URL.createObjectURL(e.target.files[0]);
+                      setPreviewImage(url);
+                    }
+                  }}
+                />
+                <label
+                  htmlFor="image-upload"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all"
+                >
+                  {previewImage ? (
+                    <div className="relative w-full h-full">
+                      <img
+                        src={previewImage}
+                        alt="Preview"
+                        className="w-full h-full object-cover rounded-xl"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all rounded-xl flex items-center justify-center">
+                        <span className="text-white font-semibold opacity-0 hover:opacity-100 transition-opacity">
+                          Click to change image
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <p className="mb-2 text-sm text-gray-600 font-semibold">
+                        Click to upload featured image
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG or GIF (MAX. 10MB)
+                      </p>
+                    </div>
+                  )}
+                </label>
+              </div>
+              {errors.image && (
+                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                  <span className="text-lg">⚠</span> {errors.image.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Tags
+              </label>
+              <input
+                {...register("tags", {
+                  required: "At least one tag is required",
+                })}
+                type="text"
+                placeholder="technology, design, lifestyle (comma-separated)"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+              />
+              {errors.tags && (
+                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                  <span className="text-lg">⚠</span> {errors.tags.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex gap-4 pt-6">
               <button
-                className="text-xl font-bold bg-slate-400 px-4 rounded"
-                onClick={() => editor?.chain().focus().toggleBold().run()}
+                type="button"
+                className="flex-1 px-6 py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all hover:shadow-md cursor-pointer"
               >
-                Bold
+                Save Draft
               </button>
               <button
-                className="text-xl font-bold  p-2 rounded"
-                onClick={() => editor?.chain().focus().toggleItalic().run()}
+                onClick={handleSubmit(onSubmit)}
+                type="button"
+                className="flex-1 px-6 py-4 bg-gradient-to-r from-indigo-600 text-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
               >
-                Italic
+                Publish Blog
               </button>
             </div>
-            {!editor ? (
-              <h1 className="mt-6 text-center text-2xl">Loading editor...</h1>
-            ) : (
-              <EditorContent
-                editor={editor}
-                className="outline-0 rounded"
-              ></EditorContent>
-            )}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

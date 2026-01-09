@@ -120,7 +120,7 @@ export default function Login() {
           <div className="max-w-60 w-full my-6 flex flex-col items-center gap-4 mx-auto">
             <button
               type="submit"
-              className="w-full bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-lime-500 hover:-translate-y-1 transition"
+              className="w-full bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1 transition"
             >
               Login
             </button>

@@ -22,8 +22,8 @@ html{
 }
 
 body {
- @apply bg-linear-to-r from-black to-gray-900;
-  color: black;
+ @apply bg-[#F5F2F2];
+  color: #2B2A2A;
   font-family: Arial, Helvetica, sans-serif;
   
 }
@@ -37,7 +37,28 @@ body {
 
 #expertise-section span:hover{
   transition: all ease 0.5s;
- background-color: rgb(17, 17, 17);
+ background-color: #2B2A2A;
+}
+
+/* Custom color utilities for the new palette */
+.text-primary {
+  color: #5A7ACD;
+}
+
+.bg-primary {
+  background-color: #5A7ACD;
+}
+
+.bg-dark {
+  background-color: #2B2A2A;
+}
+
+.text-dark {
+  color: #2B2A2A;
+}
+
+.bg-light {
+  background-color: #F5F2F2;
 }
 
 

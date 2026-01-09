@@ -46,14 +46,14 @@ export default function Blog({ filteredBlogs, query }: any) {
                 <p id="contents" className=" line-clamp-3 px-2 text-[12px]">
                   {stripHTML(b.content)}
                 </p>
-                <hr className="h-0.5 w-[90%] mx-auto shadow shadow-lime-400 my-2" />
+                <hr className="h-0.5 w-[90%] mx-auto shadow shadow-[#5A7ACD] my-2" />
                 <div
                   id="author"
                   className="p-2 flex flex-row items-center gap-2 "
                 >
                   <div
                     id="profileIcon"
-                    className="bg-lime-400 w-10 h-10 rounded-full flex justify-center items-center"
+                    className="bg-blue-600 w-10 h-10 rounded-full flex justify-center items-center text-white"
                   >
                     <User />
                   </div>

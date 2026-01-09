@@ -8,13 +8,19 @@ interface BlogsDataProps {
     id: number;
     title: string;
     content: string;
-    status: string;
-    createdAt: Date;
+    slug: string;
+    status: "published" | "draft";
+    publishedAt?: string | null;
+    updatedAt: string;
+    tags: string[];
+    image: string | null;
+    author: string | null;
   };
   index: number;
 
   onDelete: (id: number) => void;
 }
+
 export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
   const router = useRouter();
   return (
@@ -29,7 +35,7 @@ export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
         </td>
         <td className="px-8 py-4 text-gray-400 text-sm">20/08/2025</td>
         <td className="px-8 py-4">
-          <span className="bg-lime-400/10 text-lime-400 px-3 py-1 rounded-full text-[10px] font-bold">
+          <span className="bg-blue-600/10 text-blue-600 px-3 py-1 rounded-full text-[10px] font-bold">
             Published
           </span>
         </td>
@@ -38,7 +44,7 @@ export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
             <Link href={`/admin/edit/${post.id}`}>
               <Edit
                 size={18}
-                className="cursor-pointer hover:text-lime-400 transition-colors"
+                className="cursor-pointer hover:text-blue-600 transition-colors"
               />
             </Link>
             <Trash2
