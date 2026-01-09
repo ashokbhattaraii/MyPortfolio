@@ -24,7 +24,7 @@ interface registerType {
   confirmPassword: string;
 }
 export default function SignIn() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const {
@@ -86,13 +86,13 @@ export default function SignIn() {
         value === watch("password") || "Password do not match",
     },
   };
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % images.length);
+  //   }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
+  //   return () => clearTimeout(timer);
+  // }, [currentIndex]);
 
   const ErrorMesage = ({ errors, field }: any) => {
     if (!errors?.[field]) return null;
@@ -128,7 +128,7 @@ export default function SignIn() {
   return (
     <>
       <main className="text-slate-200 flex w-full  font-serif min-h-screen">
-        <div className="hidden md:flex w-[50%] bg-[#0F2854] min-h-screen   items-center flex-col">
+        {/* <div className="hidden md:flex w-[50%] bg-[#0F2854] min-h-screen   items-center flex-col">
           <div className="mr-auto ml-4 mt-4">
             <h1 className="text-2xl font-extrabold tracking-wider mr-auto ">
               Portfolio
@@ -168,9 +168,9 @@ export default function SignIn() {
               ></Image>
             </div>
           </div>
-        </div>
+        </div> */}
         <form
-          className="w-full flex flex-col justify-center items-center"
+          className="w-full flex flex-col justify-center items-center bg-black"
           onSubmit={handleSubmit(onValidSubmit)}
         >
           <div

@@ -37,7 +37,7 @@ export default function CreateBlogForm() {
       </button>
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-indigo-600 text-blue-600 px-8 py-10">
+          <div className="bg-blue-600 text-blue-600 px-8 py-10">
             <h1 className="text-4xl font-bold text-white mb-2">
               Create New Blog
             </h1>
@@ -162,7 +162,7 @@ export default function CreateBlogForm() {
               <button
                 onClick={handleSubmit(onSubmit)}
                 type="button"
-                className="flex-1 px-6 py-4 bg-gradient-to-r from-indigo-600 text-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
+                className="flex-1 px-6 py-4 bg-blue-600 text-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
               >
                 Publish Blog
               </button>

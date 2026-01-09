@@ -197,12 +197,9 @@ export default function Contact() {
             )}
           </form>
         </div>
-        <div className="bg-gradient-to-r from-[#5A7ACD] to-[#5A7ACD]/70 rounded-xl sm:rounded-2xl w-full mt-4 sm:mt-6 md:mt-0 relative md:absolute md:right-0 md:bottom-0 text-white p-4 sm:p-6 md:p-8">
+        <div className="bg-gradient-to-r from-[#5A7ACD] to-[#5A7ACD]/70 rounded-xl sm:rounded-2xl w-full  md:mt-0 relative md:absolute md:right-0 md:bottom-0 text-white p-4 sm:p-6 md:p-8">
           <div id="contactIndo" className="w-full">
-            <div
-              id="details"
-              className="mt-4 sm:mt-8 md:mt-16 space-y-4 sm:space-y-6"
-            >
+            <div id="details" className=" md:mt-8 space-y-4 sm:space-y-6">
               <div
                 id="email"
                 className="flex gap-3 sm:gap-5 items-center font-bold text-sm sm:text-base"
@@ -248,7 +245,7 @@ export default function Contact() {
           </div>
           <div
             id="socialLinks"
-            className="flex flex-row md:flex-col justify-center md:justify-start gap-3 sm:gap-4 mt-6 sm:mt-8 md:mt-0 md:absolute md:top-15 md:right-1/2 md:bottom-0 z-100"
+            className="flex flex-row md:flex-col justify-center md:justify-start gap-3 sm:gap-4 mt-6 sm:mt-8 md:mt-0 md:absolute md:top-20 md:right-1/2 md:bottom-10 z-100"
           >
             <Link href="https://www.linkedin.com/in/ashok-bhattarai-5a2644330/">
               <Image

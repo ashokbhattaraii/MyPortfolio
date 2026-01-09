@@ -7,11 +7,11 @@ import { useForm } from "react-hook-form";
 import { handleLogin, loginWithGoogle } from "../Actions/AuthActions";
 import { ok } from "assert";
 
-const images = [
-  "/auth/images/image1.jpg",
-  "/auth/images/image2.jpg",
-  "/auth/images/image3.jpg",
-];
+// const images = [
+//   "/auth/images/image1.jpg",
+//   "/auth/images/image2.jpg",
+//   "/auth/images/image3.jpg",
+// ];
 
 interface loginType {
   email: string;
@@ -19,7 +19,7 @@ interface loginType {
 }
 
 export default function Login() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
 
   const {
@@ -45,13 +45,13 @@ export default function Login() {
     },
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % images.length);
+  //   }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
+  //   return () => clearTimeout(timer);
+  // }, [currentIndex]);
 
   const onValidSubmit = async (data: any) => {
     await handleLogin(data);
@@ -64,7 +64,7 @@ export default function Login() {
 
   return (
     <main className="text-slate-200 flex w-full font-serif min-h-screen">
-      <div className="hidden md:flex w-[50%] bg-[#0F2854] min-h-screen items-center flex-col">
+      {/* <div className="hidden md:flex w-[50%] bg-[#0F2854] min-h-screen items-center flex-col">
         <div className="mr-auto ml-4 mt-4">
           <h1 className="text-2xl font-extrabold tracking-wider">Portfolio</h1>
         </div>
@@ -84,9 +84,9 @@ export default function Login() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="w-full flex flex-col justify-center items-center px-3">
+      <div className="w-full flex flex-col justify-center items-center px-3 bg-black">
         <h1 className="text-3xl text-white font-extrabold tracking-wider mb-6">
           Login
         </h1>

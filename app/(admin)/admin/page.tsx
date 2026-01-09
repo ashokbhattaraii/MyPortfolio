@@ -80,12 +80,15 @@ export default function AdminDashboard() {
               onClick={() => setMenuOpen(!menuOpen)}
             />
           )}
-          <button className="p-2 hover:bg-white/10 rounded-lg ml-auto">
+          <button
+            className="p-2 hover:bg-white/10 rounded-lg ml-auto cursor-pointer"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             <Menu size={24} />
           </button>
         </div>
 
-        <nav className="mt-10 flex flex-col gap-2">
+        <nav className="mt-10 flex flex-col gap-2 cursor-pointer">
           {sideMenus.map((menu) => (
             <div
               key={menu.name}
@@ -114,7 +117,7 @@ export default function AdminDashboard() {
               </button>
             </Link>
             <button
-              className="text-gray-400 hover:text-white underline text-sm"
+              className="text-gray-400 hover:text-white underline text-sm cursor-pointer"
               onClick={logOut}
             >
               Logout
