@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { signOut } from "next-auth/react";
+
 import Link from "next/link";
 import Post from "./Components/post/post";
 import {
@@ -14,7 +14,7 @@ import {
 import Dashboard from "./Components/dashboard/dashboard";
 import { prisma } from "@/lib/db";
 export const dynamic = "force-dynamic";
-import { fetchData } from "next-auth/client/_utils";
+
 import { fetchPosts } from "@/app/actions/blogActions";
 interface PostType {
   id: number;
@@ -76,12 +76,10 @@ export default function AdminDashboard() {
               height="40"
               src="https://img.icons8.com/ios-filled/50/FFFFFF/user-male-circle.png"
               alt="user"
+              onClick={() => setMenuOpen(!menuOpen)}
             />
           )}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 hover:bg-white/10 rounded-lg ml-auto"
-          >
+          <button className="p-2 hover:bg-white/10 rounded-lg ml-auto">
             <Menu size={24} />
           </button>
         </div>
@@ -114,10 +112,7 @@ export default function AdminDashboard() {
                 + Add New Blog
               </button>
             </Link>
-            <button
-              onClick={() => signOut()}
-              className="text-gray-400 hover:text-white underline text-sm"
-            >
+            <button className="text-gray-400 hover:text-white underline text-sm">
               Logout
             </button>
           </div>

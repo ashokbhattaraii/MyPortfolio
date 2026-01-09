@@ -5,13 +5,13 @@ import { prisma } from "@/lib/db";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  console.log("code", code);
+  console.log("Callback received, code:", code ? "present" : "missing");
 
   if (!code) {
     return NextResponse.redirect(`${origin}/login`);
   }
 
-  const response = NextResponse.redirect(`${origin}/admin`);
+  let response = NextResponse.redirect(`${origin}/admin`);
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,12 +23,7 @@ export async function GET(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => {
-            response.cookies.set(name, value, {
-              ...options,
-              path: "/",
-              sameSite: "lax",
-              secure: process.env.NODE_ENV === "production",
-            });
+            response.cookies.set(name, value, options);
           });
         },
       },
@@ -36,25 +31,24 @@ export async function GET(request: NextRequest) {
   );
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-  console.log("Exchange result:", { error, user: data?.user?.email });
 
   if (error || !data.user) {
-    console.error("Auth error:", error);
+    console.error("Session exchange failed:", error?.message);
     return NextResponse.redirect(`${origin}/login`);
   }
 
-  const user = data.user;
+  console.log("Session established for:", data.user.email);
 
   try {
     const existingUser = await prisma.user.findUnique({
-      where: { email: user.email! },
+      where: { email: data.user.email! },
     });
 
     if (!existingUser) {
-      const fullName = user.user_metadata?.full_name ?? "";
+      const fullName = data.user.user_metadata?.full_name ?? "";
       await prisma.user.create({
         data: {
-          email: user.email!,
+          email: data.user.email!,
           fname: fullName.split(" ")[0] || "Google",
           lname: fullName.split(" ").slice(1).join(" ") || "",
         },
@@ -64,6 +58,5 @@ export async function GET(request: NextRequest) {
     console.error("Database error:", dbError);
   }
 
-  console.log("Redirecting to /admin with cookies set");
   return response;
 }

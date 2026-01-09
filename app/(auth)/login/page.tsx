@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -316,7 +316,7 @@ export default function SignIn() {
             <div
               id="github"
               className="flex gap-2 bg-slate-500 max-w-100 mx-auto w-full justify-center items-center py-3 rounded mt-4 hover:-translate-y-1 trasnition-transform ease-out duration-300 cursor-pointer"
-              onClick={() => signIn("github", { callbackUrl: "/admin" })}
+              // onClick={() => signIn("github", { callbackUrl: "/admin" })}
             >
               <Image
                 src="/auth/images/github.svg"
