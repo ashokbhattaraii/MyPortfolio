@@ -12,9 +12,8 @@ interface PostType {
   author: string | null;
   status: string;
   tags: string[];
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  updatedAt: string;
+  publishedAt: string;
 }
 
 export default function Blogs() {

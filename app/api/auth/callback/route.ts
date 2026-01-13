@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { prisma } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
@@ -43,27 +42,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/login`);
   }
 
-  const user = data.user;
-
-  try {
-    const existingUser = await prisma.user.findUnique({
-      where: { email: user.email! },
-    });
-
-    if (!existingUser) {
-      const fullName = user.user_metadata?.full_name ?? "";
-      await prisma.user.create({
-        data: {
-          email: user.email!,
-          fname: fullName.split(" ")[0] || "Google",
-          lname: fullName.split(" ").slice(1).join(" ") || "",
-        },
-      });
-    }
-  } catch (dbError) {
-    console.error("Database error:", dbError);
-  }
-
+  console.log("User authenticated:", data.user.email);
   console.log("Redirecting to /admin with cookies set");
+
   return response;
 }

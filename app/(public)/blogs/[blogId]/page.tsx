@@ -18,7 +18,7 @@ interface Blog {
   author: { name: string };
   imageUrl: string;
   updatedAt: string;
-  createdAt: string;
+  publishedAt: string;
   tags: string[];
 }
 import { fetchPosts } from "@/app/actions/blogActions";
