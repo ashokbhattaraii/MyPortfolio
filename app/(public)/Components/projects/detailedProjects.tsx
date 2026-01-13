@@ -94,7 +94,7 @@ export default function DetailedProjects({
 
   useEffect(() => {
     async function checkAdmin() {
-      const checkUser = await supabase.auth.getUser();
+      const checkUser = await supabase.auth.getSession();
       if (checkUser) {
         setIsAdmin(true);
       }

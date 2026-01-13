@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { handleLogin, loginWithGoogle } from "../Actions/AuthActions";
 import { Loader2 } from "lucide-react";
+import { useToast } from "@/app/(admin)/admin/Context/ToastContext";
 
 import { useFormStatus } from "react-dom";
 
@@ -21,6 +22,7 @@ interface loginType {
 }
 
 export default function Login() {
+  const { setIsLoginSuccess, setToast } = useToast();
   // const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
   const { pending } = useFormStatus();
@@ -58,9 +60,17 @@ export default function Login() {
   const [isLoginPending, setIsLoginPending] = useState(false);
   const onValidSubmit = async (data: any) => {
     setIsLoginPending(true);
+    setIsLoginSuccess(true);
     const status = await handleLogin(data);
     if (status && !status.success) {
       setIsLoginPending(false);
+      setToast("Incorrect Data", "error");
+      return;
+    }
+    if (status.success == true) {
+      setToast("Logged in successfully", "success");
+
+      router.push("/admin");
     }
   };
 

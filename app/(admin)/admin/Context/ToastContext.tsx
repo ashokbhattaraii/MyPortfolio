@@ -10,6 +10,7 @@ interface ToastContextType {
   isTostOpen: boolean;
   setIsPostEdited: (value: boolean) => void;
   setIsMessageSent: (value: boolean) => void;
+  setIsLoginSuccess: (value: boolean) => void;
 }
 const ToastContext = createContext<ToastContextType | null>(null);
 
@@ -18,6 +19,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isPostEdited, setIsPostEdited] = useState(false);
   const [isMessageSent, setIsMessageSent] = useState(false);
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
   const [toastData, setToastData] = useState<{
     message: string;
     type: "success" | "error" | "info";
@@ -27,7 +29,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     setToastData({ message, type });
     setIsTostOpen(true);
   };
-  console.log("From toast context, ispost created", isPostCreated);
+  console.log("From toast context, islogin", isLoginSuccess);
 
   return (
     <>
@@ -39,11 +41,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           setToast,
           setIsPostEdited,
           setIsMessageSent,
+
+          setIsLoginSuccess,
         }}
       >
         {children}
         {isTostOpen &&
-          (isPostCreated || isPostEdited || isMessageSent) &&
+          (isPostCreated || isLoginSuccess || isPostEdited || isMessageSent) &&
           toastData && (
             <div className="fixed bottom-4 right-2">
               <ToastMessage

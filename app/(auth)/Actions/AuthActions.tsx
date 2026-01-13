@@ -51,8 +51,6 @@ export async function handleLogin(formData: registerType) {
 
   if (data.session) {
     console.log("Session created successfully");
-    revalidatePath("/", "layout");
-    redirect("/admin");
   }
 
   return { success: true };

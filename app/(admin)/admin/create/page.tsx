@@ -7,7 +7,8 @@ import "react-quill-new/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { title } from "process";
 import { createBlogPost } from "@/app/actions/blogActions";
-
+import { useToast } from "../Context/ToastContext";
+import { Loader2 } from "lucide-react";
 interface PostType {
   title: string;
   content: string;
@@ -25,6 +26,7 @@ export default function CreateBlogForm() {
   const [content, setContent] = useState<string>("");
   const router = useRouter();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const { setIsPostCreated, setToast } = useToast();
   const {
     register,
     handleSubmit,
@@ -36,7 +38,10 @@ export default function CreateBlogForm() {
   const [tagInput, setTagInput] = useState("");
   const [tagsArray, setTagsArray] = useState<string[]>([]);
   const [blogTitle, setBlogtitle] = useState<string>();
+  const [isPostCreating, setIsPostCreating] = useState(false);
   const onSubmit = async (data: PostType, status: "published" | "draft") => {
+    setIsPostCreated(true);
+    setIsPostCreating(true);
     const formData = new FormData();
     try {
       formData.append("title", data.title);
@@ -50,8 +55,16 @@ export default function CreateBlogForm() {
       if (fileInput?.files?.[0]) {
         formData.append("image", fileInput.files[0]);
       }
-      await createBlogPost(formData);
+      const postCrateStatus = await createBlogPost(formData);
+      if (postCrateStatus.success == true) {
+        setToast("Post created successfully", "success");
+      } else {
+        setIsPostCreating(false);
+        setToast("Error creating post", "error");
+        return;
+      }
     } catch {}
+    router.push("/admin");
   };
 
   function addTag(e: React.MouseEvent) {
@@ -264,16 +277,26 @@ export default function CreateBlogForm() {
             <div className="flex gap-4 pt-6">
               <button
                 type="button"
-                className="flex-1 px-6 py-4 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all hover:shadow-md cursor-pointer"
+                disabled={isPostCreating}
+                className="flex-1 px-6 py-4 flex justify-center items-center bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all hover:shadow-md cursor-pointer"
                 onClick={handleSubmit((data) => onSubmit(data, "draft"))}
               >
-                Save Draft
+                {isPostCreating ? (
+                  <Loader2 className="animate-spin"></Loader2>
+                ) : (
+                  "Save Draft"
+                )}
               </button>
               <button
                 type="submit"
-                className="flex-1 px-6 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
+                disabled={isPostCreating}
+                className="flex-1 flex justify-center items-center px-6 py-4 j bg-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
               >
-                Publish Blog
+                {isPostCreating ? (
+                  <Loader2 className="animate-spin"></Loader2>
+                ) : (
+                  "Publish Blog"
+                )}
               </button>
             </div>
           </div>

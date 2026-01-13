@@ -89,14 +89,13 @@ export async function createBlogPost(formData: FormData) {
         updatedAt: publishedAt,
       },
     });
+    return { success: true };
   } catch (error) {
     console.error("Database Error:", error);
     console.log("Eroor creating post", error);
     throw new Error("Failed to create blog post.");
+    return { success: false };
   }
-
-  revalidatePath("/admin");
-  redirect("/admin");
 }
 
 export async function fetchPosts(status: string) {
