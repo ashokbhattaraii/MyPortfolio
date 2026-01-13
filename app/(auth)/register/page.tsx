@@ -9,7 +9,7 @@ import { registerUser } from "../Actions/AuthActions";
 import { loginWithGoogle } from "../Actions/AuthActions";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-
+import { Loader2 } from "lucide-react";
 const images = [
   "/auth/images/image1.jpg",
   "/auth/images/image2.jpg",
@@ -25,7 +25,8 @@ interface registerType {
 }
 export default function SignIn() {
   // const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const {
     register,
@@ -117,9 +118,11 @@ export default function SignIn() {
   // }, []);
 
   const onValidSubmit = async (data: registerType) => {
+    setIsRegistering(true);
     const req = await registerUser(data);
+
     if (req) {
-      router.push("/login");
+      setIsRegistering(false);
     } else {
       console.log("failed to create user");
     }
@@ -291,8 +294,17 @@ export default function SignIn() {
               </div>
             </div>
             <div className="max-w-60 w-full my-4 flex flex-col  items-center gap-4 ">
-              <button className="  w-full flex justify-center bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1  transition-transform ease-out duration-200 cursor-pointer">
-                <span>Register</span>
+              <button
+                disabled={isRegistering}
+                className=" w-full flex justify-center bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1  transition-transform ease-out duration-200 cursor-pointer"
+              >
+                <span>
+                  {isRegistering ? (
+                    <Loader2 className="animate-spin">Registring</Loader2>
+                  ) : (
+                    "Register"
+                  )}
+                </span>
               </button>
               <span
                 className="cursor-pointer"
@@ -322,17 +334,20 @@ export default function SignIn() {
             </div>
             <div
               id="github"
-              className="flex gap-2 bg-slate-500 max-w-100 mx-auto w-full justify-center items-center py-3 rounded mt-4 hover:-translate-y-1 trasnition-transform ease-out duration-300 cursor-pointer"
+              className="flex relative gap-2 bg-slate-500 max-w-[400px] mx-auto w-full justify-center items-center py-3 rounded mt-4 hover:-translate-y-1 transition-transform ease-out duration-300 cursor-pointer"
               // onClick={() => signIn("github", { callbackUrl: "/admin" })}
             >
               <Image
                 src="/auth/images/github.svg"
                 width={20}
                 height={20}
-                alt="google-icon"
-              ></Image>
+                alt="github-icon"
+              />
               <span className="text-white text-[16px] font-bold">
                 Continue with Github
+              </span>
+              <span className="absolute -top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+                Coming Soon!
               </span>
             </div>
           </div>

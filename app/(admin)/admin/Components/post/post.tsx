@@ -6,7 +6,7 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  status: "published" | "draft";
+  status: string;
   publishedAt?: string | null;
   updatedAt: string;
   tags: string[];

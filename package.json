@@ -21,13 +21,15 @@
     "nodemailer": "^7.0.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.68.0"
+    "react-hook-form": "^7.68.0",
+    "react-quill-new": "^3.7.0"
   },
   "devDependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@prisma/client": "^5.22.0",
     "@supabase/supabase-js": "^2.90.0",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",

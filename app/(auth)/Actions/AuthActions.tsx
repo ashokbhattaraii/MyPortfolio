@@ -2,8 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server"; // ✅ Use server client
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/server";
 
 interface registerType {
   fname: string;
@@ -14,7 +13,7 @@ interface registerType {
 }
 
 export async function registerUser(formData: registerType) {
-  const supabase = await createClient(); // ✅ Call it fresh
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signUp({
     email: formData.email,
@@ -32,11 +31,11 @@ export async function registerUser(formData: registerType) {
     return { success: false, error: error.message };
   }
 
-  redirect("/login");
+  redirect("/login?registered=true");
 }
 
 export async function handleLogin(formData: registerType) {
-  const supabase = await createClient(); // ✅ Call it fresh
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.email,
@@ -47,7 +46,7 @@ export async function handleLogin(formData: registerType) {
 
   if (error) {
     console.log("Login error:", error);
-    return { error: error.message };
+    return { error: error.message, success: false };
   }
 
   if (data.session) {
@@ -68,6 +67,9 @@ export async function loginWithGoogle() {
       redirectTo: `${
         process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
       }/api/auth/callback`,
+      queryParams: {
+        prompt: "select_account",
+      },
     },
   });
 

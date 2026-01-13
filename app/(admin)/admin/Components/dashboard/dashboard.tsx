@@ -15,7 +15,7 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  status: "published" | "draft";
+  status: string;
   publishedAt?: string | null;
   updatedAt: string;
   tags: string[];
@@ -33,6 +33,15 @@ export default function Dashboard({ postsList }: DashboardProps) {
   const { isPostCreated } = useToast();
   console.log("Is post created", isPostCreated);
   const blogCount = postsList.length;
+  let draftount = 0;
+  let publishedCount = 0;
+  postsList.forEach((post) => {
+    if (post.status == "draft") {
+      draftount++;
+    } else {
+      publishedCount++;
+    }
+  });
   const latestBlogs = postsList
     .sort(
       (a, b) =>
@@ -46,8 +55,8 @@ export default function Dashboard({ postsList }: DashboardProps) {
       <main className="max-w-7xl w-full">
         <div id="statistics" className="text-white flex  justify-evenly ">
           <Card title="Total Blogs" count={blogCount}></Card>
-          <Card title="Published" count={blogCount}></Card>
-          <Card title="Drafts" count={0}></Card>
+          <Card title="Published" count={publishedCount}></Card>
+          <Card title="Drafts" count={draftount}></Card>
         </div>
         <div id="blogLists" className="">
           <h1 className="text-3xl my-4 ml-6 font-serif font-bold">

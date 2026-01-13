@@ -39,7 +39,10 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname === "/register";
   const isProtectedPage = request.nextUrl.pathname === "/admin";
 
-  if (isAuthPage && user) {
+  const isJustRegistering =
+    request.nextUrl.searchParams.get("registered") == "true";
+
+  if (isAuthPage && user && !isJustRegistering) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 

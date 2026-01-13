@@ -69,7 +69,7 @@ export default function Info() {
                 ))}
               </div>
               <p className="text-sm tracking-widest mt-2 ml-1 text-gray-300">
-                Full Stack Developer
+                Student
               </p>
             </div>
             <div

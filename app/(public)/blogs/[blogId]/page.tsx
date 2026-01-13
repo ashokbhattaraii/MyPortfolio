@@ -1,5 +1,6 @@
 import Button from "../../Resualble_Components/Button";
 import { notFound } from "next/navigation";
+
 import {
   ArrowLeft,
   Calendar,
@@ -23,16 +24,6 @@ interface Blog {
 import { fetchPosts } from "@/app/actions/blogActions";
 import { getBlogByID } from "@/app/actions/blogActions";
 
-let blogs;
-async function GetBlog() {
-  try {
-    const blogs = await fetchPosts();
-  } catch (error) {
-    console.error("Network error during fetch:", error);
-    return [];
-  }
-}
-
 export default async function BlogDetail({
   params,
 }: {
@@ -44,23 +35,23 @@ export default async function BlogDetail({
   if (!targetBlog) {
     notFound();
   }
-  const createdAt = new Date(targetBlog.createdAt).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const createdAt = new Date(targetBlog.publishedAt).toLocaleDateString(
+    "en-US",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
+  );
   const updatedAt = new Date(targetBlog.updatedAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  const stripHTML = (html: string) => {
-    return html.replace(/<[^>]*>?/gm, "");
-  };
 
   return (
     <>
-      <div id="blogDetailContainer" className="">
+      <div id="blogDetailContainer" className="max-w-4xl w-full mx-auto">
         <div className="max-w-4xl h-auto w-full mx-auto bg-linear-to-r from-black to-gray-900 p-4 text-white">
           <header>
             <div id="backBtn" className="flex gap-2 hover:text-gray-600 ">
@@ -128,11 +119,14 @@ export default async function BlogDetail({
               className="hover:scale-105 object-cover transition-transform ease-out duration-300 rounded"
             ></img>
           </div>
-          <div id="contnet" className="mt-4">
+          <div id="contnet" className="mt-4 w-full">
             <div
-              className="prose prose-invert max-w-none px-2 mb-10
-                     first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 
-                     first-letter:float-left first-letter:mr-3"
+              className="blog-content 
+      prose
+      prose-invert
+      prose-lg
+      wrap-break-word
+      text-gray-200"
               dangerouslySetInnerHTML={{ __html: targetBlog.content }}
             />
           </div>

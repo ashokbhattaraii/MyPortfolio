@@ -9,7 +9,7 @@ interface BlogsDataProps {
     title: string;
     content: string;
     slug: string;
-    status: "published" | "draft";
+    status: string;
     publishedAt?: string | null;
     updatedAt: string;
     tags: string[];
@@ -36,7 +36,7 @@ export default function BlogData({ post, onDelete, index }: BlogsDataProps) {
         <td className="px-8 py-4 text-gray-400 text-sm">20/08/2025</td>
         <td className="px-8 py-4">
           <span className="bg-blue-600/10 text-blue-600 px-3 py-1 rounded-full text-[10px] font-bold">
-            Published
+            {post.status}
           </span>
         </td>
         <td className="px-8 py-4">

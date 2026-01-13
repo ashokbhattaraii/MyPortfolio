@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { handleLogin, loginWithGoogle } from "../Actions/AuthActions";
-import { ok } from "assert";
+import { Loader2 } from "lucide-react";
+
+import { useFormStatus } from "react-dom";
 
 // const images = [
 //   "/auth/images/image1.jpg",
@@ -21,6 +23,7 @@ interface loginType {
 export default function Login() {
   // const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
+  const { pending } = useFormStatus();
 
   const {
     register,
@@ -52,9 +55,13 @@ export default function Login() {
 
   //   return () => clearTimeout(timer);
   // }, [currentIndex]);
-
+  const [isLoginPending, setIsLoginPending] = useState(false);
   const onValidSubmit = async (data: any) => {
-    await handleLogin(data);
+    setIsLoginPending(true);
+    const status = await handleLogin(data);
+    if (status && !status.success) {
+      setIsLoginPending(false);
+    }
   };
 
   const ErrorMessage = ({ field }: { field: keyof loginType }) => {
@@ -120,9 +127,16 @@ export default function Login() {
           <div className="max-w-60 w-full my-6 flex flex-col items-center gap-4 mx-auto">
             <button
               type="submit"
-              className="w-full bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1 transition"
+              disabled={isLoginPending}
+              className="w-full bg-slate-900 py-2 text-xl font-bold tracking-wider rounded shadow shadow-slate-700 hover:text-blue-600 hover:-translate-y-1 transition flex justify-center items-center"
             >
-              Login
+              <span>
+                {isLoginPending ? (
+                  <Loader2 className="animate-spin"></Loader2>
+                ) : (
+                  "Login"
+                )}
+              </span>
             </button>
 
             <span
@@ -136,32 +150,39 @@ export default function Login() {
             <span>OR</span>
           </div>
         </form>
-
-        <div
-          className="max-w-xl w-full flex flex-col gap-4"
-          onClick={loginWithGoogle}
-        >
-          <div className="flex gap-2 bg-white w-full justify-center items-center py-3 rounded cursor-pointer">
-            <Image
-              src="/auth/images/google-color.svg"
-              width={20}
-              height={20}
-              alt="google"
-            />
-            <span className="text-black text-[16px] font-bold">
-              Continue with Google
-            </span>
+        <div id="directLogin" className="max-w-xl w-full mx-auto">
+          <div
+            className="max-w-xl w-full flex flex-col gap-4"
+            onClick={loginWithGoogle}
+          >
+            <div className="flex gap-2 bg-white max-w-100 w-full mx-auto justify-center items-center py-3 rounded cursor-pointer">
+              <Image
+                src="/auth/images/google-color.svg"
+                width={20}
+                height={20}
+                alt="google"
+              />
+              <span className="text-black text-[16px] font-bold">
+                Continue with Google
+              </span>
+            </div>
           </div>
-
-          <div className="flex gap-2 bg-slate-500 w-full justify-center items-center py-3 rounded cursor-pointer hover:-translate-y-1 transition">
+          <div
+            id="github"
+            className="flex relative gap-2 bg-slate-500 max-w-[400px] mx-auto w-full justify-center items-center py-3 rounded mt-4 hover:-translate-y-1 transition-transform ease-out duration-300 cursor-pointer"
+            // onClick={() => signIn("github", { callbackUrl: "/admin" })}
+          >
             <Image
               src="/auth/images/github.svg"
               width={20}
               height={20}
-              alt="github"
+              alt="github-icon"
             />
             <span className="text-white text-[16px] font-bold">
               Continue with Github
+            </span>
+            <span className="absolute -top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+              Coming Soon!
             </span>
           </div>
         </div>

@@ -4,9 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Blog({ filteredBlogs, query }: any) {
-  const stripHTML = (html: string) => {
-    return html.replace(/<[^>]*>?/gm, "");
-  };
   return (
     <>
       {filteredBlogs.map((b: any, i: any) => {
@@ -27,7 +24,7 @@ export default function Blog({ filteredBlogs, query }: any) {
               <div className="">
                 <img src={`${b.imageUrl}`} alt="" className="pb-3" />
               </div>
-              <div id="contents" className="flex flex-col gap-2">
+              <div id="contents" className="flex flex-col gap-2 ">
                 <div id="tags" className="text-white flex gap-2">
                   {b.tags.map((t: any, i: any) => {
                     return (
@@ -43,9 +40,11 @@ export default function Blog({ filteredBlogs, query }: any) {
                 <p id="title" key={i} className="pl-2 font-bold">
                   {b.title}
                 </p>
-                <p id="contents" className=" line-clamp-3 px-2 text-[12px]">
-                  {stripHTML(b.content)}
-                </p>
+                <p
+                  id="contents"
+                  className=" line-clamp-3 px-2 text-[12px] w-full wrap-break-word overflow-hidden"
+                  dangerouslySetInnerHTML={{ __html: b.content }}
+                ></p>
                 <hr className="h-0.5 w-[90%] mx-auto shadow shadow-[#5A7ACD] my-2" />
                 <div
                   id="author"

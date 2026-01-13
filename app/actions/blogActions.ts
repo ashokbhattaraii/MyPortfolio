@@ -9,7 +9,7 @@ interface createPostInput {
   title: string;
   content: string;
   slug: string;
-  status: "published" | "draft";
+  status: string;
   publishedAt?: string | null;
   updatedAt: string;
   tags: string[];
@@ -21,7 +21,7 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  status: "published" | "draft";
+  status: string;
   publishedAt?: string | null;
   updatedAt: string;
   tags: string[];
@@ -38,8 +38,10 @@ export async function createBlogPost(formData: FormData) {
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
   const author = formData.get("author") as string;
-  const tags = formData.getAll("tags") as string[];
+  const tags = JSON.parse(formData.get("tags") as string);
   const imageFile = formData.get("image") as File;
+  const status = formData.get("status") as string;
+  const publishedAt = new Date().toISOString();
 
   let imageUrl = "";
 
@@ -82,11 +84,14 @@ export async function createBlogPost(formData: FormData) {
         tags: tags,
         image: imageUrl,
         slug: slug,
-        status: "published",
+        status: status,
+        publishedAt: publishedAt,
+        updatedAt: publishedAt,
       },
     });
   } catch (error) {
     console.error("Database Error:", error);
+    console.log("Eroor creating post", error);
     throw new Error("Failed to create blog post.");
   }
 
@@ -94,9 +99,10 @@ export async function createBlogPost(formData: FormData) {
   redirect("/admin");
 }
 
-export async function fetchPosts() {
+export async function fetchPosts(status: string) {
   const posts = await prisma.post.findMany({
     orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
+    where: { status: status },
   });
 
   return posts.map((post) => ({
@@ -104,12 +110,12 @@ export async function fetchPosts() {
     title: post.title,
     content: post.content,
     slug: post.slug,
-    status: post.status as "published" | "draft",
+    status: post.status,
     tags: post.tags,
     image: post.image,
     author: post.author,
-    publishedAt: post.publishedAt ? post.publishedAt.toISOString() : null,
-    updatedAt: post.updatedAt.toISOString(),
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
   }));
 }
 
@@ -127,7 +133,13 @@ export async function deletePost(id: number) {
 
 export async function UpdatePost(
   id: number,
-  data: { title: string; content: string; author: string; status: string }
+  data: {
+    title: string;
+    content: string;
+    tags: string[];
+    author: string;
+    status: string;
+  }
 ) {
   try {
     const updated = await prisma.post.update({
@@ -136,6 +148,7 @@ export async function UpdatePost(
         title: data.title,
         content: data.content,
         author: data.author,
+        tags: data.tags,
         status: data.status,
         slug: data.title.toLowerCase().replace(/ /g, "-"),
       },
@@ -143,10 +156,8 @@ export async function UpdatePost(
 
     return { success: true, post: updated };
   } catch (error) {
+    console.log(error);
     return { success: false, error: "Falied to update" };
-  } finally {
-    revalidatePath("/admin");
-    redirect("/admin");
   }
 }
 

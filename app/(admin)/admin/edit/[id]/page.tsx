@@ -23,7 +23,7 @@ export default async function Edit({
   return (
     <div className="p-10 bg-[#0a0a0a] min-h-screen">
       <h1 className="text-blue-600 font-bold text-2xl mb-8">Edit Blog</h1>
-      <BlogEditor initialData={post} isEditing={true} />
+      <BlogEditor post={post} id={Number(id)} />
     </div>
   );
 }

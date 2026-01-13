@@ -27,7 +27,7 @@ export default function Blogs() {
     async function fetchBlog() {
       try {
         setIsLoading(true);
-        const blogs = await fetchPosts();
+        const blogs = await fetchPosts("published");
         setBlogs(blogs);
       } catch (error) {
         console.error("Error fetching blogs", error);

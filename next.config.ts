@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import { hostname } from "os";
 
+plugins: [require("@tailwindcss/typography")];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {

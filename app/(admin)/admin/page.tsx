@@ -21,7 +21,7 @@ interface PostType {
   title: string;
   content: string;
   slug: string;
-  status: "published" | "draft";
+  status: string;
   publishedAt?: string | null;
   updatedAt: string;
   tags: string[];
@@ -39,11 +39,11 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function getPosts() {
       try {
-        const posts = await fetchPosts();
+        const publishedPosts = await fetchPosts("published");
+        const draftPosts = await fetchPosts("draft");
+        const posts = [...publishedPosts, ...draftPosts];
         setpostsList(posts);
-      } catch (error) {
-        console.log("Error fetching lists", error);
-      }
+      } catch (error) {}
     }
     getPosts();
   }, []);
@@ -88,8 +88,8 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        <nav className="mt-10 flex flex-col gap-2 cursor-pointer">
-          {sideMenus.map((menu) => (
+        {sideMenus.map((menu) => (
+          <nav className="mt-10 flex flex-col gap-2 cursor-pointer">
             <div
               key={menu.name}
               onClick={() => setSelected(menu.name)}
@@ -101,8 +101,8 @@ export default function AdminDashboard() {
               <menu.icon size={22} />
               {menuOpen && <span className="font-medium">{menu.name}</span>}
             </div>
-          ))}
-        </nav>
+          </nav>
+        ))}
       </aside>
 
       <div className="flex-1 flex flex-col">
