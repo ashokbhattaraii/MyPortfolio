@@ -5,7 +5,7 @@ import Home from "./page";
 import { Inter, Geist_Mono } from "next/font/google";
 import { ActionProvider } from "./Context/ActionContext";
 import { ToastProvider } from "./Context/ToastContext";
-
+import QueryProvider from "@/app/providers/query-providers";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -27,7 +27,9 @@ export default function RootLayout({
       <body>
         <ActionProvider>
           <ToastProvider>
-            <div className="">{children}</div>
+            <QueryProvider>
+              <div className="">{children}</div>
+            </QueryProvider>
           </ToastProvider>
         </ActionProvider>
       </body>

@@ -2,48 +2,28 @@
 import { useEffect, useState } from "react";
 import Blog from "../Components/blog/blog";
 import { Search, Loader2 } from "lucide-react";
-import { fetchPosts } from "@/app/actions/blogActions";
-
-interface PostType {
-  id: number;
-  title: string;
-  content: string;
-  slug: string;
-  author: string | null;
-  status: string;
-  tags: string[];
-  updatedAt: string;
-  publishedAt: string;
-}
+import { PostListResponse } from "@/app/type/posttype";
+import UsefetchAllBlogs from "@/app/hooks/get-all-blogs";
 
 export default function Blogs() {
   const [query, setQuery] = useState("");
-  const [blogs, setBlogs] = useState<PostType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blogs, setBlogs] = useState<PostListResponse>([]);
+
   const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, isError } = UsefetchAllBlogs();
 
   useEffect(() => {
-    async function fetchBlog() {
-      try {
-        setIsLoading(true);
-        const blogs = await fetchPosts("published");
-        setBlogs(blogs);
-      } catch (error) {
-        console.error("Error fetching blogs", error);
-        setError("Failed to load blogs. Please try again later.");
-      } finally {
-        setIsLoading(false);
-      }
+    if (data) {
+      setBlogs(data);
     }
-    fetchBlog();
-  }, []);
+  }, [data]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value.trim());
   };
 
   const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(query.toLowerCase())
+    blog.title.toLowerCase().includes(query.toLowerCase()),
   );
 
   if (isLoading) {

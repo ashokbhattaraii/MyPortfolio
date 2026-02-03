@@ -43,7 +43,7 @@ export default function Info() {
           <div
             id="infoContainer"
             className={`flex flex-col m-5 gap-4 leading-snug ${animate(
-              "delay-200"
+              "delay-200",
             )}`}
           >
             <p id="tag" className="text-5xl font-extrabold m-3  w-2/5 z-2">
@@ -56,7 +56,7 @@ export default function Info() {
                   <span
                     key={index}
                     className={`inline-block text-6xl font-serif italic relative ${animate(
-                      `delay-[${400 + index * 200}ms]`
+                      `delay-[${400 + index * 200}ms]`,
                     )}`}
                     style={{
                       transitionDelay: hasLoaded
@@ -103,7 +103,7 @@ export default function Info() {
           <div
             id="photoContainer"
             className={` flex justify-end absolute top-5 right-0 ${animate(
-              "delay-200"
+              "delay-200",
             )}`}
           >
             <div className="hidden md:block bg-blue-600 h-120 max-w-60 w-full absolute  top-10 md:right-20 rotate-10 rounded-2xl shadow shadow-purple-300 "></div>

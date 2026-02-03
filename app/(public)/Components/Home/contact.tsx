@@ -197,7 +197,7 @@ export default function Contact() {
             )}
           </form>
         </div>
-        <div className="bg-gradient-to-r from-[#5A7ACD] to-[#5A7ACD]/70 rounded-xl sm:rounded-2xl w-full  md:mt-0 relative md:absolute md:right-0 md:bottom-0 text-white p-4 sm:p-6 md:p-8">
+        <div className="bg-blue-600 rounded-xl sm:rounded-2xl w-full  md:mt-0 relative md:absolute md:right-0 md:bottom-0 text-white p-4 sm:p-6 md:p-8">
           <div id="contactIndo" className="w-full">
             <div id="details" className=" md:mt-8 space-y-4 sm:space-y-6">
               <div

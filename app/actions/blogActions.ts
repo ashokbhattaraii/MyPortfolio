@@ -15,6 +15,7 @@ interface createPostInput {
   tags: string[];
   image: string | null;
   author: string | null;
+  sourceLink?: string | null;
 }
 interface PostType {
   id: number;
@@ -27,17 +28,19 @@ interface PostType {
   tags: string[];
   image: string | null;
   author: string | null;
+  sourceLink?: string | null;
 }
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
+  process.env.SUPABASE_SERVICE_ROLE_KEY || "",
 );
 
 export async function createBlogPost(formData: FormData) {
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
   const author = formData.get("author") as string;
+  const sourceLink = formData.get("sourceLink") as string;
   const tags = JSON.parse(formData.get("tags") as string);
   const imageFile = formData.get("image") as File;
   const status = formData.get("status") as string;
@@ -85,6 +88,7 @@ export async function createBlogPost(formData: FormData) {
         image: imageUrl,
         slug: slug,
         status: status,
+        sourceLink: sourceLink ?? null,
         publishedAt: publishedAt,
         updatedAt: publishedAt,
       },
@@ -138,7 +142,7 @@ export async function UpdatePost(
     tags: string[];
     author: string;
     status: string;
-  }
+  },
 ) {
   try {
     const updated = await prisma.post.update({

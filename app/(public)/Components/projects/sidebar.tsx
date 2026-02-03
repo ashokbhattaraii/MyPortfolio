@@ -24,13 +24,8 @@ export default function SideBar({ Projects, firstPage, lastIndex }: any) {
                   <div>
                     {index + 1}. {""}
                   </div>
-                  <Link
-                    href={projectPath}
-                    className="w-full truncate hover:text-blue-700"
-                    key={index}
-                  >
-                    {p.name}
-                  </Link>
+
+                  {p.name}
                 </div>
               );
             })}

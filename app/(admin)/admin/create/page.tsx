@@ -19,6 +19,7 @@ interface PostType {
   tags: string[];
   image: string | null;
   author: string | null;
+  sourceLink?: string | null;
 }
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -47,10 +48,11 @@ export default function CreateBlogForm() {
       formData.append("title", data.title);
       formData.append("author", data.author ?? "");
       formData.append("content", data.content);
+      formData.append("sourceLink", data.sourceLink ?? "");
       formData.append("tags", JSON.stringify(tagsArray));
       formData.append("status", status);
       let fileInput = document.getElementById(
-        "image-upload"
+        "image-upload",
       ) as HTMLInputElement;
       if (fileInput?.files?.[0]) {
         formData.append("image", fileInput.files[0]);
@@ -117,6 +119,23 @@ export default function CreateBlogForm() {
               {errors.title && (
                 <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
                   <span className="text-lg">⚠</span> {errors.title.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Source Link
+              </label>
+              <input
+                {...register("sourceLink")}
+                type="url"
+                placeholder="https://example.com/source"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+              />
+              {errors.sourceLink && (
+                <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                  <span className="text-lg">⚠</span> {errors.sourceLink.message}
                 </p>
               )}
             </div>

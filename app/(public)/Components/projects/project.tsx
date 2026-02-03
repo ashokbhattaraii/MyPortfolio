@@ -64,7 +64,7 @@ export default function Project({
           <Link href={p.link} key={index} target="_blank">
             <div
               className={`bg-white rounded-xl border-2 border-gray-200 ${colorScheme.accent} 
-                p-6 group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}
+                p-6 group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-full sm:w-50 md:w-70`}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >

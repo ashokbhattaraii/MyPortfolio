@@ -4,6 +4,7 @@ import SideBar from "../Components/projects/sidebar";
 import DetailedProjects from "../Components/projects/detailedProjects";
 import React, { useState, useEffect } from "react";
 import { Target } from "lucide-react";
+import { useProjects } from "@/app/hook/project";
 
 interface ProjectsDetail {
   name: string;
@@ -13,11 +14,17 @@ interface ProjectsDetail {
 }
 
 const Projects = () => {
-  const [ProjectList, SetProjectList] = useState<ProjectsDetail[]>([]);
   const [firstPage, nextPage] = useState(0);
   const [lastIndex, setLastIndex] = useState(5);
-  const projectLength = ProjectList.length;
+  const { data: ProjectList = [], isLoading: isProjectsLoading } =
+    useProjects();
+  console.log("projects data from main project", ProjectList);
+
+  const projectLength = ProjectList?.length || 0;
   console.log("console from main project", projectLength);
+
+  const [selectedValue, setSelectValue] = useState(5);
+
   const updatePage = (action: "next" | "prev") => {
     const step = selectedValue;
 
@@ -30,42 +37,17 @@ const Projects = () => {
     }
   };
 
-  const AddProject = (data: ProjectsDetail) => {
-    SetProjectList((prevProject) => {
-      return [...prevProject, data];
-    });
-  };
-
-  const [selectedValue, setSelectValue] = useState(5);
   const handleChange = (selectedValue: any) => {
     setSelectValue(selectedValue);
     nextPage(0);
     setLastIndex(selectedValue);
   };
+
   useEffect(() => {
     console.log("selected", selectedValue);
-  }, [setSelectValue]);
-  const [isLoading, setIsLoading] = useState(true);
+  }, [selectedValue]);
 
-  useEffect(() => {
-    async function fetchInitialProjects() {
-      try {
-        const response = await fetch("/api/projects");
-        if (response.ok) {
-          const data: ProjectsDetail[] = await response.json();
-
-          console.log(data);
-          SetProjectList(data);
-        }
-      } catch (e) {
-        console.log("Failed to fetch", e);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchInitialProjects();
-  }, []);
-  if (isLoading) {
+  if (isProjectsLoading) {
     return (
       <>
         <div className="text-white animate-pulse text-4xl min-h-screen flex justify-center items-center">
@@ -74,11 +56,12 @@ const Projects = () => {
       </>
     );
   }
+
   return (
     <>
       <div
         id="projectContainer"
-        className="text-white relative top-6 flex gap-6 mx-auto w-full max-w-7xl"
+        className="text-white relative top-6 flex gap-6 mx-auto w-full max-w-8xl"
       >
         <SideBar
           Projects={ProjectList}
@@ -87,7 +70,6 @@ const Projects = () => {
         />
         <DetailedProjects
           Projects={ProjectList}
-          onAddProject={AddProject}
           onCLickNextPage={() => updatePage("next")}
           onCLickPreviousPage={() => updatePage("prev")}
           firstPage={firstPage}

@@ -1,11 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Project from "./project";
-import { NextResponse } from "next/server";
 import Button from "../../Resualble_Components/Button";
-import { useForm } from "react-hook-form";
-import { createClient } from "@/lib/supabase/client";
-import ToastMessage from "@/app/(admin)/admin/Components/Toast/toast";
 
 interface ProjectDetail {
   name: string;
@@ -17,13 +13,11 @@ interface ProjectDetail {
 
 interface DetailedProjectProps {
   Projects: ProjectDetail[];
-  onAddProject: (newProject: ProjectDetail) => void;
   onCLickNextPage: (nextPage: any) => void;
 }
 
 export default function DetailedProjects({
   Projects,
-  onAddProject,
   onCLickNextPage,
   onCLickPreviousPage,
   projectLength,
@@ -32,56 +26,6 @@ export default function DetailedProjects({
   handleChange,
   selectedValue,
 }: any) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<ProjectDetail>();
-
-  const ValidationRules = {
-    name: {
-      required: "Name can't be empty",
-      minLength: {
-        value: 5,
-        message: "Atleast 5 character",
-      },
-    },
-    description: {
-      required: "Description can't be empty",
-      minLength: {
-        value: 5,
-        message: "Atleast 5 character",
-      },
-    },
-    date: {
-      required: "Completion date is required",
-    },
-
-    link: {
-      required: "Enter a valid project link",
-      pattern: {
-        value:
-          /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|[a-zA-Z0-9]+\.[^\s]{2,})$/i,
-        message: "Must be a valid URL (e.g., https://example.com)",
-      },
-    },
-  };
-
-  const ErrorMessage = ({ error, name }: { error: any; name: string }) => {
-    const fieldError = error[name];
-    if (!fieldError) {
-      return null;
-    }
-    return (
-      <p className="text-red-400 text-sm mt-1 self-start ml-2">
-        {fieldError.message}
-      </p>
-    );
-  };
-
-  const [isFormOpen, toogleForm] = useState(false);
-  const [toast, setToast] = useState(false);
-
   function changeValue(event: React.ChangeEvent<HTMLSelectElement>) {
     const value = event.target.value;
     const numValue = Number(value);
@@ -89,65 +33,11 @@ export default function DetailedProjects({
     console.log("selected", numValue);
   }
 
-  const [isAdmin, setIsAdmin] = useState(false);
-  const supabase = createClient();
-
-  useEffect(() => {
-    async function checkAdmin() {
-      const checkUser = await supabase.auth.getSession();
-      if (checkUser) {
-        setIsAdmin(true);
-      }
-      return setIsAdmin(false);
-    }
-    checkAdmin();
-  }, []);
-  function onClickAdd() {
-    if (!isAdmin) {
-      setToast(true);
-      console.log("Toast stte", toast);
-
-      console.log("toast message shown");
-      return;
-    }
-    console.log("admin status", isAdmin);
-    toogleForm(!isFormOpen);
-  }
-  const onSubmit = async (data: ProjectDetail) => {
-    try {
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to save project to serevr");
-      }
-
-      const result = await response.json();
-
-      onAddProject(result || data);
-      toogleForm(false);
-    } catch {
-      console.log("Submission failed", errors);
-      alert("Error, check the consle");
-    }
-  };
-
   return (
     <>
-      {toast && (
-        <div className="fixed bottom-4 right-2">
-          <ToastMessage
-            type="error"
-            message="Access denied"
-            onClose={() => setToast(false)}
-          ></ToastMessage>
-        </div>
-      )}
       <div
         id="detailProjectDisplay"
-        className="text-white h-full w-full max-w-7xl ml-15 md:ml-0"
+        className="text-white h-full w-full max-w-8xl ml-15 md:ml-0"
       >
         <h2 className="text-[#2B2A2A] font-bold">Projects</h2>
         <div
@@ -160,29 +50,6 @@ export default function DetailedProjects({
             lastIndex={lastIndex}
             selectedValue={selectedValue}
           />
-          <div
-            id="AddProjects"
-            className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-6 
-              cursor-pointer transition-all duration-300 hover:border-gray-400 hover:shadow-xl 
-              hover:-translate-y-1 group flex flex-col items-center justify-center gap-4 min-h-[200px]"
-            onClick={onClickAdd}
-          >
-            <div
-              className="w-16 h-16 rounded-xl bg-gray-100 flex items-center justify-center
-              transition-all duration-300 group-hover:bg-gray-200 group-hover:scale-110"
-            >
-              <span className="text-5xl font-light text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
-                +
-              </span>
-            </div>
-
-            <div className="text-center space-y-1">
-              <p className="font-semibold text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
-                Add Project
-              </p>
-              <p className="text-xs text-gray-500">Click to create new</p>
-            </div>
-          </div>
         </div>
         <div
           id="pageControl"
@@ -222,86 +89,6 @@ export default function DetailedProjects({
           </div>
         </div>
       </div>
-      {isFormOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md px-4">
-          <form className="w-full max-w-3xl rounded bg-gradient-to-br from-zinc-900 to-black p-6 shadow-2xl shadow-blue-900/40 overflow-y-auto max-h-[90vh]">
-            <h1 className="mb-6 text-center text-2xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Add New Project
-            </h1>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1">
-                <label className="text-sm text-gray-300">Project Name</label>
-                <input
-                  type="text"
-                  placeholder="My Awesome Project"
-                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
-                  {...register("name", ValidationRules.name)}
-                />
-                <ErrorMessage error={errors} name="name" />
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <label className="text-sm text-gray-300">Project Link</label>
-                <input
-                  type="text"
-                  placeholder="https://example.com"
-                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
-                  {...register("link", ValidationRules.link)}
-                />
-                <ErrorMessage error={errors} name="link" />
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1">
-                <label className="text-sm text-gray-300">Completion Date</label>
-                <input
-                  type="date"
-                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
-                  {...register("dateOfCompletion", ValidationRules.date)}
-                />
-                <ErrorMessage error={errors} name="date" />
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <label className="text-sm text-gray-300">Tags</label>
-                <input
-                  type="text"
-                  placeholder="React, Next.js, Tailwind"
-                  className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition"
-                />
-              </div>
-            </div>
-            <div className="mt-4 flex flex-col gap-1">
-              <label className="text-sm text-gray-300">Description</label>
-              <textarea
-                rows={3}
-                placeholder="Describe your project..."
-                className="rounded bg-zinc-800 px-3 py-2 outline-none border border-zinc-700 focus:border-blue-500 transition resize-none"
-                {...register("description", ValidationRules.description)}
-              />
-              <ErrorMessage error={errors} name="description" />
-            </div>
-
-            <div className="mt-8 flex justify-center gap-4">
-              <Button
-                onClick={() => toogleForm(false)}
-                className="rounded bg-zinc-700 px-6 py-2 font-bold text-white hover:bg-red-600 transition"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                onClick={handleSubmit(onSubmit)}
-                className="rounded bg-blue-600 py-2 font-bold text-white hover:scale-105 transition"
-              >
-                Add Project
-              </Button>
-            </div>
-          </form>
-        </div>
-      )}
     </>
   );
 }

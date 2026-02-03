@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import "../globals.css";
 import Navigation from "./Navbar";
-
+import QueryProvider from "../providers/query-providers";
 import Home from "./page";
 import expertise from "./Components/Home/expertise";
 import { ToastProvider } from "../(admin)/admin/Context/ToastContext";
@@ -28,10 +28,11 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth Geist.className">
       <body>
         <Navigation />
-
-        <ToastProvider>
-          <div className="mt-20">{children}</div>
-        </ToastProvider>
+        <QueryProvider>
+          <ToastProvider>
+            <div className="mt-20">{children}</div>
+          </ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   );

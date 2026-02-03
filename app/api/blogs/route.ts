@@ -1,13 +1,24 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
+import { prisma } from "@/lib/db";
 
-const path = "./data/blogs.json";
 export async function GET() {
   try {
-    const response = await fs.readFile(path, "utf-8");
-    const existingBlogs = await JSON.parse(response);
-    return NextResponse.json(existingBlogs, { status: 200 });
+    const res = await prisma.post.findMany({
+      where: { status: "published" },
+      include: {
+        PostStats: true,
+      },
+    });
+
+    return NextResponse.json(res);
   } catch (error) {
-    console.log(error);
+    console.error("Database error:", error); // Add logging
+    return NextResponse.json(
+      {
+        error: "Failed to fetch blogs",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
   }
 }

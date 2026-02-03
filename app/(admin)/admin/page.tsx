@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { logOut } from "@/app/(auth)/Actions/AuthActions";
 import Link from "next/link";
+import ProjectManage from "./Components/Project/projectManage";
 import Post from "./Components/post/post";
 import {
   LayoutDashboard,
@@ -55,6 +56,7 @@ export default function AdminDashboard() {
     { name: "Dashboard", icon: LayoutDashboard },
     { name: "Posts", icon: FileText },
     { name: "Media", icon: MoreHorizontal },
+    { name: "Projects", icon: MoreHorizontal },
     { name: "Settings", icon: Settings },
   ];
 
@@ -128,6 +130,7 @@ export default function AdminDashboard() {
         <main className="p-10">
           {selected === "Dashboard" ? <Dashboard postsList={postsList} /> : ``}
           {selected === "Posts" ? <Post postsList={postsList} /> : ``}
+          {selected === "Projects" ? <ProjectManage /> : ``}
         </main>
       </div>
     </div>

@@ -1,21 +1,46 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/client"
 }
 
 datasource db {
   provider = "postgresql"
-  url= env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Post {
+  id          Int        @id @default(autoincrement())
+  title       String
+  slug        String     @unique
+  content     String
+  status      String
+  sourceLink  String
+  tags        String[]
+  image       String?
+  author      String?    @default("Admin")
+  publishedAt String
+  updatedAt   String
+  PostStats   PostStats?
+}
+
+model PostStats {
   id        Int      @id @default(autoincrement())
-  title     String
-  slug      String   @unique
-  content   String
-  status    String
-  tags      String[]
-  image     String?
-  author    String? @default("Admin")
-  publishedAt String 
-  updatedAt String 
+  postId    Int      @unique
+  post      Post     @relation(fields: [postId], references: [id])
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  shares    Int      @default(0)
+  comments  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectDetail {
+  id                Int      @id @default(autoincrement())
+  name              String
+  description       String
+  dateOfCompletion  String
+  link              String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
