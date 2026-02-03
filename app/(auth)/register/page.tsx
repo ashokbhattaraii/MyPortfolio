@@ -10,83 +10,88 @@ import { loginWithGoogle } from "../Actions/AuthActions";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Loader2 } from "lucide-react";
-const images = [
-  "/auth/images/image1.jpg",
-  "/auth/images/image2.jpg",
-  "/auth/images/image3.jpg",
-];
-interface registerType {
-  fname: string;
-  lname: string;
-  phone: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+
+// const images = [
+//   "/auth/images/image1.jpg",
+//   "/auth/images/image2.jpg",
+//   "/auth/images/image3.jpg",
+// ];
+
+// interface registerType {
+//   fname: string;
+//   lname: string;
+//   phone: string;
+//   email: string;
+//   password: string;
+//   confirmPassword: string;
+// }
+
 export default function SignIn() {
   // const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [isRegistering, setIsRegistering] = useState(false);
+  // const [isRegistering, setIsRegistering] = useState(false);
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<registerType>({ mode: "onChange" });
-  const validationRules = {
-    fname: {
-      required: "First name is required",
-      minLength: {
-        value: 3,
-        message: "Atleast 3 characters",
-      },
-    },
-    lname: {
-      required: "Last name is required",
-      minLength: {
-        value: 3,
-        message: "Atleast 3 characters",
-      },
-    },
-    phone: {
-      required: "Phone number is required",
-      minLength: {
-        value: 10,
-        message: "Number must be 10 digits",
-      },
-    },
+  // const {
+  //   register,
+  //   reset,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm<registerType>({ mode: "onChange" });
 
-    email: {
-      required: "Email is required",
+  // const validationRules = {
+  //   fname: {
+  //     required: "First name is required",
+  //     minLength: {
+  //       value: 3,
+  //       message: "Atleast 3 characters",
+  //     },
+  //   },
+  //   lname: {
+  //     required: "Last name is required",
+  //     minLength: {
+  //       value: 3,
+  //       message: "Atleast 3 characters",
+  //     },
+  //   },
+  //   phone: {
+  //     required: "Phone number is required",
+  //     minLength: {
+  //       value: 10,
+  //       message: "Number must be 10 digits",
+  //     },
+  //   },
 
-      pattern: {
-        value: /^\S+@\S+\.\S+$/,
-        message: "Please enter a valid email",
-      },
-    },
+  //   email: {
+  //     required: "Email is required",
 
-    password: {
-      message: "Password is required",
+  //     pattern: {
+  //       value: /^\S+@\S+\.\S+$/,
+  //       message: "Please enter a valid email",
+  //     },
+  //   },
 
-      minLength: {
-        value: 8,
-        message: "Atleast 8 characters or symbols",
-      },
-    },
+  //   password: {
+  //     message: "Password is required",
 
-    confirmPassword: {
-      message: "Confirm Password is required",
+  //     minLength: {
+  //       value: 8,
+  //       message: "Atleast 8 characters or symbols",
+  //     },
+  //   },
 
-      minLength: {
-        value: 8,
-        message: "Atleast 8 characters or symbols",
-      },
-      validate: (value: string) =>
-        value === watch("password") || "Password do not match",
-    },
-  };
+  //   confirmPassword: {
+  //     message: "Confirm Password is required",
+
+  //     minLength: {
+  //       value: 8,
+  //       message: "Atleast 8 characters or symbols",
+  //     },
+  //     validate: (value: string) =>
+  //       value === watch("password") || "Password do not match",
+  //   },
+  // };
+
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -95,17 +100,18 @@ export default function SignIn() {
   //   return () => clearTimeout(timer);
   // }, [currentIndex]);
 
-  const ErrorMesage = ({ errors, field }: any) => {
-    if (!errors?.[field]) return null;
-    if (errors)
-      return (
-        <>
-          <span className="text-red-600">{errors[field].message}</span>
-        </>
-      );
-  };
+  // const ErrorMesage = ({ errors, field }: any) => {
+  //   if (!errors?.[field]) return null;
+  //   if (errors)
+  //     return (
+  //       <>
+  //         <span className="text-red-600">{errors[field].message}</span>
+  //       </>
+  //     );
+  // };
 
   const router = useRouter();
+
   // useEffect(() => {
   //   const checkSession = async () => {
   //     const {
@@ -117,20 +123,20 @@ export default function SignIn() {
   //   checkSession();
   // }, []);
 
-  const onValidSubmit = async (data: registerType) => {
-    setIsRegistering(true);
-    const req = await registerUser(data);
+  // const onValidSubmit = async (data: registerType) => {
+  //   setIsRegistering(true);
+  //   const req = await registerUser(data);
 
-    if (req) {
-      setIsRegistering(false);
-    } else {
-      console.log("failed to create user");
-    }
-  };
+  //   if (req) {
+  //     setIsRegistering(false);
+  //   } else {
+  //     console.log("failed to create user");
+  //   }
+  // };
 
   return (
     <>
-      <main className="text-slate-200 flex w-full  font-serif min-h-screen">
+      <main className="text-slate-200 flex w-full font-serif min-h-screen">
         {/* <div className="hidden md:flex w-[50%] bg-[#0F2854] min-h-screen   items-center flex-col">
           <div className="mr-auto ml-4 mt-4">
             <h1 className="text-2xl font-extrabold tracking-wider mr-auto ">
@@ -172,18 +178,17 @@ export default function SignIn() {
             </div>
           </div>
         </div> */}
-        <form
-          className="w-full flex flex-col justify-center items-center bg-black"
-          onSubmit={handleSubmit(onValidSubmit)}
-        >
+
+        <div className="w-full flex flex-col justify-center items-center bg-black">
           <div
             id="registerForm"
             className="text-white flex items-center justify-center w-full flex-col px-3"
           >
-            <h1 className="text-3xl text-white font-extrabold tracking-wider ">
+            <h1 className="text-3xl text-white font-extrabold tracking-wider mb-8">
               Register
             </h1>
-            <div id="input" className="w-full max-w-2xl">
+
+            {/* <div id="input" className="w-full max-w-2xl">
               <div className="flex gap-2 my-4 w-full ">
                 <label
                   htmlFor="fname"
@@ -314,12 +319,13 @@ export default function SignIn() {
                 <span className="text-blue-600">Login</span>
               </span>
               <h1>OR</h1>
-            </div>
+            </div> */}
+
             <div id="directRegister" className="max-w-xl w-full">
               <div
                 id="google"
                 onClick={async () => await loginWithGoogle()}
-                className="flex gap-2 bg-white max-w-100 mx-auto w-full justify-center items-center py-3 rounded cursor-pointer"
+                className="flex gap-2 bg-white max-w-100 mx-auto w-full justify-center items-center py-3 rounded cursor-pointer hover:-translate-y-1 transition-transform ease-out duration-300"
               >
                 <Image
                   src="/auth/images/google-color.svg"
@@ -328,7 +334,7 @@ export default function SignIn() {
                   alt="google-icon"
                 ></Image>
                 <span className="text-black text-[16px] font-bold">
-                  Continue with google
+                  Continue with Google
                 </span>
               </div>
             </div>
@@ -351,7 +357,7 @@ export default function SignIn() {
               </span>
             </div>
           </div>
-        </form>
+        </div>
       </main>
     </>
   );

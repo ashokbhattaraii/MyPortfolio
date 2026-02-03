@@ -16,39 +16,39 @@ import { useFormStatus } from "react-dom";
 //   "/auth/images/image3.jpg",
 // ];
 
-interface loginType {
-  email: string;
-  password: string;
-}
+// interface loginType {
+//   email: string;
+//   password: string;
+// }
 
 export default function Login() {
   const { setIsLoginSuccess, setToast } = useToast();
   // const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
-  const { pending } = useFormStatus();
+  // const { pending } = useFormStatus();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<loginType>({ mode: "onChange" });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<loginType>({ mode: "onChange" });
 
-  const validationRules = {
-    email: {
-      required: "Email is required",
-      pattern: {
-        value: /^\S+@\S+\.\S+$/,
-        message: "Please enter a valid email",
-      },
-    },
-    password: {
-      required: "Password is required",
-      minLength: {
-        value: 8,
-        message: "Atleast 8 characters or symbols",
-      },
-    },
-  };
+  // const validationRules = {
+  //   email: {
+  //     required: "Email is required",
+  //     pattern: {
+  //       value: /^\S+@\S+\.\S+$/,
+  //       message: "Please enter a valid email",
+  //     },
+  //   },
+  //   password: {
+  //     required: "Password is required",
+  //     minLength: {
+  //       value: 8,
+  //       message: "Atleast 8 characters or symbols",
+  //     },
+  //   },
+  // };
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -57,27 +57,28 @@ export default function Login() {
 
   //   return () => clearTimeout(timer);
   // }, [currentIndex]);
-  const [isLoginPending, setIsLoginPending] = useState(false);
-  const onValidSubmit = async (data: any) => {
-    setIsLoginPending(true);
-    setIsLoginSuccess(true);
-    const status = await handleLogin(data);
-    if (status && !status.success) {
-      setIsLoginPending(false);
-      setToast("Incorrect Data", "error");
-      return;
-    }
-    if (status.success == true) {
-      setToast("Logged in successfully", "success");
 
-      router.push("/admin");
-    }
-  };
+  // const [isLoginPending, setIsLoginPending] = useState(false);
+  // const onValidSubmit = async (data: any) => {
+  //   setIsLoginPending(true);
+  //   setIsLoginSuccess(true);
+  //   const status = await handleLogin(data);
+  //   if (status && !status.success) {
+  //     setIsLoginPending(false);
+  //     setToast("Incorrect Data", "error");
+  //     return;
+  //   }
+  //   if (status.success == true) {
+  //     setToast("Logged in successfully", "success");
 
-  const ErrorMessage = ({ field }: { field: keyof loginType }) => {
-    if (!errors[field]) return null;
-    return <span className="text-red-600">{errors[field]?.message}</span>;
-  };
+  //     router.push("/admin");
+  //   }
+  // };
+
+  // const ErrorMessage = ({ field }: { field: keyof loginType }) => {
+  //   if (!errors[field]) return null;
+  //   return <span className="text-red-600">{errors[field]?.message}</span>;
+  // };
 
   return (
     <main className="text-slate-200 flex w-full font-serif min-h-screen">
@@ -108,7 +109,7 @@ export default function Login() {
           Login
         </h1>
 
-        <form
+        {/* <form
           onSubmit={handleSubmit(onValidSubmit)}
           className="w-full max-w-xl flex flex-col gap-4"
         >
@@ -159,13 +160,14 @@ export default function Login() {
 
             <span>OR</span>
           </div>
-        </form>
+        </form> */}
+
         <div id="directLogin" className="max-w-xl w-full mx-auto">
           <div
             className="max-w-xl w-full flex flex-col gap-4"
             onClick={loginWithGoogle}
           >
-            <div className="flex gap-2 bg-white max-w-100 w-full mx-auto justify-center items-center py-3 rounded cursor-pointer">
+            <div className="flex gap-2 bg-white max-w-100 w-full mx-auto justify-center items-center py-3 rounded cursor-pointer hover:-translate-y-1 transition-transform ease-out duration-300">
               <Image
                 src="/auth/images/google-color.svg"
                 width={20}
